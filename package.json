@@ -1,0 +1,29 @@
+{
+  "name": "webproject",
+  "version": "1.0.0",
+  "description": "Ban ve tau hoa",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "nodemon --exec babel-node src/server.js"
+  },
+  "keywords": [
+    "train",
+    "ticket",
+    "sales"
+  ],
+  "author": "Hoang, Dung, An, Nam",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "nodemon": "^2.0.22"
+  }
+}
