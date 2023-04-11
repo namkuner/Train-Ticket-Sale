@@ -9,7 +9,9 @@ module.exports = {
       CMND :  "251330516",
       phoneNumber: "0784852324",
       password : "namkuner2402",
+      address : "Thon 4 , xa Tam Bo",
       gender : 0,
+
       roleID : "R1",
       createdAt: new Date(),
       updatedAt: new Date()

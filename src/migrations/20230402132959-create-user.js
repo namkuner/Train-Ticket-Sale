@@ -5,10 +5,11 @@ module.exports = {
       id: {
         // firstName: DataTypes.STRING,
         // lastName: DataTypes.STRING,
-        // email: DataTypes.STRING,
-        // CMND :  DataTypes.STRING,
         // phoneNumber: DataTypes.STRING,
         // password : DataTypes.STRING,
+        // email: DataTypes.STRING,
+        // CMND :  DataTypes.STRING,
+        // address : DataTypes.STRING,
         // gender : DataTypes.INTEGER,
         // roleID : DataTypes.STRING,
     
@@ -23,18 +24,22 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING
       },
-      email: {
-        type: Sequelize.STRING
-      },
-      CMND: {
-        type: Sequelize.STRING
-      },
       phoneNumber: {
         type: Sequelize.STRING
       },
       password: {
         type: Sequelize.STRING
       },
+      email: {
+        type: Sequelize.STRING
+      },
+      CMND: {
+        type: Sequelize.STRING
+      },
+      address: {
+        type: Sequelize.STRING
+      },
+
       gender: {
         type: Sequelize.INTEGER
       },
