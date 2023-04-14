@@ -3,7 +3,7 @@ let createNewUser = (data) =>{
     console.log(data)
     return new Promise(async(reslove, reject)=>{
         try{
-            await db.user.create({
+            await db.User.create({
                 firstName: data.firstName,
                 lastName: data.lastName,
                 phoneNumber: data.phoneNumber,
@@ -25,7 +25,7 @@ let createNewUser = (data) =>{
 let dataUser =()=>{
     return new Promise(async(reslove,reject)=>{
         try{
-            let data = db.User.findAll();
+            let data = await db.User.findAll();
             reslove(data);
         }
         catch(e)
@@ -35,10 +35,10 @@ let dataUser =()=>{
     })
 }
 
-let infomationUser=(id)=>{
+let infomationUser=(userid)=>{
     return new Promise(async(reslove, reject)=>{
         try{
-            let data = db.User.findOne({where:{id: id}})
+            let data = await db.User.findOne({where:{id: userid}})
             reslove(data);
         }
         catch(e){
@@ -46,27 +46,39 @@ let infomationUser=(id)=>{
         }
     })
 }
-let updateUser =(user)=>{
-    return new Promise(async(reslove, reject)=>{
-        try{
-            let data = db.User.findOne({where:{id: user.id}})
-            console.log("data",data)
-            if(data){
-                data.firstName = user.firstName,
-                data.lastName = user.lastName,
-                data.phoneNumber = user.phoneNumber,
-                data.password =  user.password,
-                data.email = user.email,
-                data.CMND =  user.CMND,
-                data.address = user.address,
-                data.gender = user.gender,
-                await data.save();
-
-            }
-            reslove();
+let updateUser = async (user) => {
+    try {
+        let data = await db.User.findOne({where:{id: user.id}});
+        console.log(user);
+        console.log("data", data);
+        if (data) {
+            data.firstName = user.firstName;
+            data.lastName = user.lastName;
+            data.phoneNumber = user.phoneNumber;
+            data.password = user.password;
+            data.email = user.email;
+            data.CMND = user.CMND;
+            data.address = user.address;
+            data.gender = user.gender;
         }
-        catch(e){
-            reject(e);
+        await data.save();
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+let xoathongtinuser = (dataid)=>
+{
+    return new Promise(async(reslove,rejcet)=>{
+        try{
+            let data = await db.User.findOne({where:{id: dataid.id}})
+            if(data)
+            {data.destroy();
+            }
+            reslove("bạn đã xóa thông tin thành công ")
+        }catch(e)
+        {
+            rejcet(e)
         }
     })
 }
@@ -75,4 +87,5 @@ module.exports ={
     dataUser:dataUser,
     infomationUser :infomationUser,
     updateUser: updateUser,
+    xoathongtinuser:xoathongtinuser,
 }

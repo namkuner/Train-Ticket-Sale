@@ -10,6 +10,8 @@ let initWebRouters =(app)=>{
     router.get('/dataUser', homeControllers.insertUser);
     router.get('/editUser',homeControllers.thaydoithongtin);
     router.post('/updatethongtinUser',homeControllers.capnhatthongtin);
+    router.get('/xemtruockhixoa',homeControllers.preDelete);
+    router.post('/deleteUser',homeControllers.xoaUser);
     return app.use("/", router);
 
 }
