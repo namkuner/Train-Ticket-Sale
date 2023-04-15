@@ -1,5 +1,7 @@
-import express from "express"
+import express from "express";
+import db from '../models/index';
 import dangNhapDangKyService from "../services/dangNhapDangKyService"
+import nguoidatveService from "../services/nguoidatveService"
 let dangKy = (req,res)=>{
     return res.render("dangky.ejs")
 }
@@ -45,6 +47,26 @@ let xoaUser = async(res,req)=>{
     return res.send("Xoa thông tin thành công ")
     // return res.render('dataUser.ejs',{user:data})
 }
+//////
+let dataBooker = (req,res)=>{
+    return res.render("databooker.ejs")
+}
+let completeDatabooker = async(req, res)=>{
+    let message = await nguoidatveService.createNewBooker(req.body);
+    console.log(message)
+    return res.send('post crud from sever');
+}
+
+let displaybooker = async (req, res)=>{
+    let data = await nguoidatveService.getAllBooker();
+    console.log('------------------------')
+    console.log(data)
+    console.log('------------------------')
+    return res.render('displaybooker.ejs', {
+        dataTable: data
+    });
+}
+
 module.exports={
     dangKy :dangKy,
     dangNhap :dangNhap,
@@ -53,7 +75,9 @@ module.exports={
     thaydoithongtin :thaydoithongtin,
     capnhatthongtin: capnhatthongtin,
     xoaUser :xoaUser,
-    preDelete :preDelete ,
-
+    preDelete :preDelete,
+    dataBooker :dataBooker,
+    completeDatabooker : completeDatabooker,
+    displaybooker :displaybooker,
 }
 

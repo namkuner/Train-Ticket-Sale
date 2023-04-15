@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin người đặt vé</title>
+</head>
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+</style> 
+<body>
+      <table>
+        <tr>
+          <th>Họ tên</th>
+          <th>Số điện thoại</th>
+          <th>Email</th>
+          <th>CCCD</th>
+          <th>Số vé</th>
+        </tr>
+
+        <% for(let i=0; i < dataTable.length; i++) { %>
+            <tr>
+                <td><%= dataTable[i].Hoten %></td>
+                <td><%= dataTable[i].Phone %></td>
+                <td><%= dataTable[i].Email %></td>
+                <td><%= dataTable[i].CCCD %></td>
+                <td><%= dataTable[i].Sove %></td>
+            </tr>
+        <% } %>
+      </table>
+</body>
+</html>
