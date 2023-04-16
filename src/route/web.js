@@ -17,6 +17,12 @@ let initWebRouters =(app)=>{
     router.get('/databooker', homeControllers.dataBooker);
     router.post('/complete-databooker', homeControllers.completeDatabooker);
     router.get('/get-databooker', homeControllers.displaybooker);
+    router.get('/edit-databooker', homeControllers.editbooker);
+    //sua
+    router.post('/capnhat-databooker', homeControllers.putbooker)
+    //xoa
+    router.get('/delete-databooker', homeControllers.deletebooker)
+    
 
 
     return app.use("/", router);

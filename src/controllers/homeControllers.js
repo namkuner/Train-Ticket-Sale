@@ -67,17 +67,52 @@ let displaybooker = async (req, res)=>{
     });
 }
 
+let editbooker = async(req, res) => {
+    let bookerId = req.query.id;
+    if(bookerId){
+        let bookerData = await nguoidatveService.getBookerInforById(bookerId);
+        console.log('-----------------------')
+        console.log(bookerData)
+        console.log('-----------------------')
+        //let bookerData
+        return res.render('editbooker.ejs', {
+            booker: bookerData
+        });
+    }else{
+        return res.send('Booker not found!');
+    }
+}
+let putbooker = async(req, res) => {
+    let data = req.body;
+    let allBookers = await nguoidatveService.updateBookerData(data);
+    return res.render('displaybooker.ejs', {
+        dataTable: allBookers
+    });
+}
+let deletebooker = async(req, res) => {
+    let id = req.query.id;
+    if(id){
+        await nguoidatveService.deleteBookerById(id);
+        return res.send('Xoá người đặt vé thành công!')
+    }else{
+        return res.send('Người đặt vé không tồn tại!')
+    }
+    
+}
 module.exports={
     dangKy :dangKy,
     dangNhap :dangNhap,
     completeRegister :completeRegister,
     insertUser :insertUser,
     thaydoithongtin :thaydoithongtin,
-    capnhatthongtin: capnhatthongtin,
-    xoaUser :xoaUser,
+    capnhatthongtin: capnhatthongtin,  
+    xoaUser :xoaUser, 
     preDelete :preDelete,
     dataBooker :dataBooker,
     completeDatabooker : completeDatabooker,
     displaybooker :displaybooker,
+    editbooker :editbooker,
+    putbooker :putbooker,
+    deletebooker :deletebooker,
 }
 

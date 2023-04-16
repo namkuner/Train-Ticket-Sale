@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thông tin người đặt vé</title>
 </head>
-<style>
+ 
+ <style>
     table {
       font-family: arial, sans-serif;
       border-collapse: collapse;
@@ -21,8 +22,39 @@
     tr:nth-child(even) {
       background-color: #dddddd;
     }
+
+    .btn-edit {
+      outline: none;
+      border: none;
+      background: green;
+      height: 25px;
+      width: 80px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .btn-delete {
+      outline: none;
+      border: none;
+      background: rgb(194, 26, 26);
+      height: 25px;
+      width: 60px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .btn-detail {
+      outline: none;
+      border: none;
+      background: rgb(49, 49, 170);
+      height: 25px;
+      width: 60px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
 </style> 
+ 
+ 
 <body>
+      <h1>Thông tin người đặt vé</h1>
       <table>
         <tr>
           <th>Họ tên</th>
@@ -30,6 +62,7 @@
           <th>Email</th>
           <th>CCCD</th>
           <th>Số vé</th>
+          <th>Hành động</th>
         </tr>
 
         <% for(let i=0; i < dataTable.length; i++) { %>
@@ -39,6 +72,11 @@
                 <td><%= dataTable[i].Email %></td>
                 <td><%= dataTable[i].CCCD %></td>
                 <td><%= dataTable[i].Sove %></td>
+                <td>
+                  <a href="/edit-databooker?id=<%= dataTable[i].id %>" class="btn-edit" type="button">Chỉnh sửa</a>
+                  <a href="/delete-databooker?id=<%= dataTable[i].id %>" class="btn-delete" type="button">Xoá</a>
+                  <a href="" class="btn-detail" type="button">Chi tiết</a>
+                </td>
             </tr>
         <% } %>
       </table>
