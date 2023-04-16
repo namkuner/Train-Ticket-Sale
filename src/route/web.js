@@ -12,6 +12,13 @@ let initWebRouters =(app)=>{
     router.post('/updatethongtinUser',homeControllers.capnhatthongtin);
     router.get('/post-delete',homeControllers.chuanbixoa);
     router.post('/deleteUser',homeControllers.xoaUser);
+    //
+
+    router.get('/databooker', homeControllers.dataBooker);
+    router.post('/complete-databooker', homeControllers.completeDatabooker);
+    router.get('/get-databooker', homeControllers.displaybooker);
+
+
     return app.use("/", router);
 
 }
