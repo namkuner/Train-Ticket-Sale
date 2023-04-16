@@ -29,20 +29,20 @@ let capnhatthongtin = async(req,res)=>{
     let message = dangNhapDangKyService.updateUser(user);
     return res.send("Cập nhật thông tin thành công")
 }
-let preDelete = async(req,res)=>{
+let chuanbixoa = async(req,res)=>{
     console.log(req.query.id)
     let userid = req.query.id
-    // let data = await dangNhapDangKyService.infomationUser(userid);
-    let message = await dangNhapDangKyService.xoathongtinuser(userid)
-    return res.send("bạn đã xóa thành công")
+    let data = await dangNhapDangKyService.infomationUser(userid);
+    // let message = await dangNhapDangKyService.xoathongtinuser(userid)
+    return res.render("xoaUser.ejs",{user:data})
 }
 let xoaUser = async(res,req)=>{
     let userid =req.body;
     
     console.log(userid)
     let message = await dangNhapDangKyService.xoathongtinuser(userid)
-    let data = await dangNhapDangKyService.dataUser();
-    return res.send("Xoa thông tin thành công ")
+    // let data = await dangNhapDangKyService.dataUser();
+    return res.send("xóa thông tin thành công")
     // return res.render('dataUser.ejs',{user:data})
 }
 module.exports={
@@ -52,8 +52,8 @@ module.exports={
     insertUser :insertUser,
     thaydoithongtin :thaydoithongtin,
     capnhatthongtin: capnhatthongtin,
+    chuanbixoa :chuanbixoa,
     xoaUser :xoaUser,
-    preDelete :preDelete ,
 
 }
 
