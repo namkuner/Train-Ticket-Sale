@@ -5,57 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thông tin người đặt vé</title>
 </head>
- 
- <style>
-    table {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-    }
-    
-    td, th {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-    }
-    
-    tr:nth-child(even) {
-      background-color: #dddddd;
-    }
 
-    .btn-edit {
-      outline: none;
-      border: none;
-      background: green;
-      height: 25px;
-      width: 80px;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-    .btn-delete {
-      outline: none;
-      border: none;
-      background: rgb(194, 26, 26);
-      height: 25px;
-      width: 60px;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-    .btn-detail {
-      outline: none;
-      border: none;
-      background: rgb(49, 49, 170);
-      height: 25px;
-      width: 60px;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-</style> 
- 
- 
 <body>
       <h1>Thông tin người đặt vé</h1>
-      <table>
+      <table class="table">
+        <thead>
         <tr>
           <th>Họ tên</th>
           <th>Số điện thoại</th>
@@ -64,7 +18,9 @@
           <th>Số vé</th>
           <th>Hành động</th>
         </tr>
+      </thead>
 
+      <tbody>
         <% for(let i=0; i < dataTable.length; i++) { %>
             <tr>
                 <td><%= dataTable[i].Hoten %></td>
@@ -73,12 +29,98 @@
                 <td><%= dataTable[i].CCCD %></td>
                 <td><%= dataTable[i].Sove %></td>
                 <td>
-                  <a href="/edit-databooker?id=<%= dataTable[i].id %>" class="btn-edit" type="button">Chỉnh sửa</a>
-                  <a href="/delete-databooker?id=<%= dataTable[i].id %>" class="btn-delete" type="button">Xoá</a>
-                  <a href="" class="btn-detail" type="button">Chi tiết</a>
+                  <div class="button-container">
+                  <a href="/edit-databooker?id=<%= dataTable[i].id %>" class="edit-button" type="button">Edit</a>
+                  <a href="/delete-databooker?id=<%= dataTable[i].id %>" class="delete-button" type="button">Delete</a>
+                  <a href="" class="detail-button" type="button">Detail</a>
+                  </div>
                 </td>
             </tr>
         <% } %>
+      </tbody>
       </table>
+
+
+
+      <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+           
+         table th, .table td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: left;
+        } 
+        
+        table th {
+          background-color: #f2f2f2;
+        }
+    
+        .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      }
+      
+      .edit-button{
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-right: 10px;
+      }
+      .delete-button {
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-right: 10px;
+      }
+
+      .detail-button {
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      margin-right: 30px;
+      }
+
+      
+      .edit-button {
+      background-color: #6ab04c;
+      }
+      
+      .delete-button {
+      background-color: #dc3545;
+      }
+
+      .detail-button {
+      background-color: rgb(16, 16, 195);
+      }
+      
+      .edit-button:hover,
+      .delete-button:hover,
+      .detail-button {
+      opacity: 0.8;
+      }
+        </style>
 </body>
 </html>
