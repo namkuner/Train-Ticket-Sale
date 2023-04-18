@@ -20,7 +20,7 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-12 mt-3"><b>Update User Infomation</b></div>
+      <div class="col-12 mt-3"><b>Delete User Infomation</b></div>
       <form action="/deleteUser" method="POST">
         <div class="row">
           <div class="col-md-6 mb-3">
@@ -129,6 +129,7 @@
               </div>
               <input type="hidden" name="roleid" value="R3">
               <input type="hidden" name ="id" value="<%=user.id%>">
+              <div class="col-12 mt-3"><b>Bạn có chắc chắn muốn xóa không</b></div>
               <button class="btn btn-primary" type="submit">Delete</button>
             </form>
             <script>

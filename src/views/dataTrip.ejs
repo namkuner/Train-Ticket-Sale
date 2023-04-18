@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Trip Info</title>
+</head>
+
+<body>
+    <h1>Trip Info</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Điểm xuất phát</th>
+                <th scope="col">Điểm đến</th>
+                <th scope="col">Ngày khởi hành</th>
+                <th scope="col">Giá vé</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Tên toa</th>
+                <th scope="col">Tên tàu</th>
+                <th scope="col">Chức năng</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let i=0; i < trip.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= trip[i].diemXuatPhat %>
+                    </td>
+                    <td>
+                        <%= trip[i].diemDen %>
+                    </td>
+                    <td>
+                        <%= trip[i].ngayKhoiHanh %>
+                    </td>
+                    <td>
+                        <%= trip[i].giaVe %>
+                    </td>
+                    <td>
+                        <%= trip[i].trangThai %>
+                    </td>
+                    <td>
+                        <%= trip[i].tenToa %>
+                    </td>
+                    <td>
+                        <%= trip[i].tenTau %>
+                    </td>
+
+                    <td>
+                        <div class="button-container">
+                            <a href="/edit-trip?id=<%=trip[i].id %>" class="edit-button" type="button">Edit</a>
+                            <a href="/delete-trip?id=<%=trip[i].id %>" class="delete-button" type="button">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table th,
+        .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 200px;
+            margin: auto;
+        }
+
+        .edit-button,
+        .delete-button {
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .edit-button {
+            background-color: #6ab04c;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+        }
+
+        .edit-button:hover,
+        .delete-button:hover {
+            opacity: 0.8;
+        }
+    </style>
+
+
+
+
+
+</body>
+
+</html>
