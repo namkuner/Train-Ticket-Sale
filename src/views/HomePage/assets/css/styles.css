@@ -184,6 +184,7 @@ main {
 	background-color: var(--maincolor);
 	color: #fff;
 }
+/*Nơi đi*/
 
 .autobox {
 	position: absolute;
@@ -204,5 +205,28 @@ main {
 	color: #8133e0;
 }
 .autobox.active li {
+	display: block;
+}
+
+/*Nơi đến*/
+.autobox2 {
+	position: absolute;
+	top: 100%;
+	background-color: #fff;
+	width: 170px;
+	background-color: rgba(221, 221, 221, 0.5);
+	overflow-y: auto;
+}
+.autobox2 li {
+	list-style: none;
+	padding: 6px 0 6px 36px;
+	cursor: pointer;
+	color: #333;
+	display: none;
+}
+.autobox2 li:hover {
+	color: #8133e0;
+}
+.autobox2.active li {
 	display: block;
 }
