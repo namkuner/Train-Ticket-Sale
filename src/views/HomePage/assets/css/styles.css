@@ -184,3 +184,22 @@ main {
 	background-color: var(--maincolor);
 	color: #fff;
 }
+
+.autobox {
+	position: absolute;
+	top: 100%;
+	background-color: #fff;
+	width: 170px;
+	background-color: rgba(221, 221, 221, 0.5);
+	overflow-y: auto;
+}
+.autobox li {
+	list-style: none;
+	padding: 6px 0 6px 36px;
+	cursor: pointer;
+	color: #333;
+	display: none;
+}
+.autobox li:hover {
+	color: #8133e0;
+}
