@@ -18,7 +18,7 @@
 		<nav class="navbar navbar-expand-lg">
 			<div class="container">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="/main.html">
+					<a class="navbar-brand" href="#">
 						<img src="./assets/images/train-logo.png" alt="logo-train" width="70px" />
 					</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -119,8 +119,7 @@
 						<input required type="text" name="to" placeholder="Nơi đến" class="form-control" />
 					</div>
 					<div class="form-child">
-						<select class="form-select form-select-lg" aria-label=".form-select-lg example" name="type"
-							required>
+						<select id="trip-type" class="form-select form-select-lg" aria-label=".form-select-lg example" name="type" required>
 							<option selected disabled>Loại vé</option>
 							<option value="1">Một chiều</option>
 							<option value="2">Khứ hồi</option>
@@ -132,11 +131,26 @@
 							placeholder="Ngày đi" />
 					</div>
 					<div class="form-child day">
-						<input name="day-back" class="form-control" type="datetime-local" placeholder="Ngày về" />
+						<input id="return-date" name="day-back" class="form-control" type="datetime-local" placeholder="Ngày về" />
 					</div>
 					<button class="form-child btn btn-primary" type="submit">
 						Tìm kiếm
 					</button>
+
+					<!--Nếu chọn một chiều thì ô khứu hồi sẽ bị kháo và không cho người dùng chọn-->
+							<script>
+								const tripTypeSelect = document.getElementById("trip-type");
+								const returnDateInput = document.getElementById("return-date");
+
+								tripTypeSelect.addEventListener("change", function() {
+  									if (tripTypeSelect.value === "1") {
+    									returnDateInput.disabled = true;
+  									} else {
+    								returnDateInput.disabled = false;
+  									}
+								});
+							</script>
+
 				</form>
 			</div>
 		</div>

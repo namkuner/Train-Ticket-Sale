@@ -203,3 +203,6 @@ main {
 .autobox li:hover {
 	color: #8133e0;
 }
+.autobox.active li {
+	display: block;
+}
