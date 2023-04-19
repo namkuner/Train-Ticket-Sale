@@ -1,7 +1,8 @@
-import express from "express"
+import express from "express";
+import db from '../models/index';
 import dangNhapDangKyService from "../services/dangNhapDangKyService"
+import nguoidatveService from "../services/nguoidatveService"
 import tripCRUD from "../services/tripCRUD"
-
 let dangKy = (req, res) => {
     return res.render("dangky.ejs")
 }
@@ -12,7 +13,7 @@ let dangNhap = (req, res) => {
 let completeRegister = async (req, res) => {
     let message = await dangNhapDangKyService.createNewUser(req.body); // req.body la data nguoi nhap
     console.log(message);
-    return res.send("Chúc mừng bạn đã đăng kí thành công!")
+    return res.send("Chúc mừng bạn đã đăng kí thành công!");
 }
 let insertUser = async (req, res) => {
     let data = await dangNhapDangKyService.dataUser();
@@ -28,8 +29,8 @@ let thaydoithongtin = async (req, res) => {
 let capnhatthongtin = async (req, res) => {
     let user = req.body;
     console.log(user);
-    let message = dangNhapDangKyService.updateUser(user);
-    return res.send("Cập nhật thông tin thành công")
+    let message = await dangNhapDangKyService.updateUser(user);
+    return res.send("Cập nhật thông tin thành công");
 }
 let chuanbixoa = async (req, res) => {
     console.log(req.query.id)
@@ -43,6 +44,8 @@ let xoaUser = async (req, res) => {
 
     console.log(userid)
     let message = await dangNhapDangKyService.xoathongtinuser(userid)
+    // let data = await dangNhapDangKyService.dataUser();
+    return res.send("xóa thông tin thành công")
     // let data = await dangNhapDangKyService.dataUser();
     return res.send("xóa thông tin thành công")
     // return res.render('dataUser.ejs',{user:data})
@@ -108,8 +111,60 @@ let deleteTrip = async (req, res) => {
     }
 }
 
+/* --------------BOOKING ----------*/
+let dataBooker = (req, res) => {
+    return res.render("databooker.ejs")
+}
+let completeDatabooker = async (req, res) => {
+    let message = await nguoidatveService.createNewBooker(req.body);
+    console.log(message)
+    return res.send('post crud from sever');
+}
+
+let displaybooker = async (req, res) => {
+    let data = await nguoidatveService.getAllBooker();
+    console.log('------------------------')
+    console.log(data)
+    console.log('------------------------')
+    return res.render('displaybooker.ejs', {
+        dataTable: data
+    });
+}
+
+let editbooker = async (req, res) => {
+    let bookerId = req.query.id;
+    if (bookerId) {
+        let bookerData = await nguoidatveService.getBookerInforById(bookerId);
+        console.log('-----------------------')
+        console.log(bookerData)
+        console.log('-----------------------')
+        //let bookerData
+        return res.render('editbooker.ejs', {
+            booker: bookerData
+        });
+    } else {
+        return res.send('Booker not found!');
+    }
+}
+let putbooker = async (req, res) => {
+    let data = req.body;
+    let allBookers = await nguoidatveService.updateBookerData(data);
+    return res.render('displaybooker.ejs', {
+        dataTable: allBookers
+    });
+}
+let deletebooker = async (req, res) => {
+    let id = req.query.id;
+    if (id) {
+        await nguoidatveService.deleteBookerById(id);
+        return res.send('Xoá người đặt vé thành công!')
+    } else {
+        return res.send('Người đặt vé không tồn tại!')
+    }
+
+}
 module.exports = {
-    //User
+    //USER
     dangKy: dangKy,
     dangNhap: dangNhap,
     completeRegister: completeRegister,
@@ -118,7 +173,13 @@ module.exports = {
     capnhatthongtin: capnhatthongtin,
     chuanbixoa: chuanbixoa,
     xoaUser: xoaUser,
-
+    //BOOKING
+    dataBooker: dataBooker,
+    completeDatabooker: completeDatabooker,
+    displaybooker: displaybooker,
+    editbooker: editbooker,
+    putbooker: putbooker,
+    deletebooker: deletebooker,
     //Trip
     formCreateTrip: formCreateTrip,
     doneCreateTrip: doneCreateTrip,

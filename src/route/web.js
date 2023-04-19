@@ -9,10 +9,10 @@ let initWebRouters = (app) => {
     router.post('/complete-register', homeControllers.completeRegister);
     router.get('/dangnhap', homeControllers.dangNhap);
     router.get('/dataUser', homeControllers.insertUser);
-    router.get('/editUser', homeControllers.thaydoithongtin);
-    router.post('/updatethongtinUser', homeControllers.capnhatthongtin);
-    router.get('/post-delete', homeControllers.chuanbixoa);
-    router.post('/deleteUser', homeControllers.xoaUser);
+    router.get('/editUser',homeControllers.thaydoithongtin);
+    router.post('/updatethongtinUser',homeControllers.capnhatthongtin);
+    router.get('/post-delete',homeControllers.chuanbixoa);
+    router.post('/deleteUser',homeControllers.xoaUser);
 
     //TRIP
     router.get('/nhapTrip', homeControllers.formCreateTrip)
@@ -21,6 +21,16 @@ let initWebRouters = (app) => {
     router.get('/edit-trip', homeControllers.getEditTripById)
     router.post('/update-trip', homeControllers.updateTrips)
     router.get('/delete-trip', homeControllers.deleteTrip)
+    
+    //BOOK
+    router.get('/databooker', homeControllers.dataBooker);
+    router.post('/complete-databooker', homeControllers.completeDatabooker);
+    router.get('/get-databooker', homeControllers.displaybooker);
+    router.get('/edit-databooker', homeControllers.editbooker);
+    //sua
+    router.post('/capnhat-databooker', homeControllers.putbooker)
+    //xoa
+    router.get('/delete-databooker', homeControllers.deletebooker)
 
     return app.use("/", router);
 
