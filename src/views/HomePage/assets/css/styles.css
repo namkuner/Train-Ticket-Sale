@@ -190,14 +190,13 @@ main {
 	margin-top: 20px;
 }
 /*Nơi đi*/
-
 .autobox {
 	position: absolute;
 	top: 100%;
-	background-color: #fff;
 	width: 170px;
-	background-color: rgba(221, 221, 221, 0.5);
+	background-color: #f1eded;
 	overflow-y: auto;
+	max-height: 200px;
 }
 .autobox li {
 	list-style: none;
@@ -217,10 +216,10 @@ main {
 .autobox2 {
 	position: absolute;
 	top: 100%;
-	background-color: #fff;
 	width: 170px;
-	background-color: rgba(221, 221, 221, 0.5);
+	background-color: #f1eded;/*rgba(221, 221, 221, 0.5);*/
 	overflow-y: auto;
+	max-height: 200px;
 }
 .autobox2 li {
 	list-style: none;
