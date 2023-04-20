@@ -184,6 +184,11 @@ main {
 	background-color: var(--maincolor);
 	color: #fff;
 }
+.some-regulations .container .titlegatau{
+	background-color: var(--maincolor);
+	color: #fff;
+	margin-top: 20px;
+}
 /*Nơi đi*/
 
 .autobox {
@@ -230,3 +235,36 @@ main {
 .autobox2.active li {
 	display: block;
 }
+
+/*Tìm ga tàu*/
+.gatau-search {
+	text-align: center;
+	margin: 0 auto;
+	display: block;
+}
+.autobox3 {
+	position: absolute;
+	width: 872px;
+	background-color: #f1eded;/*rgba(221, 221, 221, 0.5);*/
+	overflow-y: auto;
+	display: grid;
+  	grid-template-columns: repeat(4, 1fr);
+  	grid-gap: 10px;
+}
+.autobox3 li {
+	list-style: none;
+	padding: 6px 0 6px 36px;
+	cursor: pointer;
+	color: #333;
+	display: none;
+}
+.autobox3 li:hover {
+	color: #8133e0;
+}
+.autobox3.active li {
+	display: block;
+}
+
+/**/
+
+
