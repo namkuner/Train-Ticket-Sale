@@ -6,41 +6,17 @@ const gatauSearch = document.querySelector(".gatau-search")
 const autoBox3 = document.querySelector(".autobox3")
 
 
-//Nơi đi
-inputSearch.onkeyup = (e) => {
-    //console.log(e.target.value)
-    let checkData = e.target.value
-    let dataArray = []
-    if(checkData){
-        dataArray = recomentlist.filter((data) => {
-            return data.toLocaleLowerCase().startsWith(checkData.toLocaleLowerCase())
-        })
-        
-        dataArray = dataArray.map((data) => {
-            return data = '<li>'+data+'</li>'
-        })
-        autoBox.classList.add('active')
-        showAdress (dataArray)
-        let liItem = autoBox.querySelectorAll("li")
-        for(let i=0;i<liItem.length;i++){
-            liItem[i].addEventListener("click",function(){
-                inputSearch.value = liItem[i].innerHTML
-                autoBox.classList.remove('active')
-            })
-        }
-        //console.log(dataArray)
-    }else{
-        autoBox.classList.remove('active')
-    }
-}
-function showAdress (list){
-    let listData
-    if (!list.length) {
-        listData = '<li>'+inputSearch.value+'</li>'
-    }else {
-        listData = list.join('')
-    }
-    autoBox.innerHTML = listData
+function slugName(str) {
+    str = str.toLowerCase();
+    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+    str = str.replace(/đ/g, "d");
+    str = str.replace(/ /g, "-");
+    return str;
 }
 
 let recomentlist = [
@@ -77,52 +53,90 @@ let recomentlist = [
     "Dĩ An",
     "Sài Gòn",
 ]
+  
 
-//Nơi đến 
+
+//Nơi đi (tìm kiếm không cần dấu)
+inputSearch.oninput = (e) => {
+    let checkData = slugName(e.target.value);
+    let dataArray = [];
+    if (checkData) {
+      dataArray = recomentlist.filter((data) => {
+        return slugName(data).startsWith(checkData);
+      });
+      dataArray = dataArray.map((data) => {
+        return "<li>" + data + "</li>";
+      });
+      autoBox.classList.add("active");
+      showAddress(dataArray);
+      let liItem = autoBox.querySelectorAll("li");
+      for (let i = 0; i < liItem.length; i++) {
+        liItem[i].addEventListener("click", function () {
+          inputSearch.value = liItem[i].innerHTML;
+          autoBox.classList.remove("active");
+        });
+      }
+    } else {
+      autoBox.classList.remove("active");
+    }
+};
+  
+function showAddress(list) {
+    let listData;
+    if (!list.length) {
+      listData = "<li>" + inputSearch.value + "</li>";
+    } else {
+      listData = list.join("");
+    }
+    autoBox.innerHTML = listData;
+}
+
+//Nơi đến (tìm kiếm không cần dấu)
 outputSearch.onkeyup = (e) => {
     //console.log(e.target.value)
-    let checkData = e.target.value
+    let checkData = slugName(e.target.value);
     let dataArray = []
     if(checkData){
         dataArray = recomentlist.filter((data) => {
-            return data.toLocaleLowerCase().startsWith(checkData.toLocaleLowerCase())
+            return slugName(data).startsWith(checkData);
         })
         
         dataArray = dataArray.map((data) => {
-            return data = '<li>'+data+'</li>'
-        })
-        autoBox2.classList.add('active')
-        showAdress2 (dataArray)
-        let liItem = autoBox2.querySelectorAll("li")
+            return "<li>" + data + "</li>";
+        });
+        autoBox2.classList.add('active');
+        showAdress2 (dataArray);
+        let liItem = autoBox2.querySelectorAll("li");
         for(let i=0;i<liItem.length;i++){
             liItem[i].addEventListener("click",function(){
-                outputSearch.value = liItem[i].innerHTML
-                autoBox2.classList.remove('active')
-            })
+                outputSearch.value = liItem[i].innerHTML;
+                autoBox2.classList.remove('active');
+            });
         }
         //console.log(dataArray)
     }else{
-        autoBox2.classList.remove('active')
+        autoBox2.classList.remove('active');
     }
 }
 function showAdress2 (list){
-    let listData2
+    let listData2;
     if (!list.length) {
-        listData2 = '<li>'+outputSearch.value+'</li>'
+        listData2 = '<li>'+outputSearch.value+'</li>';
     }else {
-        listData2 = list.join('')
+        listData2 = list.join('');
     }
-    autoBox2.innerHTML = listData2
+    autoBox2.innerHTML = listData2;
 }
+/////
 
-//Tìm ga tàu
+//Tìm ga tàu (tìm kiếm không cần dấu)
 gatauSearch.onkeyup = (e) => {
     //console.log(e.target.value)
-    let checkData = e.target.value
+    let checkData = slugName(e.target.value);
     let dataArray = []
     if(checkData){
         dataArray = recomentlist.filter((data) => {
-            return data.toLocaleLowerCase().startsWith(checkData.toLocaleLowerCase())
+            return slugName(data).startsWith(checkData);
         })
         
         dataArray = dataArray.map((data) => {
@@ -139,21 +153,24 @@ gatauSearch.onkeyup = (e) => {
         }
         //console.log(dataArray)
     }else{
-        let allDataArray = recomentlist.map((data) => {
-            return data = '<li>'+data+'</li>'
-        })
         autoBox3.classList.add('active')
-        showAdress3 (allDataArray)
-        let liItem = autoBox3.querySelectorAll("li")
-        for(let i=0;i<liItem.length;i++){
-            liItem[i].addEventListener("click",function(){
-                gatauSearch.value = liItem[i].innerHTML
-                autoBox3.classList.remove('active')
-            })
-        }
     }
 }
+function showAdress3 (list){
+    let listData3
+    if (!list.length) {
+        listData3 = '<li>'+gatauSearch.value+'</li>'
+    }else {
+        listData3 = list.join('')
+    }
+    autoBox3.innerHTML = listData3
+}
 //
+
+
+
+
+
 
 
 //////TÌM GA TÀU TRONG PHẦN TRANG CHỦ
@@ -173,19 +190,7 @@ gatauSearch.addEventListener("click", function(){
     }
 })
 //
-function showAdress3 (list){
-    let listData3
-    if (!list.length) {
-        listData3 = '<li>'+gatauSearch.value+'</li>'
-    }else {
-        listData3 = list.join('')
-    }
-    autoBox3.innerHTML = listData3
-    //show các ga tàu khi click vào
-    gatauSearch.addEventListener("click", function() {
-        document.querySelector(".table").classList.add("active");
-    });
-}
+
 //Khi ckick ra khỏi ô tìm ga tàu thì bảng dữ liệu sẽ ẩn đi
 document.addEventListener('click', function(event) {
     const isClickInsideInput = gatauSearch.contains(event.target);
@@ -297,3 +302,5 @@ function showBox() {
 }
 outputSearch.addEventListener('focus', showBox);
 //////
+
+
