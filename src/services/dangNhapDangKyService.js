@@ -46,6 +46,28 @@ let infomationUser=(userid)=>{
         }
     })
 }
+let checkdangnhap = (user_password)=>{
+    return new Promise(async(reslove,reject)=>{
+        try{
+            let data =await db.User.findOne({where :{phoneNumber: user_password.SDT}})
+            if(data)
+            {
+                if(data.password ==user_password.password)
+                {
+                    reslove("Bạn đã đăng nhập thành công")
+                }
+                else{
+                    reslove("Mật khẩu bạn bị sai mời nhập lại")
+                }
+                
+            }
+            else {
+                reslove("tài khoản của bạn không chính xác! xin mời nhập lại")
+            }
+        }catch(e)
+        {reject(e)}
+    })
+}
 let updateUser = async (user) => {
     try {
         let data = await db.User.findOne({where:{id: user.id}});
@@ -88,4 +110,5 @@ module.exports ={
     infomationUser :infomationUser,
     updateUser: updateUser,
     xoathongtinuser:xoathongtinuser,
+    checkdangnhap:checkdangnhap,
 }
