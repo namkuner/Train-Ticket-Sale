@@ -6,13 +6,14 @@ let initWebRouters = (app) => {
     //USER
     router.get('/', homeControllers.dangKy);
     router.get('/dangky', homeControllers.dangKy);
-    router.post('/complete-register', homeControllers.completeRegister);
+    router.post('/complete-register', homeControllers.completeRegister);   
     router.get('/dangnhap', homeControllers.dangNhap);
+    router.post('/login',homeControllers.loginn)
     router.get('/dataUser', homeControllers.insertUser);
     router.get('/editUser',homeControllers.thaydoithongtin);
     router.post('/updatethongtinUser',homeControllers.capnhatthongtin);
-    router.get('/post-delete',homeControllers.chuanbixoa);
-    router.post('/deleteUser',homeControllers.xoaUser);
+    router.get('/xemtruockhixoa',homeControllers.xemtruocuser);
+    router.post('/xoa-user',homeControllers.xoaiduser);
 
     //TRIP
     router.get('/nhapTrip', homeControllers.formCreateTrip)

@@ -1,56 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Trang chủ</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <title>Login Page</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Bán vé tàu</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Trang chủ</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Vé tàu</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Giới thiệu</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Đăng nhập</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Đăng ký</a>
-      </li>
-    </ul>
+  <h1>Login Page</h1>
+  <div id="form-wrapper">
+    <form method="POST" action="/login">
+      <label for="SDT">Số điện thoại</label>
+      <input type="text" id="SDT" name="SDT" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+      <button type="submit">Login</button>
+    </form>
   </div>
-</nav>
-
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-6">
-      <h1>Chào mừng đến với trang bán vé tàu</h1>
-      <p>Chúng tôi cung cấp các loại vé tàu cho hành trình của bạn. Đặt vé tàu ngay hôm nay để có chuyến đi thú vị và tiết kiệm chi phí.</p>
-      <button class="btn btn-primary">Đặt vé tàu</button>
-    </div>
-    <div class="col-md-6">
-      <img src="https://www.w3schools.com/w3images/train.jpg" class="img-fluid">
-    </div>
-  </div>
-</div>
-
+  <% if ( er !== null) { %>
+    <script>
+        alert('<%= er %>');
+    </script>
+<% } %>
+  <style>body {
+    background-image: url('train2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  #form-wrapper {
+    width: 30%;
+    margin: 0 auto;
+    background-color: #34da3cc9;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  button[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }</style>
 </body>
 </html>
