@@ -12,6 +12,32 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
 	<link rel="stylesheet" href="./assets/css/styles.css" />
+
+	<!--///////////////////////////////////////////////////-->
+	<!--<script>
+		function search() {
+			var from = document.getElementById("from").value;
+			var to = document.getElementById("to").value;
+			var type = document.getElementById("type").value;
+			var goday = document.getElementById("goday").value;
+
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					if (this.responseText == "found") {
+						window.location.href = "booking.html";
+					} else {
+						document.getElementById("result").innerHTML = "Không tìm thấy vé tàu phù hợp.";
+					}
+				}
+			};
+			xhttp.open("GET", "search.php?from=" + from + "&to=" + to + "&type=" + type + "&daygo=" + goday, true);
+			xhttp.send();
+		}
+	</script>-->
+	<!--///////////////////////////////////////////////////-->
+	<script src="search.js"></script>
+
 </head>
 
 <body>
@@ -73,51 +99,51 @@
 
 		<div class="booking-form">
 			<div class="container">
-				<form>
+				<form action="/src/views/HomePage/search.js" method="GET"><!--action="booking.js"-->
 					<div class="form-child hotline">
 						<h3>Vé tàu</h3>
 						<p>Hotline: 999999999</p>
 					</div>
 
 					<div class="form-child">
-						<input required type="text" name="from" placeholder="Nơi đi" class="form-control input-search" />
+						<input required type="text" name="from" id="from" placeholder="Nơi đi" class="form-control input-search" />
 						<div class="autobox">
-							<li>Hà Nội</li>
-							<li>Phủ lý</li>
-							<li>Nam Định</li>
-							<li>Ninh Bình</li>
+							<li>Biên Hòa</li>
 							<li>Bỉm Sơn</li>
-							<li>Thanh Hóa</li>
-							<li>Minh Khôi</li>
+							<li>Bình Thuận</li>
+							<li>Bồng Sơn</li>
 							<li>Chợ Sy</li>
+							<li>Đà Nẵng</li>
+							<li>Dĩ An</li>
+							<li>Diêu Trì</li>
+							<li>Đông Hà</li>
+							<li>Đồng Hới</li>
+							<li>Đồng Lê</li>
+							<li>Đức Phổ</li>
+							<li>Giã</li>
+                            <li>Hà Nội</li>
+							<li>Huế</li>
+							<li>Hương Phố</li>	
+							<li>Minh Khôi</li>
+							<li>Nam Định</li>
+							<li>Nha Trang</li>
+							<li>Ninh Bình</li>
+							<li>Ninh Hòa</li>
+							<li>Núi Thành</li>
+							<li>Phủ lý</li>
+							<li>Quãng Ngãi</li>
+							<li>Sài Gòn</li>
+							<li>Sôn Mao</li>
+							<li>Tam Kỳ</li>
+							<li>Thanh Hóa</li>
+							<li>Tháp Chàm</li>
+							<li>Tuy Hòa</li>
 							<li>Vinh</li>
 							<li>Yên Trung</li>
-							<li>Hương Phố</li>
-							<li>Đồng Lê</li>
-							<li>Đồng Hới</li>
-							<li>Đông Hà</li>
-							<li>Huế</li>
-							<li>Đà Nẵng</li>
-							<li>Tam Kỳ</li>
-							<li>Núi Thành</li>
-							<li>Quãng Ngãi</li>
-							<li>Đức Phổ</li>
-							<li>Bồng Sơn</li>
-							<li>Diêu Trì</li>
-							<li>Tuy Hòa</li>
-							<li>Giã</li>
-							<li>Ninh Hòa</li>
-							<li>Nha Trang</li>
-							<li>Tháp Chàm</li>
-							<li>Sôn Mao</li>
-							<li>Bình Thuận</li>
-							<li>Biên Hòa</li>
-							<li>Dĩ An</li>
-							<li>Sài Gòn</li>
 						</div>
 					</div>
 					<div class="form-child">
-						<input required type="text" name="to" placeholder="Nơi đến" class="form-control output-search" />
+						<input required type="text" name="to" id="to" placeholder="Nơi đến" class="form-control output-search" />
 						<div class="autobox2">
 							<li>Hà Nội</li>
 							<li>Phủ lý</li>
@@ -162,20 +188,25 @@
 					</div>
 
 					<div class="form-child day">
-						<input id="go-date" required name="day-go" class="form-control" type="datetime-local"
-							placeholder="Ngày đi" />
-					</div>
+						<input id="godate" required name="daygo" class="form-control" type="datetime-local" placeholder="Ngày đi" />   <!--id="go-date"-->
+					</div> 
 					<div class="form-child day">
-						<input id="return-date" name="day-back" class="form-control" type="datetime-local" placeholder="Ngày về" />
+						<input id="returndate" name="dayback" class="form-control" type="datetime-local" placeholder="Ngày về" />
 					</div>
-					<button class="form-child btn btn-primary" type="submit">
+					<!--<button class="form-child btn btn-primary" type="submit" onclick="handleSearch()">
+						Tìm kiếm
+					</button>-->
+					<button class="form-child btn btn-primary" type="submit" onclick="handleSearch()">
 						Tìm kiếm
 					</button>
+					<div id="result"></div>
+					<!--///////-->
+					<script src="validateForm.js"></script>
 
 					<!--Nếu chọn một chiều thì ô khứu hồi sẽ bị kháo và không cho người dùng chọn-->
 							<script>
 								const tripTypeSelect = document.getElementById("trip-type");
-								const returnDateInput = document.getElementById("return-date");
+								const returnDateInput = document.getElementById("returndate");
 
 								tripTypeSelect.addEventListener("change", function() {
   									if (tripTypeSelect.value === "1") {
@@ -185,10 +216,11 @@
   									}
 								});
 							</script>
-
+					<!------------------------------------------------------------------------------>
 				</form>
 			</div>
 		</div>
+
 
 		<div class="some-regulations">
 
