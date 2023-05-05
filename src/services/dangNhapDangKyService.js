@@ -104,6 +104,19 @@ let xoathongtinuser = (dataid)=>
         }
     })
 }
+//////////////////////////////////////trang admin
+let dataAdmin =()=>{
+    return new Promise(async(reslove,reject)=>{
+        try{
+            let data = await db.User.findAll();
+            reslove(data);
+        }
+        catch(e)
+        {
+            reject(e);
+        }
+    })
+}
 module.exports ={
     createNewUser: createNewUser,
     dataUser:dataUser,
@@ -111,4 +124,6 @@ module.exports ={
     updateUser: updateUser,
     xoathongtinuser:xoathongtinuser,
     checkdangnhap:checkdangnhap,
+    //-----thêm dữ liệu tài khoản người dùng vào trang admin
+    dataAdmin: dataAdmin,
 }

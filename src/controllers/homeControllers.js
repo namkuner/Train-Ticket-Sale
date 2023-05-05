@@ -7,9 +7,7 @@ let dangKy = (req,res)=>{
     return res.render("dangky.ejs")
 }
 let dangNhap = (req, res)=>{
-
     return res.render("dangnhap.ejs",{er : null})
-    
 }
 let loginn = async (req,res)=>{
     let SDT_password =req.body;
@@ -174,8 +172,31 @@ let deletebooker = async (req, res) => {
     } else {
         return res.send('Người đặt vé không tồn tại!')
     }
-
 }
+
+/* --------------TRANG ADMIN ----------*/
+let insertUser1 = async(req, res)=>{
+    let data = await dangNhapDangKyService.dataAdmin();
+    /*return res.render('admin.ejs',{user:data})*/
+    return res.render('../views/AdminPage/ejs/admin.ejs',{user:data})
+}
+let insertUser2 = async(req, res)=>{
+    let data = await dangNhapDangKyService.dataAdmin();
+    return res.render('../views/AdminPage/ejs/danhsachve.ejs',{user:data})
+}
+let insertUser3 = async(req, res)=>{
+    let data = await dangNhapDangKyService.dataAdmin();
+    return res.render('../views/AdminPage/ejs/thongtindat.ejs',{user:data})
+}
+let insertUser4 = async(req, res)=>{
+    let data = await tripCRUD.getAllDataTrip();
+    return res.render('../views/AdminPage/ejs/quanlilichtrinh.ejs',{trip:data})
+}
+
+
+/*----------------------------------------------------------------------------------------*/
+  
+
 module.exports = {
     //USER
     dangKy :dangKy,
@@ -203,5 +224,10 @@ module.exports = {
     editTripsById: editTripsById,
     updateTrips: updateTrips,
     deleteTrip: deleteTrip,
+    //Lấy dữ liệu tài khoản người dùng
+    insertUser1:insertUser1,
+    insertUser2: insertUser2,
+    insertUser3: insertUser3,
+    insertUser4: insertUser4,
 }
 
