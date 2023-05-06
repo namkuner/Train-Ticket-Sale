@@ -50,13 +50,13 @@ let initWebRouters = (app) => {
     router.get('/delete-databooker', homeControllers.deletebooker)
 
     //LẤY DỮ LIỆU NGƯỜI DÙNG RA TRANG ADMIN
-    //router.get('/admin', homeControllers.insertUser1);
-   // router.get('/danhsachve', homeControllers.insertUser2);
     router.get('/AdminPage/ejs/admin', homeControllers.insertUser1);
     router.get('/AdminPage/ejs/danhsachve', homeControllers.insertUser2);
     router.get('/AdminPage/ejs/thongtindat', homeControllers.insertUser3);
     router.get('/AdminPage/ejs/quanlilichtrinh', homeControllers.insertUser4);
 
+    //Trang booking
+    router.get('/HomePage/ejs/booking', homeControllers.insertUser5);
     
 
     /*router.get('/admin', (req, res) => {
