@@ -145,7 +145,7 @@ main {
 
 	width:295px;
 	height: 23px;
-    background-image: url('../images/train-footer.png');
+    background-image: url('http://127.0.0.1:5500/src/views/HomePage/images/train-footer.png');
     background-repeat: no-repeat;
     background-size: cover;
     animation: trainRun linear 14s infinite;
@@ -697,7 +697,7 @@ main {
 	<script src="../js/validateForm.js"></script>-->
 
 
-<!---------------------------------CODE JS------------------------------------------------>
+<!---------------------------------Ô nơi đến, nơi đi------------------------------------------------>
     <script>
 const inputSearch = document.querySelector(".input-search")
 const autoBox = document.querySelector(".autobox")
@@ -999,6 +999,26 @@ outputSearch.addEventListener('focus', showBox);
 </script>  
 <!--------------------------------------------------------------------------------->
 
+<!-------------------------Ảnh động chuyển động qua lại---------------------------->
+<script>
+	var swiper = new Swiper('.mySwiper', {
+	  spaceBetween: 30,
+	  centeredSlides: true,
+	  autoplay: {
+		delay: 2500,
+		disableOnInteraction: false,
+	  },
+	  pagination: {
+		el: '.swiper-pagination',
+		clickable: true,
+	  },
+	  navigation: {
+		nextEl: '.swiper-button-next',
+		prevEl: '.swiper-button-prev',
+	  },
+	});
+  </script>
+<!--------------------------------------------------------------------------------->
 
 	<script>
 		flatpickr("input[type='datetime-local']", {
