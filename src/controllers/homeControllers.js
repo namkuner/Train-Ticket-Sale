@@ -195,8 +195,22 @@ let insertUser4 = async(req, res)=>{
     let data = await tripCRUD.getAllDataTrip();
     return res.render('../views/AdminPage/ejs/quanlilichtrinh.ejs',{trip:data})
 }
+/*----------------------------------------------------------------------------------------*/
 
+/* -------------Trang booking----------*/
+let insertUser5 = async(req, res)=>{
+    let data = await dangNhapDangKyService.dataAdmin();
+    /*return res.render('admin.ejs',{user:data})*/
+    return res.render('../views/HomePage/ejs/booking.ejs',{user:data})
+}
+/*----------------------------------------------------------------------------------------*/
 
+/* -------------Trang chủ----------*/
+let insertUser6 = async(req, res)=>{
+    let data = await dangNhapDangKyService.dataAdmin();
+    /*return res.render('admin.ejs',{user:data})*/
+    return res.render('../views/HomePage/ejs/main.ejs',{user:data})
+}
 /*----------------------------------------------------------------------------------------*/
   
 
@@ -233,5 +247,9 @@ module.exports = {
     insertUser2: insertUser2,
     insertUser3: insertUser3,
     insertUser4: insertUser4,
+    //Trang booking
+    insertUser5: insertUser5,
+    //Trang chủ
+    insertUser6: insertUser6,
 }
 
