@@ -167,12 +167,6 @@ function showAdress3 (list){
 }
 //
 
-
-
-
-
-
-
 //////TÌM GA TÀU TRONG PHẦN TRANG CHỦ
 gatauSearch.addEventListener("click", function(){
     autoBox3.classList.remove('active');
@@ -206,7 +200,6 @@ function showBox3() {
     }
 }
 gatauSearch.addEventListener('focus', showBox3);
-//
 ////////
 
 //////TÌM NƠI ĐI TRONG PHẦN TRANG CHỦ
