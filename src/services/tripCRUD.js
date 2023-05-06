@@ -6,10 +6,10 @@ let createNewTrip = (data) => {
             await db.Trip.create({
                 diemXuatPhat: data.diemXuatPhat,
                 diemDen: data.diemDen,
-                ngayKhoiHanh: data.ngayKhoiHanh,
-                giaVe: data.giaVe,
-                trangThai: data.trangThai,
-                tenToa: data.tenToa,
+                thoiGianDi: data.thoiGianDi,
+                thoiGianDen: data.thoiGianDen,
+                // giaVe: data.giaVe,
+                soToa: data.soToa,
                 tenTau: data.tenTau,
             })
             resolve("Tạo chuyến mới thành công")
@@ -58,10 +58,10 @@ let updateTrip = async (trip) => {
             if (data) {
                 data.diemXuatPhat = trip.diemXuatPhat;
                 data.diemDen = trip.diemDen;
-                data.ngayKhoiHanh = trip.ngayKhoiHanh;
-                data.giaVe = trip.giaVe;
-                data.trangThai = trip.trangThai;
-                data.tenToa = trip.tenToa;
+                data.thoiGianDi = trip.thoiGianDi;
+                data.thoiGianDen = trip.thoiGianDen;
+                // data.giaVe = trip.giaVe;
+                data.soToa = trip.soToa;
                 data.tenTau = trip.tenTau;
                 await data.save();
                 let allTrip = await db.Trip.findAll()

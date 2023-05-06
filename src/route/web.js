@@ -34,7 +34,8 @@ let initWebRouters = (app) => {
     router.get('/delete-databooker', homeControllers.deletebooker)
 
 
-
+    //SEARCH-Trip
+    router.get('/search-info', homeControllers.searchTrips)
 
     return app.use("/", router);
 
