@@ -201,6 +201,14 @@ let insertUser5 = async(req, res)=>{
     return res.render('../views/HomePage/ejs/booking.ejs',{user:data})
 }
 /*----------------------------------------------------------------------------------------*/
+
+/* -------------Trang chủ----------*/
+let insertUser6 = async(req, res)=>{
+    let data = await dangNhapDangKyService.dataAdmin();
+    /*return res.render('admin.ejs',{user:data})*/
+    return res.render('../views/HomePage/ejs/main.ejs',{user:data})
+}
+/*----------------------------------------------------------------------------------------*/
   
 
 module.exports = {
@@ -237,5 +245,7 @@ module.exports = {
     insertUser4: insertUser4,
     //Trang booking
     insertUser5: insertUser5,
+    //Trang chủ
+    insertUser6: insertUser6,
 }
 

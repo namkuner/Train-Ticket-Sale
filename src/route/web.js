@@ -57,6 +57,8 @@ let initWebRouters = (app) => {
 
     //Trang booking
     router.get('/HomePage/ejs/booking', homeControllers.insertUser5);
+    //Trang chủ
+    router.get('/HomePage/ejs/main', homeControllers.insertUser6);
     
 
     /*router.get('/admin', (req, res) => {
