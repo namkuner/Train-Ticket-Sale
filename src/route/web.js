@@ -20,7 +20,7 @@ app.set('view engine', 'ejs');
 ///////////////////
 let initWebRouters = (app) => {
     //USER
-    router.get('/', homeControllers.dangKy);
+    router.get('/', homeControllers.homepage);
     router.get('/dangky', homeControllers.dangKy);
     router.post('/complete-register', homeControllers.completeRegister);   
     router.get('/dangnhap', homeControllers.dangNhap);

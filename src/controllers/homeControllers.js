@@ -3,6 +3,9 @@ import db from '../models/index';
 import dangNhapDangKyService from "../services/dangNhapDangKyService"
 import nguoidatveService from "../services/nguoidatveService"
 import tripCRUD from "../services/tripCRUD"
+let homepage =(req,res)=>{
+    return res.render("src/views/HomePage/main.html")
+}
 let dangKy = (req,res)=>{
     return res.render("dangky.ejs")
 }
@@ -199,6 +202,7 @@ let insertUser4 = async(req, res)=>{
 
 module.exports = {
     //USER
+    homepage :homepage,
     dangKy :dangKy,
     dangNhap :dangNhap,
     completeRegister :completeRegister,
