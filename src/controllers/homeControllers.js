@@ -4,7 +4,8 @@ import dangNhapDangKyService from "../services/dangNhapDangKyService"
 import nguoidatveService from "../services/nguoidatveService"
 import tripCRUD from "../services/tripCRUD"
 let homepage =(req,res)=>{
-    return res.render("src/views/HomePage/main.html")
+    let idlogin = null
+    return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
 }
 let dangKy = (req,res)=>{
     return res.render("dangky.ejs")
@@ -15,15 +16,17 @@ let dangNhap = (req, res)=>{
 let loginn = async (req,res)=>{
     let SDT_password =req.body;
     console.log(SDT_password)
-    let error = await dangNhapDangKyService.checkdangnhap(SDT_password)
-    console.log(error)
-    if(error=="Bạn đã đăng nhập thành công")
+    let result  = await dangNhapDangKyService.checkdangnhap(SDT_password)
+    console.log(result)
+    if(result.message=="Bạn đã đăng nhập thành công")
     {
-        return res.redirect('/')
+        let loggedInUser  = result.data.id;
+        console.log("loggedInUser" + loggedInUser)
+        return res.render('homepage.ejs',{loggedInUser:loggedInUser})
     }
     else
     {
-        res.render("dangnhap.ejs", {er :error})
+        res.render("dangnhap.ejs", {er :result})
     }
 
 }

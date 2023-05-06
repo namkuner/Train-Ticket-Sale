@@ -54,7 +54,7 @@ let checkdangnhap = (user_password)=>{
             {
                 if(data.password ==user_password.password)
                 {
-                    reslove("Bạn đã đăng nhập thành công")
+                    reslove({ message: "Bạn đã đăng nhập thành công", data: data })
                 }
                 else{
                     reslove("Mật khẩu bạn bị sai mời nhập lại")
