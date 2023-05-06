@@ -54,7 +54,7 @@ let checkdangnhap = (user_password)=>{
             {
                 if(data.password ==user_password.password)
                 {
-                    reslove("Bạn đã đăng nhập thành công")
+                    reslove({ message: "Bạn đã đăng nhập thành công", data: data })
                 }
                 else{
                     reslove("Mật khẩu bạn bị sai mời nhập lại")
@@ -104,6 +104,19 @@ let xoathongtinuser = (dataid)=>
         }
     })
 }
+//////////////////////////////////////trang admin
+let dataAdmin =()=>{
+    return new Promise(async(reslove,reject)=>{
+        try{
+            let data = await db.User.findAll();
+            reslove(data);
+        }
+        catch(e)
+        {
+            reject(e);
+        }
+    })
+}
 module.exports ={
     createNewUser: createNewUser,
     dataUser:dataUser,
@@ -111,4 +124,6 @@ module.exports ={
     updateUser: updateUser,
     xoathongtinuser:xoathongtinuser,
     checkdangnhap:checkdangnhap,
+    //-----thêm dữ liệu tài khoản người dùng vào trang admin
+    dataAdmin: dataAdmin,
 }

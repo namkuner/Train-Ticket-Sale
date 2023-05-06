@@ -20,8 +20,9 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-12 mt-3"><b>Delete User Infomation</b></div>
-      <form action="/xoa-user" method="POST">
+      <div class="col-12 mt-3"><b>Thông tin cá nhân</b></div>
+      
+      <form >
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">First Name</label>
@@ -129,8 +130,7 @@
               </div>
               <input type="hidden" name="roleid" value="R3">
               <input type="hidden" name ="id" value="<%=user.id%>">
-              <div class="col-12 mt-3"><b>Bạn có chắc chắn muốn xóa không</b></div>
-              <button class="btn btn-primary" type="submit">Delete</button>
+              <button class="btn btn-primary" type="submit">a</button>
             </form>
             <script>
               function togglePassword() {

@@ -2,9 +2,25 @@ import express from "express";
 import homeControllers from "../controllers/homeControllers";
 let router = express.Router();
 
+//const express = require('express');
+//const router = express.Router();
+
+
+/*
+const app = express();
+const ejs = require('ejs');
+// Rest of your code goes here
+app.set('view engine', 'ejs');
+//////lấy dữ liệu người dùng ra admin
+// Khai báo thư viện body-parser
+*/
+
+
+
+///////////////////
 let initWebRouters = (app) => {
     //USER
-    router.get('/', homeControllers.dangKy);
+    router.get('/', homeControllers.homepage);
     router.get('/dangky', homeControllers.dangKy);
     router.post('/complete-register', homeControllers.completeRegister);   
     router.get('/dangnhap', homeControllers.dangNhap);
@@ -33,10 +49,24 @@ let initWebRouters = (app) => {
     //xoa
     router.get('/delete-databooker', homeControllers.deletebooker)
 
+    //LẤY DỮ LIỆU NGƯỜI DÙNG RA TRANG ADMIN
+    router.get('/AdminPage/ejs/admin', homeControllers.insertUser1);
+    router.get('/AdminPage/ejs/danhsachve', homeControllers.insertUser2);
+    router.get('/AdminPage/ejs/thongtindat', homeControllers.insertUser3);
+    router.get('/AdminPage/ejs/quanlilichtrinh', homeControllers.insertUser4);
 
-    //SEARCH-Trip
-    router.get('/search-info', homeControllers.searchTrips)
+    //Trang booking
+    router.get('/HomePage/ejs/booking', homeControllers.insertUser5);
+    //Trang chủ
+    router.get('/HomePage/ejs/main', homeControllers.insertUser6);
+    
 
+    /*router.get('/admin', (req, res) => {
+        connection.query('SELECT * FROM users', (error, results, fields) => {
+          if (error) throw error;
+          res.render('admin', {data: users});
+        });
+      });*/
     return app.use("/", router);
 
 }

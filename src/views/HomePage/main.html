@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -99,14 +98,15 @@
 
 		<div class="booking-form">
 			<div class="container">
-				<form action="/search-info" method="GET"><!--action="booking.js"--> 
+				<form action="/src/views/HomePage/search.js" method="GET"><!--action="booking.js"-->
 					<div class="form-child hotline">
 						<h3>Vé tàu</h3>
 						<p>Hotline: 999999999</p>
 					</div>
 
 					<div class="form-child">
-						<input required type="text" name="from" id="from" placeholder="Nơi đi" class="form-control input-search" />
+						<input required type="text" name="from" id="from" placeholder="Nơi đi"
+							class="form-control input-search" />
 						<div class="autobox">
 							<li>Biên Hòa</li>
 							<li>Bỉm Sơn</li>
@@ -121,9 +121,9 @@
 							<li>Đồng Lê</li>
 							<li>Đức Phổ</li>
 							<li>Giã</li>
-                            <li>Hà Nội</li>
+							<li>Hà Nội</li>
 							<li>Huế</li>
-							<li>Hương Phố</li>	
+							<li>Hương Phố</li>
 							<li>Minh Khôi</li>
 							<li>Nam Định</li>
 							<li>Nha Trang</li>
@@ -143,7 +143,8 @@
 						</div>
 					</div>
 					<div class="form-child">
-						<input required type="text" name="to" id="to" placeholder="Nơi đến" class="form-control output-search" />
+						<input required type="text" name="to" id="to" placeholder="Nơi đến"
+							class="form-control output-search" />
 						<div class="autobox2">
 							<li>Hà Nội</li>
 							<li>Phủ lý</li>
@@ -180,7 +181,8 @@
 						</div>
 					</div>
 					<div class="form-child">
-						<select id="trip-type" class="form-select form-select-lg" aria-label=".form-select-lg example" name="type" required>
+						<select id="trip-type" class="form-select form-select-lg" aria-label=".form-select-lg example"
+							name="type" required>
 							<option selected disabled>Loại vé</option>
 							<option value="1">Một chiều</option>
 							<option value="2">Khứ hồi</option>
@@ -188,10 +190,12 @@
 					</div>
 
 					<div class="form-child day">
-						<input id="godate" required name="daygo" class="form-control" type="datetime-local" placeholder="Ngày đi" />   <!--id="go-date"-->
-					</div> 
+						<input id="godate" required name="daygo" class="form-control" type="datetime-local"
+							placeholder="Ngày đi" /> <!--id="go-date"-->
+					</div>
 					<div class="form-child day">
-						<input id="returndate" name="dayback" class="form-control" type="datetime-local" placeholder="Ngày về" />
+						<input id="returndate" name="dayback" class="form-control" type="datetime-local"
+							placeholder="Ngày về" />
 					</div>
 					<!--<button class="form-child btn btn-primary" type="submit" onclick="handleSearch()">
 						Tìm kiếm
@@ -204,18 +208,18 @@
 					<script src="validateForm.js"></script>
 
 					<!--Nếu chọn một chiều thì ô khứu hồi sẽ bị kháo và không cho người dùng chọn-->
-							<script>
-								const tripTypeSelect = document.getElementById("trip-type");
-								const returnDateInput = document.getElementById("returndate");
+					<script>
+						const tripTypeSelect = document.getElementById("trip-type");
+						const returnDateInput = document.getElementById("returndate");
 
-								tripTypeSelect.addEventListener("change", function() {
-  									if (tripTypeSelect.value === "1") {
-    									returnDateInput.disabled = true;
-  									} else {
-    								returnDateInput.disabled = false;
-  									}
-								});
-							</script>
+						tripTypeSelect.addEventListener("change", function () {
+							if (tripTypeSelect.value === "1") {
+								returnDateInput.disabled = true;
+							} else {
+								returnDateInput.disabled = false;
+							}
+						});
+					</script>
 					<!------------------------------------------------------------------------------>
 				</form>
 			</div>
@@ -249,26 +253,27 @@
 							<h5>2. Hình thức trả vé.</h5>
 
 							<p>
-								<p>
-									- Khi hành khách mua vé và thanh toán online qua website bán vé của
-									ngành Đường sắt, app bán vé hoặc các ứng dụng mua vé tàu hỏa của các
-									đối tác thứ ba thì có thể trả vé online qua các website bán vé của
-									ngành đường sắt hoặc đến trực tiếp nhà ga.
-								</p>
-								<p>
-									- Khi hành khách mua vé
-									bằng các hình thức khác, muốn đổi vé, trả vé hành khách đến trực
-									tiếp nhà ga kèm theo giấy tờ tùy thân bản chính của người đi tàu
-									hoặc người mua vé cho nhân viên đường sắt. Đồng thời, thông tin trên
-									thẻ đi tàu phải trùng khớp với giấy tờ tùy thân của hành khách.
-								</p>
+							<p>
+								- Khi hành khách mua vé và thanh toán online qua website bán vé của
+								ngành Đường sắt, app bán vé hoặc các ứng dụng mua vé tàu hỏa của các
+								đối tác thứ ba thì có thể trả vé online qua các website bán vé của
+								ngành đường sắt hoặc đến trực tiếp nhà ga.
+							</p>
+							<p>
+								- Khi hành khách mua vé
+								bằng các hình thức khác, muốn đổi vé, trả vé hành khách đến trực
+								tiếp nhà ga kèm theo giấy tờ tùy thân bản chính của người đi tàu
+								hoặc người mua vé cho nhân viên đường sắt. Đồng thời, thông tin trên
+								thẻ đi tàu phải trùng khớp với giấy tờ tùy thân của hành khách.
+							</p>
 							</p>
 							<strong>Trân trọng cảm ơn!.</strong>
 
 							<!--tìm kiếm ga tàu-->
 							<h5 class="titlegatau text-center mb-0 text-uppercase py-2">TÌM TÊN GA:</h5>
 							<div class="form-child">
-								<input required type="text" name="to" placeholder="Tìm ga tàu" class="form-control gatau-search" tabindex="0" />
+								<input required type="text" name="to" placeholder="Tìm ga tàu"
+									class="form-control gatau-search" tabindex="0" />
 
 								<div class="autobox3">
 									<li>Hà Nội</li>
@@ -305,7 +310,7 @@
 									<li>Sài Gòn</li>
 								</div>
 							</div>
-							
+
 							<!------------------->
 
 							<div class="download-app mt-2">
@@ -380,7 +385,7 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
-	</script>
+		</script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<script src="./assets/js/index.js"></script>

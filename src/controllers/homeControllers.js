@@ -7,6 +7,10 @@ import searchtripService from "../services/searchtripService"
 const ejs = require('ejs');
 const path = require('path');
 
+let homepage =(req,res)=>{
+    let idlogin = null
+    return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
+}
 let dangKy = (req, res) => {
     return res.render("dangky.ejs")
 }
@@ -18,13 +22,17 @@ let dangNhap = (req, res) => {
 let loginn = async (req, res) => {
     let SDT_password = req.body;
     console.log(SDT_password)
-    let error = await dangNhapDangKyService.checkdangnhap(SDT_password)
-    console.log(error)
-    if (error == "Bạn đã đăng nhập thành công") {
-        return res.redirect('/')
+    let result  = await dangNhapDangKyService.checkdangnhap(SDT_password)
+    console.log(result)
+    if(result.message=="Bạn đã đăng nhập thành công")
+    {
+        let loggedInUser  = result.data.id;
+        console.log("loggedInUser" + loggedInUser)
+        return res.render('homepage.ejs',{loggedInUser:loggedInUser})
     }
-    else {
-        res.render("dangnhap.ejs", { er: error })
+    else
+    {
+        res.render("dangnhap.ejs", {er :result})
     }
 
 }
@@ -176,42 +184,53 @@ let deletebooker = async (req, res) => {
     } else {
         return res.send('Người đặt vé không tồn tại!')
     }
-
 }
 
-//------------------Search Trips ---------
-let searchTrips = async (req, res) => {
-    try {
-      const { diemXuatPhat, diemDen, ngayKhoiHanh } = req.body;
-      const tripData = await searchtripService.handleSearchTripTrue(diemXuatPhat, diemDen, ngayKhoiHanh);
-  
-      if (tripData.errCode === 4) {
-        return res.render('search.ejs', {
-          tripData: tripData.trip
-        });
-      } else {
-        return res.status(500).json({
-          errCode: tripData.errCode,
-          errMessage: tripData.errMessage
-        });
-      }
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({
-        errCode: -1,
-        errMessage: 'Internal Error'
-      });
-    }
-  };
+/* --------------TRANG ADMIN ----------*/
+let insertUser1 = async(req, res)=>{
+    let data = await dangNhapDangKyService.dataAdmin();
+    /*return res.render('admin.ejs',{user:data})*/
+    return res.render('../views/AdminPage/ejs/admin.ejs',{user:data})
+}
+let insertUser2 = async(req, res)=>{
+    let data = await dangNhapDangKyService.dataAdmin();
+    return res.render('../views/AdminPage/ejs/danhsachve.ejs',{user:data})
+}
+let insertUser3 = async(req, res)=>{
+    let data = await dangNhapDangKyService.dataAdmin();
+    return res.render('../views/AdminPage/ejs/thongtindat.ejs',{user:data})
+}
+let insertUser4 = async(req, res)=>{
+    let data = await tripCRUD.getAllDataTrip();
+    return res.render('../views/AdminPage/ejs/quanlilichtrinh.ejs',{trip:data})
+}
+/*----------------------------------------------------------------------------------------*/
 
+/* -------------Trang booking----------*/
+let insertUser5 = async(req, res)=>{
+    let data = await dangNhapDangKyService.dataAdmin();
+    /*return res.render('admin.ejs',{user:data})*/
+    return res.render('../views/HomePage/ejs/booking.ejs',{user:data})
+}
+/*----------------------------------------------------------------------------------------*/
+
+/* -------------Trang chủ----------*/
+let insertUser6 = async(req, res)=>{
+    let data = await dangNhapDangKyService.dataAdmin();
+    /*return res.render('admin.ejs',{user:data})*/
+    return res.render('../views/HomePage/ejs/main.ejs',{user:data})
+}
+/*----------------------------------------------------------------------------------------*/
+  
 
 module.exports = {
     //USER
-    dangKy: dangKy,
-    dangNhap: dangNhap,
-    completeRegister: completeRegister,
-    insertUser: insertUser,
-    thaydoithongtin: thaydoithongtin,
+    homepage :homepage,
+    dangKy :dangKy,
+    dangNhap :dangNhap,
+    completeRegister :completeRegister,
+    insertUser :insertUser,
+    thaydoithongtin :thaydoithongtin,
     capnhatthongtin: capnhatthongtin,
     xoaiduser: xoaiduser,
     loginn: loginn,
@@ -232,6 +251,14 @@ module.exports = {
     editTripsById: editTripsById,
     updateTrips: updateTrips,
     deleteTrip: deleteTrip,
-    searchTrips: searchTrips,
+    //Lấy dữ liệu tài khoản người dùng
+    insertUser1:insertUser1,
+    insertUser2: insertUser2,
+    insertUser3: insertUser3,
+    insertUser4: insertUser4,
+    //Trang booking
+    insertUser5: insertUser5,
+    //Trang chủ
+    insertUser6: insertUser6,
 }
 
