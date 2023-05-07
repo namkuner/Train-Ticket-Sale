@@ -13,13 +13,11 @@
             <tr>
                 <th scope="col">Điểm xuất phát</th>
                 <th scope="col">Điểm đến</th>
-                <th scope="col">Ngày khởi hành</th>
-                <th scope="col">Giá vé</th>
-                <th scope="col">Trạng thái</th>
-                <th scope="col">Tên toa</th>
+                <th scope="col">Thời gian đi</th>
+                <th scope="col">Thời gian đến</th>
                 <th scope="col">Tên tàu</th>
+                <th scope="col">Số toa</th>
                 <th scope="col">Chức năng</th>
-
             </tr>
         </thead>
         <tbody>
@@ -32,19 +30,16 @@
                         <%= trip[i].diemDen %>
                     </td>
                     <td>
-                        <%= trip[i].ngayKhoiHanh %>
+                        <%= trip[i].thoiGianDi %>
                     </td>
                     <td>
-                        <%= trip[i].giaVe %>
-                    </td>
-                    <td>
-                        <%= trip[i].trangThai %>
-                    </td>
-                    <td>
-                        <%= trip[i].tenToa %>
+                        <%= trip[i].thoiGianDen %>
                     </td>
                     <td>
                         <%= trip[i].tenTau %>
+                    </td>
+                    <td>
+                        <%= trip[i].soToa %>
                     </td>
 
                     <td>
