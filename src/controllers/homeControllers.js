@@ -11,6 +11,7 @@ let homepage =(req,res)=>{
     let idlogin = null
     return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
 }
+
 let dangKy = (req, res) => {
     return res.render("dangky.ejs")
 }
@@ -204,8 +205,8 @@ let insertUser2 = async(req, res)=>{
     return res.render('../views/AdminPage/ejs/danhsachve.ejs',{user:data})
 }
 let insertUser3 = async(req, res)=>{
-    let data = await dangNhapDangKyService.dataAdmin();
-    return res.render('../views/AdminPage/ejs/thongtindat.ejs',{user:data})
+    let data = await nguoidatveService.getAllBooker();
+    return res.render('../views/AdminPage/ejs/thongtindat.ejs',{dataTable:data})
 }
 let insertUser4 = async(req, res)=>{
     let data = await tripCRUD.getAllDataTrip();
@@ -223,9 +224,11 @@ let insertUser5 = async(req, res)=>{
 
 /* -------------Trang chủ----------*/
 let insertUser6 = async(req, res)=>{
-    let data = await dangNhapDangKyService.dataAdmin();
+   /* let data = await dangNhapDangKyService.dataAdmin();*/
     /*return res.render('admin.ejs',{user:data})*/
-    return res.render('../views/HomePage/ejs/main.ejs',{user:data})
+    /*return res.render('../views/HomePage/ejs/main.ejs',{user:data})*/
+    let idlogin = null
+    return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
 }
 /*----------------------------------------------------------------------------------------*/
   

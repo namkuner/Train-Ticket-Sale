@@ -241,6 +241,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 100px;
+    margin-bottom: 20px;
 }
 
 .add {
@@ -368,40 +370,7 @@ button:hover {
             </div>
         </div>
 
-        <h3 class="i-name">
-            Quản lí ga tàu: Nhóm 28
-        </h3>
-
-        <div class="values">
-            <div class="val-box">
-                <i class="fas fa-user"></i>
-                <div>
-                    <h3>N21DCCN002</h3>
-                    <span>Trần Kim An</span>
-                </div>
-            </div>
-            <div class="val-box">
-                <i class="fas fa-user"></i>
-                <div>
-                    <h3>N21DCCN020</h3>
-                    <span>Nguyễn Văn Dũng</span>
-                </div>
-            </div>
-            <div class="val-box">
-                <i class="fas fa-user"></i>
-                <div>
-                    <h3>N21DCCN034</h3>
-                    <span>Nguyễn Minh Hoàng</span>
-                </div>
-            </div>
-            <div class="val-box">
-                <i class="fas fa-user"></i>
-                <div>
-                    <h3>N21DCCN054</h3>
-                    <span>Phạm Đình Nam</span>
-                </div>
-            </div>
-        </div>
+        
 
         <!--Tải dữ liệu lên-->
 
@@ -411,12 +380,11 @@ button:hover {
         
 <!--////////////////////////////////////////////////////////////////////////////-->
 
-
 <div class="records">
 <div class="record-header">
     <div class="add">
-        <span>Tài khoản User:</span>
-        <button>Thêm người quản lí</button>
+        <span>Thông tin người đặt:</span>
+        <button>Thêm người đặt</button>
     </div>
 
     <div class="browse">
@@ -434,92 +402,101 @@ button:hover {
 </div>
 </div>
 
+<!------------------------------------------------------------------------------------->
 
-
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col" style="width: 12%;">Họ và tên</th>
+            <th scope="col" style="width: 10%;">Số điện thoại</th>
+            <th scope="col" style="width: 28%;">Email</th>
+            <th scope="col" style="width: 10%;">CCCD</th>
+            <th scope="col" style="width: 5%;">Số vé</th>
+            <th scope="col" style="width: 10%;">Tổng tiền</th>
+            <th scope="col" style="width: 25%;">Chức năng</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for(let i=0; i < dataTable.length; i++) { %>
+            <tr>
+                <td><%= dataTable[i].Hoten %></td>
+                <td><%= dataTable[i].Phone %></td>
+                <td><%= dataTable[i].Email %></td>
+                <td><%= dataTable[i].CCCD %></td>
+                <td><%= dataTable[i].Sove %></td>
+                <td><%= dataTable[i].Tongtien %></td>
+                <td>
+                  <div class="button-container">
+                  <a href="/edit-databooker?id=<%= dataTable[i].id %>" class="edit-button" type="button">Edit</a>
+                  <a href="/delete-databooker?id=<%= dataTable[i].id %>" class="delete-button" type="button">Delete</a>
+                  <a href="" class="detail-button" type="button">Detail</a>
+                  </div>
+                </td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
 
 <!------------------------------------------------------------------------------------->
 
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Email</th>
-            <th scope="col">CMND</th>
-            <th scope="col">Address</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Manage</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% for (let i = 0; i < user.length; i++) { %>
-            <tr>
-              <td><%= user[i].firstName %></td>
-              <td><%= user[i].lastName %></td>
-              <td><%= user[i].phoneNumber %></td>
-              <td><%= user[i].email %></td>
-              <td><%= user[i].CMND %></td>
-              <td><%= user[i].address %></td>
-              <td><%= user[i].gender %></td>
-              <td> <div class="button-container">
-                <a href="/editUser?id=<%=user[i].id %>" class="edit-button" type="button">Edit</a>
-                <a href="/post-delete?id=<%=user[i].id %>" class="delete-button" type="button">Delete</a>
-              </div></td>
-            </tr>
-          <% } %>
-        </tbody>
-    </table>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        
-        table th, .table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        
-        table th {
-            background-color: #c7ceea;/*background-color: #f2f2f2;*/
-        }
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 200px;
-            margin: auto;
-        }
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-        .edit-button,
-        .delete-button {
-            border: none;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+    table th,
+    .table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
 
-        .edit-button {
-            background-color: #6ab04c;
-            text-decoration: none;
-        }
+    table th {
+        background-color: #f2f2f2;
+    }
 
-        .delete-button {
-            background-color: #dc3545;
-            text-decoration: none;
-        }
+    .button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: auto;
+    }
 
-        .edit-button:hover,
-        .delete-button:hover {
-            opacity: 0.8;
-        }
-    </style>
+    .edit-button,
+    .delete-button,
+    .detail-button {
+        border: none;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        margin: 0 5px;
+    }
+
+    .edit-button {
+        background-color: #6ab04c;
+    }
+
+    .delete-button {
+        background-color: #dc3545;
+    }
+
+    .detail-button {
+      background-color: rgb(16, 16, 195);
+    }
+
+    .edit-button:hover,
+    .delete-button:hover,
+    .detail-button:hover {
+        opacity: 0.7;
+    }
+</style>
 
 
 <!------------------------------------------------------------------------------------->

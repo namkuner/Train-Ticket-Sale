@@ -16,6 +16,7 @@
           <th>Email</th>
           <th>CCCD</th>
           <th>Số vé</th>
+          <th>Tổng tiền</th>
           <th>Hành động</th>
         </tr>
       </thead>
@@ -28,6 +29,7 @@
                 <td><%= dataTable[i].Email %></td>
                 <td><%= dataTable[i].CCCD %></td>
                 <td><%= dataTable[i].Sove %></td>
+                <td><%= dataTable[i].Tongtien %></td>
                 <td>
                   <div class="button-container">
                   <a href="/edit-databooker?id=<%= dataTable[i].id %>" class="edit-button" type="button">Edit</a>
