@@ -20,13 +20,13 @@ let loginn = async (req,res)=>{
     console.log(result)
     if(result.message=="Bạn đã đăng nhập thành công")
     {
-        let loggedInUser  = result.data.id;
-        console.log("loggedInUser" + loggedInUser)
-        return res.render('homepage.ejs',{loggedInUser:loggedInUser})
+        let idlogin  = result.data.id;
+        
+        return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
     }
     else
     {
-        res.render("dangnhap.ejs", {er :result})
+        res.render("dangnhap.ejs", {er :result.message})
     }
 
 }
@@ -67,6 +67,13 @@ let xoaiduser = async(req,res)=>{
     // let data = await dangNhapDangKyService.dataUser();
     return res.send("Xoa thông tin thành công ")
     // return res.render('dataUser.ejs',{user:data})
+}
+let thongtincanhan = async(req,res)=>{
+    let userid = req.body.userID
+    console.log("user ID" + req.body.userID)
+    let data = await dangNhapDangKyService.infomationUser(userid);
+    console.log(data)
+    return res.render("thongtincanhan.ejs",{user:data})
 }
 /*------------------TRIP---------------*/
 
@@ -229,7 +236,7 @@ module.exports = {
     xoaiduser :xoaiduser,
     loginn :loginn,
     xemtruocuser :xemtruocuser ,
-
+    thongtincanhan :thongtincanhan,
     //BOOKING
     dataBooker: dataBooker,
     completeDatabooker: completeDatabooker,
