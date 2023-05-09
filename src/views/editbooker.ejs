@@ -103,34 +103,20 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-12 mt-3"> <b>Chỉnh sửa thông tin người đặt vé </b></div>
-      <p>Quý khách vui lòng điền đẩy đủ và chính xác các thông tin về người mua vé dưới đây. Các thông tin này sẽ được sử dụng để xác minh người mua vé và lấy vé tại ga trước khi lên tàu theo đúng các quy định của Tổng công ty Đường sắt Việt Nam.</p>
-      <form action="/capnhat-databooker" method="POST">
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="Hoten">Họ và tên</label>
-            <input
-              type="text"
-              class="form-control"
-              name="Hoten"
-              placeholder="Họ và tên"
-              required
-              value="<%= booker.Hoten %>"
-            />
+      <div class="col-6 mt-3"> 
+        <form action="/capnhat-databooker" method="POST">
+          <div class="form-row">
+              <label for="Hoten">Họ và tên</label>
+              <input
+                type="text"
+                class="form-control"
+                name="Hoten"
+                placeholder="Họ và tên"
+                required
+                value="<%= booker.Hoten %>"
+              />
           </div>
-          <div class="col-md-6 mb-3">
-            <label for="CCCD">Số CCCD/Hộ chiếu</label>
-            <input
-              type="tel"
-              class="form-control"
-              name="CCCD"
-              placeholder="Số CCCD/Hộ chiếu"
-              value="<%= booker.CCCD %>"
-            />
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
+          <div class="form-row">
             <label for="Email">Email </label>
             <input
               type="email"
@@ -141,19 +127,33 @@
               value="<%= booker.Email %>"
             />
           </div>
-          <div class="col-md-6 mb-3">
-            <label for="Phone">Số di động</label>
-        <input
-          type="text"
-          class="form-control"
-          name="Phone"
-          placeholder="Số di động"
-          value="<%= booker.Phone %>"
-        />
-      </div>
-      <input name="id" value="<%= booker.id %>" type="text" hidden>
-      <input type="hidden" name="roleid" value="R3">
-      <button class="btn btn-primary" type="submit">Cập nhật</button>
-    </form>
+          <div class="form-row">
+            <div class="col-md-6 mb-3">
+              <label for="CCCD">Số CCCD/Hộ chiếu</label>
+              <input
+                type="tel"
+                class="form-control"
+                name="CCCD"
+                placeholder="Số CCCD/Hộ chiếu"
+                value="<%= booker.CCCD %>"
+              />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="Phone">Số di động</label>
+              <input
+                type="text"
+                class="form-control"
+                name="Phone"
+                placeholder="Số di động"
+                value="<%= booker.Phone %>"
+              />
+            </div>
+          </div>
+          <input name="id" value="<%= booker.id %>" type="text" hidden>
+          <input type="hidden" name="roleid" value="R3">
+          <button class="btn btn-primary" type="submit">Cập nhật</button>
+        </form>
+        
   </div>
+</div>
 </div>

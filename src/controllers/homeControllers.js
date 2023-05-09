@@ -231,7 +231,32 @@ let insertUser6 = async(req, res)=>{
     return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
 }
 /*----------------------------------------------------------------------------------------*/
-  
+
+/*------------------------------modal sửa thông tin người đặt-----------------------------*/
+/*const showEditModal = async (req, res) => {
+    const bookerId = req.params.id;
+    const bookerData = await nguoidatveService.getBookerInforById(bookerId);
+    res.render('thongtindat.ejs', {
+      booker: bookerData
+    });
+  };*/
+
+let getEditbooker = async (req, res) => {
+    let bookerId = req.query.id;
+    if (bookerId) {
+        let bookerData = await nguoidatveService.getBookerInforById(bookerId);
+        console.log('-----------------------')
+        console.log(bookerData)
+        console.log('-----------------------')
+        //let bookerData
+        return res.render('AdminPage/ejs/thongtindat', {
+            booker: bookerData
+        });
+    } else {
+        return res.send('Booker not found!');
+    }
+}
+/*----------------------------------------------------------------------------------------*/
 
 module.exports = {
     //USER
@@ -273,5 +298,8 @@ module.exports = {
     insertUser5: insertUser5,
     //Trang chủ
     insertUser6: insertUser6,
+    //Modal sửa thông tin người đặt
+    //showEditModal: showEditModal,
+    getEditbooker: getEditbooker,
 }
 

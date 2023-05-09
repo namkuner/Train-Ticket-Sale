@@ -327,7 +327,71 @@ button:hover {
     background-color: rgb(41, 174, 70);
     color: white;
   }
+
+
   
+/*****************************Sửa thông tin người đặt******************************/
+  :root {
+    --pink-color: #e26e70;
+  }
+.modal {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0,0,0,0.6);
+}
+.modal_inner {
+    width: 400px;
+    position: relative;
+    top: 30%;
+    right: 11%;
+    margin: auto;
+    background: white;
+    animation: modalShow 0.2s linear;
+}
+.modal_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: var(--pink-color);
+    color: white;
+}
+.modal_body {
+    padding: 15px;
+}
+.modal_body h2{
+    color: var(--pink-color);
+    margin-bottom: 10px;
+}
+.modal_footer {
+    padding: 15px;
+    text-align: right;
+}
+.modal_footer button {
+    padding: 10px 20px;
+    color: white;
+    background: var(--pink-color);
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.hide {
+    display: none;
+}
+@keyframes modalShow {
+    from {
+        top: -200px;
+        opacity: 0;
+    }
+    to {
+        top: 30%;
+        opacity: 1;
+    }
+}
+/****************************************************************/
 
 
 	</style>
@@ -427,15 +491,129 @@ button:hover {
                 <td><%= dataTable[i].Tongtien %></td>
                 <td>
                   <div class="button-container">
-                  <a href="/edit-databooker?id=<%= dataTable[i].id %>" class="edit-button" type="button">Edit</a>
+                  <!--<a href="/edit-databooker?id=<%= dataTable[i].id %>" class="edit-button" type="button">Edit</a>-->
+                  <!--<button class="open-modal-btn">Sửa</button>-->
+                  <!--<a class="edit-button <%= dataTable[i].id %>" type="button">Edit</a>-->
+                  <a class="edit-button <%= dataTable[i].id %>" type="button">Edit</a>
                   <a href="/delete-databooker?id=<%= dataTable[i].id %>" class="delete-button" type="button">Delete</a>
                   <a href="" class="detail-button" type="button">Detail</a>
                   </div>
                 </td>
+        
+
+                  
+
             </tr>
         <% } %>
     </tbody>
 </table>
+<!-----------------------Tạo modal sửa thông tin người đặt------------------------------>
+
+<div class="modal hide" id="edit-booker-modal">
+    <div class="modal_inner">
+        <div class="modal_header">
+            <p>Chỉnh sửa thông tin người đặt</p>
+            <i class="fa fa-times"></i>
+        </div>
+        <div class="modal_body">
+            <form action="/capnhat-databooker" method="POST">
+                <div class="form-row">
+                    <label for="Hoten">Họ và tên:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="Hoten" 
+                      placeholder="Họ và tên"
+                      required
+                      value="<%= booker.Hoten %>"
+                    />
+                </div>
+                <div class="form-row">
+                  <label for="Email">Email: </label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="Email"
+                    placeholder="Enter email"
+                    required
+                    value="<%= booker.Email %>"
+                  />
+                </div>
+                <div class="form-row">
+                  <div class="col-md-6 mb-3">
+                    <label for="CCCD">Số CCCD:</label>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      name="CCCD"
+                      placeholder="Số CCCD"
+                      value="<%= booker.CCCD %>"
+                    />
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="Phone">Số di động:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="Phone"
+                      placeholder="Số di động"
+                      value="<%= booker.Phone %>"
+                    />
+                  </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal_footer">
+            <input type="hidden" name="roleid" value="R3">
+            <button class="btn btn-primary" type="submit">Cập nhật</button>
+            <button>Close</button>
+        </div>
+    </div>
+</div>
+
+<!--Sửa thông tin người đặt file js-->
+
+
+
+<script>
+    // Lấy danh sách các button sửa
+    var btnOpens = document.querySelectorAll('.edit-button');
+    var modal = document.querySelector('.modal');
+    var iconClose = document.querySelector('.modal_header i');
+    var btnClose = document.querySelector('.modal_footer button');
+    var modalTitle = document.querySelector('.modal_header h2');
+
+
+    function toggleModal() {
+        modal.classList.toggle('hide');
+        // Lấy giá trị của data-id trên button sửa tương ứng
+        var id = this.getAttribute('data-id');
+        // Hiển thị giá trị id lên title của modal
+        modalTitle.innerText = 'Edit booking with id ' + id;
+    }
+
+    // Duyệt qua danh sách các button sửa và thêm event listener cho từng button
+    for (var i = 0; i < btnOpens.length; i++) {
+        btnOpens[i].addEventListener('click', toggleModal);
+    }
+
+    btnClose.addEventListener('click', toggleModal);
+    iconClose.addEventListener('click', toggleModal);
+    modal.addEventListener('click', function(e) {
+        if(e.target == e.currentTarget) {
+            toggleModal();
+        }
+    })
+
+
+
+
+
+    
+
+</script>
+  
+<!-------------------------------------------------------------------------------------->
 
 <!------------------------------------------------------------------------------------->
 
@@ -500,6 +678,7 @@ button:hover {
 
 
 <!------------------------------------------------------------------------------------->
+
 
 
     </section>
