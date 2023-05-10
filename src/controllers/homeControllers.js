@@ -177,10 +177,18 @@ let editbooker = async (req, res) => {
         return res.send('Booker not found!');
     }
 }
+/**********************************************************************
 let putbooker = async (req, res) => {
     let data = req.body;
     let allBookers = await nguoidatveService.updateBookerData(data);
     return res.render('displaybooker.ejs', {
+        dataTable: allBookers
+    });
+}*/ 
+let putbooker = async (req, res) => {
+    let data = req.body;
+    let allBookers = await nguoidatveService.updateBookerData(data);
+    return res.render('AdminPage/ejs/thongtindat', {
         dataTable: allBookers
     });
 }
@@ -224,39 +232,12 @@ let insertUser5 = async(req, res)=>{
 
 /* -------------Trang chủ----------*/
 let insertUser6 = async(req, res)=>{
-   /* let data = await dangNhapDangKyService.dataAdmin();*/
-    /*return res.render('admin.ejs',{user:data})*/
-    /*return res.render('../views/HomePage/ejs/main.ejs',{user:data})*/
     let idlogin = null
     return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
 }
 /*----------------------------------------------------------------------------------------*/
 
-/*------------------------------modal sửa thông tin người đặt-----------------------------*/
-/*const showEditModal = async (req, res) => {
-    const bookerId = req.params.id;
-    const bookerData = await nguoidatveService.getBookerInforById(bookerId);
-    res.render('thongtindat.ejs', {
-      booker: bookerData
-    });
-  };*/
 
-let getEditbooker = async (req, res) => {
-    let bookerId = req.query.id;
-    if (bookerId) {
-        let bookerData = await nguoidatveService.getBookerInforById(bookerId);
-        console.log('-----------------------')
-        console.log(bookerData)
-        console.log('-----------------------')
-        //let bookerData
-        return res.render('AdminPage/ejs/thongtindat', {
-            booker: bookerData
-        });
-    } else {
-        return res.send('Booker not found!');
-    }
-}
-/*----------------------------------------------------------------------------------------*/
 
 module.exports = {
     //USER
@@ -298,8 +279,5 @@ module.exports = {
     insertUser5: insertUser5,
     //Trang chủ
     insertUser6: insertUser6,
-    //Modal sửa thông tin người đặt
-    //showEditModal: showEditModal,
-    getEditbooker: getEditbooker,
 }
 

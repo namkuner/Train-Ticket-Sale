@@ -1,6 +1,6 @@
 import express from "express";
 import homeControllers from "../controllers/homeControllers";
-const nguoidatveService = require('../services/nguoidatveService');
+/*const nguoidatveService = require('../services/nguoidatveService');*/
 let router = express.Router();
 
 //const express = require('express');
@@ -47,42 +47,23 @@ let initWebRouters = (app) => {
     router.get('/get-databooker', homeControllers.displaybooker);
     router.get('/edit-databooker', homeControllers.editbooker);
     //sua
-    router.post('/capnhat-databooker', homeControllers.putbooker)
+    //router.post('/capnhat-databooker', homeControllers.putbooker)
+    router.post('/AdminPage/ejs/thongtindat', homeControllers.putbooker)
     //xoa
     router.get('/delete-databooker', homeControllers.deletebooker)
+
 
     //LẤY DỮ LIỆU NGƯỜI DÙNG RA TRANG ADMIN
     router.get('/AdminPage/ejs/admin', homeControllers.insertUser1);
     router.get('/AdminPage/ejs/danhsachve', homeControllers.insertUser2);
-    //router.get('/AdminPage/ejs/thongtindat', homeControllers.insertUser3);
+    router.get('/AdminPage/ejs/thongtindat', homeControllers.insertUser3);
     router.get('/AdminPage/ejs/quanlilichtrinh', homeControllers.insertUser4);
 
     //Trang booking
     router.get('/HomePage/ejs/booking', homeControllers.insertUser5);
     //Trang chủ
     router.get('/HomePage/ejs/main', homeControllers.insertUser6);
-    //Modal sửa thông tin người đặt
-    //router.get('/AdminPage/ejs/thongtindat', homeControllers.getEditbooker);
-
-
-
-    router.get('/AdminPage/ejs/thongtindat', async (req, res) => {
-      let bookerId = req.query.id;
-      if (bookerId) {
-          let bookerData = await nguoidatveService.getBookerInforById(bookerId);
-          return res.render('AdminPage/ejs/thongtindat', {
-              booker: bookerData
-          });
-      } else {
-          let data = await nguoidatveService.getAllBooker();
-          return res.render('../views/AdminPage/ejs/thongtindat.ejs', {
-              dataTable: data,
-              booker: {} // or null, or any other default value you prefer
-          });
-      }
-  });
-  
-
+    
     
 
     /*router.get('/admin', (req, res) => {

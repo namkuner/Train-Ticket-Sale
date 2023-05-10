@@ -15,9 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   };
   Inforbooker.init({
     Hoten: DataTypes.STRING,
-    Phone: DataTypes.INTEGER,
+    //Phone: DataTypes.INTEGER,
+    Phone: DataTypes.STRING,
     Email: DataTypes.STRING,
-    CCCD: DataTypes.INTEGER,
+    //CCCD: DataTypes.INTEGER,
+    //CCCD: DataTypes.BIGINT,
+    CCCD: DataTypes.STRING,
     Ngaydi: DataTypes.DATE,
     Sove: DataTypes.INTEGER,
     Tongtien: DataTypes.INTEGER,
