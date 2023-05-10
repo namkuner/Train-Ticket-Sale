@@ -46,11 +46,18 @@ let initWebRouters = (app) => {
     router.post('/complete-databooker', homeControllers.completeDatabooker);
     router.get('/get-databooker', homeControllers.displaybooker);
     router.get('/edit-databooker', homeControllers.editbooker);
+    //xoá người đặt vé
+    router.get('/delete-databooker', homeControllers.deletebooker)
+    //
+    //sau khi xoá người đặt vé sẽ chạy tới cái này để thông báo ra người dùng
+    router.get('/displaybooker', homeControllers.deletebooker1)
+    //
     //sua
     //router.post('/capnhat-databooker', homeControllers.putbooker)
     router.post('/AdminPage/ejs/thongtindat', homeControllers.putbooker)
     //xoa
-    router.get('/delete-databooker', homeControllers.deletebooker)
+    //router.get('/delete-databooker', homeControllers.deletebooker)
+
 
 
     //LẤY DỮ LIỆU NGƯỜI DÙNG RA TRANG ADMIN

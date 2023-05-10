@@ -177,6 +177,32 @@ let editbooker = async (req, res) => {
         return res.send('Booker not found!');
     }
 }
+/*new*/ 
+let deletebooker = async (req, res) => {
+    let bookerId = req.query.id;
+    if (bookerId) {
+        let bookerData = await nguoidatveService.getBookerInforById(bookerId);
+        console.log('-----------------------')
+        console.log(bookerData)
+        console.log('-----------------------')
+        //let bookerData
+        return res.render('deletebooker.ejs', {
+            booker: bookerData
+        });
+    } else {
+        return res.send('Booker not found!');
+    }
+}
+let deletebooker1 = async (req, res) => {
+    let id = req.query.id;
+    if (id) {
+        await nguoidatveService.deleteBookerById(id);
+        //return res.send('Xoá người đặt vé thành công!')
+        return res.render('displaybooker.ejs');
+    } else {
+        return res.send('Người đặt vé không tồn tại!')
+    }
+}
 /**********************************************************************
 let putbooker = async (req, res) => {
     let data = req.body;
@@ -192,6 +218,7 @@ let putbooker = async (req, res) => {
         dataTable: allBookers
     });
 }
+/*
 let deletebooker = async (req, res) => {
     let id = req.query.id;
     if (id) {
@@ -200,7 +227,7 @@ let deletebooker = async (req, res) => {
     } else {
         return res.send('Người đặt vé không tồn tại!')
     }
-}
+}*/
 
 /* --------------TRANG ADMIN ----------*/
 let insertUser1 = async(req, res)=>{
@@ -279,5 +306,8 @@ module.exports = {
     insertUser5: insertUser5,
     //Trang chủ
     insertUser6: insertUser6,
+//new
+    deletebooker1: deletebooker1,
+//new
 }
 
