@@ -67,9 +67,9 @@ let updateBookerData = (data) => {
             }else{
                 resolve();
             }
-
         }catch(e) {
-            console(e)
+            console.log(e); // Sửa từ console(e) thành console.log(e)
+            reject(e);
         }
     })
 }

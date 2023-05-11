@@ -161,7 +161,7 @@ let displaybooker = async (req, res) => {
         dataTable: data
     });
 }
-
+/*nút sửa người đặt vé*/
 let editbooker = async (req, res) => {
     let bookerId = req.query.id;
     if (bookerId) {
@@ -177,7 +177,17 @@ let editbooker = async (req, res) => {
         return res.send('Booker not found!');
     }
 }
-/*new*/ 
+/*Sau khi sửa xong chuyển đến trang displaybooker2.ejs để xác nhận sửa thành công*/
+let putbooker = async (req, res) => {
+    let data = req.body;
+    let allBookers = await nguoidatveService.updateBookerData(data);
+    return res.render('displaybooker2.ejs', {
+        dataTable: allBookers
+    });
+}
+/**/
+
+/*nút xoá người đặt vé*/ 
 let deletebooker = async (req, res) => {
     let bookerId = req.query.id;
     if (bookerId) {
@@ -193,6 +203,7 @@ let deletebooker = async (req, res) => {
         return res.send('Booker not found!');
     }
 }
+/*Sau khi xoá xong chuyển đến trang displaybooker.ejs để xác nhận xoá thành công*/
 let deletebooker1 = async (req, res) => {
     let id = req.query.id;
     if (id) {
@@ -203,6 +214,8 @@ let deletebooker1 = async (req, res) => {
         return res.send('Người đặt vé không tồn tại!')
     }
 }
+/**/
+
 /**********************************************************************
 let putbooker = async (req, res) => {
     let data = req.body;
@@ -211,13 +224,7 @@ let putbooker = async (req, res) => {
         dataTable: allBookers
     });
 }*/ 
-let putbooker = async (req, res) => {
-    let data = req.body;
-    let allBookers = await nguoidatveService.updateBookerData(data);
-    return res.render('AdminPage/ejs/thongtindat', {
-        dataTable: allBookers
-    });
-}
+
 /*
 let deletebooker = async (req, res) => {
     let id = req.query.id;
@@ -306,8 +313,9 @@ module.exports = {
     insertUser5: insertUser5,
     //Trang chủ
     insertUser6: insertUser6,
-//new
+//nút xoá người đặt vé
     deletebooker1: deletebooker1,
-//new
+//
+
 }
 
