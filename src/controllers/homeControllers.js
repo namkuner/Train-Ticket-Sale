@@ -228,7 +228,12 @@ let insertUser6 = async(req, res)=>{
     return res.render('../views/HomePage/ejs/main.ejs',{user:data})
 }
 /*----------------------------------------------------------------------------------------*/
-  
+let timkiemtau = async(req,res)=>{
+    let infotau = req.body
+    console.log(infotau)
+    let data = await searchtripService.handleSearchTripTrue(infotau.from, infotau.to,infotau.daygo)
+    console.log(data)
+}
 
 module.exports = {
     //USER
@@ -270,5 +275,7 @@ module.exports = {
     insertUser5: insertUser5,
     //Trang chủ
     insertUser6: insertUser6,
+
+    timkiemtau:timkiemtau
 }
 
