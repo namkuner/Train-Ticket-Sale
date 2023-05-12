@@ -27,42 +27,49 @@
                     <div class="col-12 mt-3"><b>Chỉnh sửa và cập nhật chuyến</b></div>
 
                     <div class="form-group col-md-6">
-                        <label for="inputEmail4">Điểm xuất phát</label>
+                        <label for="diemXuatPhat">Điểm xuất phát</label>
                         <input type="text" class="form-control" placeholder="Điểm xuất phát" name="diemXuatPhat"
                             value="<%= trip.diemXuatPhat %>">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">Điếm đến</label>
+                        <label for="diemDen">Điếm đến</label>
                         <input type="text" class="form-control" name="diemDen" placeholder="Điểm đến"
                             value="<%= trip.diemDen %>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="inputAddress">Thời gian đi</label>
+                    <label for="thoiGianDi">Thời gian đi</label>
                     <input type="date" class="form-control" name="thoiGianDi" placeholder="Thời gian đi"
                         value="<%= trip.thoiGianDi %>">
                 </div>
                 <div class="form-group">
-                    <label for="inputAddress">Thời gian đến</label>
+                    <label for="thoiGianDen">Thời gian đến</label>
                     <input type="date" class="form-control" name="thoiGianDen" placeholder="Thời gian đến"
                         value="<%= trip.thoiGianDen %>">
                 </div>
-                <!-- <div class="form-group">
-                    <label for="inputAddress">Trạng thái</label>
-                    <input type="number" class="form-control" name="trangThai" placeholder="true/false"
-                        value="<%= trip.trangThai %>">
-                </div> -->
+                
+                <div class="form-group">
+                    <label for="giaVe">Giá vé</label>
+                    <input type="number" class="form-control" name="giaVe" placeholder="Thời gian đến"
+                        value="<%= trip.giaVe %>">
+                </div>
+
                 <div class="form-group">
                     <label for="inputAddress">Tên tàu</label>
                     <input type="text" class="form-control" name="tenTau" placeholder="Tàu" value="<%= trip.tenTau %>">
                 </div>
                 <div class="form-group">
-                    <label for="inputAddress">Số lượng toa</label>
-                    <input type="number" class="form-control" name="soToa" placeholder="Số lượng"
+                    <label for="soToa">Số toa</label>
+                    <input type="number" class="form-control" name="soToa" placeholder="Số..."
                         value="<%= trip.soToa %>">
                 </div>
-                <input name="id" value="<%= trip.id %>" type="text" hidden>
+
+                <div class="form-group">
+                    <label for="soGhe">Số ghế</label>
+                    <input type="number" class="form-control" name="soGhe" placeholder="Số..."
+                        value="<%= trip.soGhe %>">
+                </div>
 
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
