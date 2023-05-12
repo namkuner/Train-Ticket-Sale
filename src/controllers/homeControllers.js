@@ -270,17 +270,14 @@ let insertUser6 = async(req, res)=>{
     return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
 }
 /*----------------------------------------------------------------------------------------*/
-<<<<<<< HEAD
+
 let timkiemtau = async(req,res)=>{
     let infotau = req.body
     console.log(infotau)
     let data = await searchtripService.handleSearchTripTrue(infotau.from, infotau.to,infotau.daygo)
     console.log(data)
 }
-=======
 
-
->>>>>>> a5512190389a401392dd575d382882bdb3fb6efc
 
 module.exports = {
     //USER
@@ -322,14 +319,14 @@ module.exports = {
     insertUser5: insertUser5,
     //Trang chủ
     insertUser6: insertUser6,
-<<<<<<< HEAD
 
-    timkiemtau:timkiemtau
-=======
+
+    timkiemtau:timkiemtau,
+
 //nút xoá người đặt vé
     deletebooker1: deletebooker1,
 //
 
->>>>>>> a5512190389a401392dd575d382882bdb3fb6efc
+
 }
 
