@@ -293,22 +293,24 @@ form .fields .input-field{
     color: #333;
 }
 
-.cap-nhat {
-    display: inline-block;
-    align-items: center;
-    justify-content: center;
-    height: 45px;
-    max-width: 200px;
-    width: 100%;
-    border: none;
-    outline: none;
-    color: #fff;
-    border-radius: 5px;
-    margin: 25px 20px 25px 0;
-    background-color: #6ab04c;
-    transition: all 0.3s linear;
-    cursor: pointer;
-    font-size: 16px;
+a.xoa {
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  max-width: 200px;
+  width: 100%;
+  border: none;
+  outline: none;
+  color: #fff;
+  border-radius: 5px;
+  margin: 25px 20px 25px 0;
+  background-color: #6ab04c;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  line-height: 45px;
 }
 
 a.thoat {
@@ -374,7 +376,7 @@ a.thoat {
     </div>
 
   <div class="container">
-    <header>Sửa thông tin người đặt vé</header>
+    <header>Xác nhận xoá người đặt vé</header>
     <form action="/AdminPage/ejs/thongtindat" method="POST">
       <div class="form first">
           <div class="details ID">
@@ -424,10 +426,7 @@ a.thoat {
               </div>
 
               <div class="nut">
-                <input name="id" value="<%= booker.id %>" type="text" hidden>
-                <input type="hidden" name="roleid" value="R3">
-                <button class="btn btn-primary cap-nhat" type="submit">Cập nhật</button>
-                <!--<a href="/displaybooker2?id=<%= booker.id %>" class="btn btn-primary cap-nhat">Cập nhật</a>-->
+                <a href="/displaybooker?id=<%= booker.id %>" class="xoa">Xoá</a>
                 <a href="/AdminPage/ejs/thongtindat" class="thoat">Thoát</a>
               </div>
           </div> 

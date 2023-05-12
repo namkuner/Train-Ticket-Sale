@@ -1,5 +1,6 @@
 import express from "express";
 import homeControllers from "../controllers/homeControllers";
+/*const nguoidatveService = require('../services/nguoidatveService');*/
 let router = express.Router();
 
 //const express = require('express');
@@ -45,10 +46,25 @@ let initWebRouters = (app) => {
     router.post('/complete-databooker', homeControllers.completeDatabooker);
     router.get('/get-databooker', homeControllers.displaybooker);
     router.get('/edit-databooker', homeControllers.editbooker);
-    //sua
-    router.post('/capnhat-databooker', homeControllers.putbooker)
-    //xoa
+
+    //new
+    //router.get('/displaybooker2', homeControllers.editbooker1)
+    //new
+
+    //xoá người đặt vé
     router.get('/delete-databooker', homeControllers.deletebooker)
+    //
+    //sau khi xoá người đặt vé sẽ chạy tới cái này để thông báo ra người dùng
+    router.get('/displaybooker', homeControllers.deletebooker1)
+    //
+
+    //sua
+    //router.post('/capnhat-databooker', homeControllers.putbooker)
+    router.post('/AdminPage/ejs/thongtindat', homeControllers.putbooker)
+    //xoa
+    //router.get('/delete-databooker', homeControllers.deletebooker)
+
+
 
     //LẤY DỮ LIỆU NGƯỜI DÙNG RA TRANG ADMIN
     router.get('/AdminPage/ejs/admin', homeControllers.insertUser1);
@@ -60,8 +76,10 @@ let initWebRouters = (app) => {
     router.get('/HomePage/ejs/booking', homeControllers.insertUser5);
     //Trang chủ
     router.get('/HomePage/ejs/main', homeControllers.insertUser6);
+
     //Tìm kiếm
     router.post('/timkiemvetau',homeControllers.timkiemtau)
+
 
     /*router.get('/admin', (req, res) => {
         connection.query('SELECT * FROM users', (error, results, fields) => {

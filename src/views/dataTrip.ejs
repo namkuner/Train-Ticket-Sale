@@ -15,8 +15,10 @@
                 <th scope="col">Điểm đến</th>
                 <th scope="col">Thời gian đi</th>
                 <th scope="col">Thời gian đến</th>
+                <th scope="col">Giá vé</th>
                 <th scope="col">Tên tàu</th>
                 <th scope="col">Số toa</th>
+                <th scope="col">Số ghế</th>
                 <th scope="col">Chức năng</th>
             </tr>
         </thead>
@@ -36,10 +38,16 @@
                         <%= trip[i].thoiGianDen %>
                     </td>
                     <td>
+                        <%= trip[i].giaVe %>
+                    </td>
+                    <td>
                         <%= trip[i].tenTau %>
                     </td>
                     <td>
                         <%= trip[i].soToa %>
+                    </td>
+                    <td>
+                        <%= trip[i].soGhe %>
                     </td>
 
                     <td>

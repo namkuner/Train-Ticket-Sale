@@ -3,14 +3,6 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Inforbookers', {
       id: {
-        //Hoten: DataTypes.STRING,
-        //Phone: DataTypes.INTEGER,
-        //Email: DataTypes.STRING,
-        //CCCD: DataTypes.INTEGER,
-        //Ngaydi: DataTypes.DATE,
-        //Sove: DataTypes.INTEGER,
-        //Tongtien: DataTypes.INTEGER,
-    
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -19,14 +11,20 @@ module.exports = {
       Hoten: {
         type: Sequelize.STRING
       },
+      //Phone: {
+      //  type: Sequelize.INTEGER
+      //},
       Phone: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING,
       },
       Email: {
         type: Sequelize.STRING
       },
+      //CCCD: {
+      //  type: Sequelize.BIGINT
+      //},
       CCCD: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING,
       },
       Ngaydi: {
         type: Sequelize.DATE

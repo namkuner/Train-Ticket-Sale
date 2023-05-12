@@ -8,9 +8,10 @@ let createNewTrip = (data) => {
                 diemDen: data.diemDen,
                 thoiGianDi: data.thoiGianDi,
                 thoiGianDen: data.thoiGianDen,
-                // giaVe: data.giaVe,
-                soToa: data.soToa,
+                giaVe: data.giaVe,
                 tenTau: data.tenTau,
+                soToa: data.soToa,
+                soGhe: data.soGhe,
             })
             resolve("Tạo chuyến mới thành công")
         }
@@ -60,9 +61,10 @@ let updateTrip = async (trip) => {
                 data.diemDen = trip.diemDen;
                 data.thoiGianDi = trip.thoiGianDi;
                 data.thoiGianDen = trip.thoiGianDen;
-                // data.giaVe = trip.giaVe;
+                data.giaVe = trip.giaVe;
                 data.soToa = trip.soToa;
                 data.tenTau = trip.tenTau;
+                data.soGhe = trip.soGhe;
                 await data.save();
                 let allTrip = await db.Trip.findAll()
                 resolve(allTrip)

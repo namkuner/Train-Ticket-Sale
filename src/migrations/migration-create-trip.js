@@ -20,14 +20,17 @@ module.exports = {
             thoiGianDen: {
                 type: Sequelize.DATE
             },
-            // giaVe: {
-            //     type: Sequelize.STRING
-            // },
-            soToa: {
-                type: Sequelize.STRING
+            giaVe: {
+                type: Sequelize.INTEGER
             },
             tenTau: {
                 type: Sequelize.STRING
+            },
+            soToa: {
+                type: Sequelize.INTEGER
+            },
+            soGhe: {
+                type: Sequelize.INTEGER
             },
             createdAt: {
                 allowNull: false,
