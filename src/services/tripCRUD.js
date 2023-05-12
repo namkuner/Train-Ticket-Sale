@@ -9,8 +9,8 @@ let createNewTrip = (data) => {
                 thoiGianDi: data.thoiGianDi,
                 thoiGianDen: data.thoiGianDen,
                 giaVe: data.giaVe,
-                soToa: data.soToa,
                 tenTau: data.tenTau,
+                soToa: data.soToa,
                 soGhe: data.soGhe,
             })
             resolve("Tạo chuyến mới thành công")

@@ -24,7 +24,7 @@
             <form action="/update-trip" method="post">
 
                 <div class="form-row">
-                    <div class="col-12 mt-3"><b>Chỉnh sửa và cập nhật chuyến</b></div>
+                    <h1 class="col-12 mt-3"><b>Chỉnh sửa và cập nhật chuyến</b></h1>
 
                     <div class="form-group col-md-6">
                         <label for="diemXuatPhat">Điểm xuất phát</label>
@@ -48,7 +48,7 @@
                     <input type="date" class="form-control" name="thoiGianDen" placeholder="Thời gian đến"
                         value="<%= trip.thoiGianDen %>">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="giaVe">Giá vé</label>
                     <input type="number" class="form-control" name="giaVe" placeholder="Thời gian đến"
@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputAddress">Tên tàu</label>
+                    <label for="tenTau">Tên tàu</label>
                     <input type="text" class="form-control" name="tenTau" placeholder="Tàu" value="<%= trip.tenTau %>">
                 </div>
                 <div class="form-group">
