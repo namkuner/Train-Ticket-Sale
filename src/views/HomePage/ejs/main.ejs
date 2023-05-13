@@ -9,30 +9,6 @@
 		integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-
-	<!--///////////////////////////////////////////////////-->
-	<!--<script>
-		function search() {
-			var from = document.getElementById("from").value;
-			var to = document.getElementById("to").value;
-			var type = document.getElementById("type").value;
-			var goday = document.getElementById("goday").value;
-
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					if (this.responseText == "found") {
-						window.location.href = "booking.html";
-					} else {
-						document.getElementById("result").innerHTML = "Không tìm thấy vé tàu phù hợp.";
-					}
-				}
-			};
-			xhttp.open("GET", "search.php?from=" + from + "&to=" + to + "&type=" + type + "&daygo=" + goday, true);
-			xhttp.send();
-		}
-	</script>-->
-	<!--///////////////////////////////////////////////////-->
 	<script src="search.js"></script>
 
     <style>
@@ -61,7 +37,6 @@ body {
 .nav-link {
 	color: #fff;
 }
-
 
 :root {
 	--maincolor: #014a9e;
@@ -99,7 +74,6 @@ header > nav {
 
 main {
     overflow: hidden;
-
 }
 
 .slider {
@@ -409,7 +383,7 @@ main {
 
 		<div class="booking-form">
 			<div class="container">
-				<form action="/src/views/HomePage/search.js" method="GET"><!--action="booking.js"-->
+				<form action="/booking" method="POST"><!--action="booking.js" method="GET"-->
 					<div class="form-child hotline">
 						<h3>Vé tàu</h3>
 						<p>Hotline: 999999999</p>
@@ -526,7 +500,6 @@ main {
   									}
 								});
 							</script>
-					<!------------------------------------------------------------------------------>
 				</form>
 			</div>
 		</div>
