@@ -72,8 +72,10 @@ let initWebRouters = (app) => {
     router.get('/HomePage/ejs/booking', homeControllers.insertUser5);
     //Trang chủ
     router.get('/HomePage/ejs/main', homeControllers.insertUser6);
-    
-    
+
+    //Tìm kiếm
+    router.post('/timkiemvetau',homeControllers.timkiemtau)
+
 
     /*router.get('/admin', (req, res) => {
         connection.query('SELECT * FROM users', (error, results, fields) => {

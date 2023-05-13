@@ -10,7 +10,6 @@ let app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/', express.static(path.join(__dirname, 'views')));
 
 viewEngine(app);
 initWebRouters(app);
