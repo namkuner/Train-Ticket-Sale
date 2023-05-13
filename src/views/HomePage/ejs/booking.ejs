@@ -254,7 +254,7 @@ img {
 }
 .et-bed-left {
     border-left: 3px solid #385d8a;
-    height: 40px;
+    height: 37px;
 }
 .et-bed-left .et-bed-outer {
     padding-right: 2px;
@@ -301,6 +301,10 @@ h5 {
     width: 700px;
 	margin-left: 47px;
 }
+.et-col-md-4 {
+	top: 10px;
+}
+
 
 
 /********************************************************************************/
@@ -358,52 +362,9 @@ h5 {
 			<div class="container  pt-5 px-0 pb-5">
 				<div class="grid">
 					<div class="row">
-
-						<div class="inf col-8 l-8">
-							<h5>1. Thời gian, mức phí đổi trả vé:</h5>
-							<p>
-								<strong>- Đổi vé:</strong> Vé cá nhân đổi trước giờ tàu chạy 24 giờ
-								trở lên, lệ phí là 20.000 đồng/vé, dưới 24 giờ không đổi vé; không
-								áp dụng đổi vé đối với vé tập thể. <br />
-								<strong> - Trả vé:</strong> <br />
-								+ Vé cá nhân: Trả vé trước giờ tàu chạy từ 24 giờ trở lên lệ phí là
-								10% giá vé, từ 4 giờ đến dưới 24 giờ lệ phí là 20% giá vé, dưới 4
-								giờ không trả vé. <br />
-								+ Vé tập thể: Trả vé trước giờ tàu chạy từ 72 giờ trở lên lệ phí là
-								10% giá vé ,từ 24 giờ đến dưới 72 giờ lệ phí là 20% giá vé, dưới 24
-								giờ không trả vé.
-							</p>
-							<h5>2. Hình thức trả vé.</h5>
-							<p>
-								<p>
-									- Khi hành khách mua vé và thanh toán online qua website bán vé của
-									ngành Đường sắt, app bán vé hoặc các ứng dụng mua vé tàu hỏa của các
-									đối tác thứ ba thì có thể trả vé online qua các website bán vé của
-									ngành đường sắt hoặc đến trực tiếp nhà ga.
-								</p>
-								<p>
-									- Khi hành khách mua vé
-									bằng các hình thức khác, muốn đổi vé, trả vé hành khách đến trực
-									tiếp nhà ga kèm theo giấy tờ tùy thân bản chính của người đi tàu
-									hoặc người mua vé cho nhân viên đường sắt. Đồng thời, thông tin trên
-									thẻ đi tàu phải trùng khớp với giấy tờ tùy thân của hành khách.
-								</p>
-							</p>
-							<strong>Trân trọng cảm ơn!.</strong>
-						</div>
-
-
-
-
-
-
-
-
-
-						<!--*****************************NEW***************************-->
 						<div class="row" ng-show="tauDiKhuyenMaiInfos&amp;&amp;tauDiKhuyenMaiInfos.length>0">
 							<div class="col-md-12">
-								<h4 style="margin-top: 0px" class="ng-binding">Khuyến mại cho chiều đi</h4>
+								<h4 style="margin-top: 0px; font-size: 18px; margin-bottom: 13px; color: #317eac" class="ng-binding">Khuyến mại cho chiều đi</h4>
 								<table class="table table-striped table-bordered table-hover">
 									<thead class="table-row-header">
 										<tr>
@@ -440,76 +401,62 @@ h5 {
 						</div>
 
 						<div class="et-col-md-12 table-bordered list-ticket-deskhop" style="margin-top: 20px; padding: 5px; margin-left: 47px; width: 700px;">
-							<div class="et-col-md-12">
+							<div class="et-col-md-12" style="margin-bottom: 15px;">
 								<div class="et-col-md-4 et-no-padding">
 									<div class="et-col-md-12">
 										<div class="et-col-md-12" style="padding:0px">
 											<div class="et-col-md-12" style="padding:6px 0px 0px 0px">
-												<div class="et-car-block" style="height:36px">
+												<div class="et-car-block" style="height:36px; display: inline-block;">
 													<div class="et-car-icon et-car-icon-avaiable">
 														<!--<img src="/HomePage/images/trainCar2.png">-->
 														<img src="https://scontent.fsgn13-3.fna.fbcdn.net/v/t1.15752-9/346106970_1317239385494022_3703447187004011364_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=b8aO2KMS1kQAX-OrVe0&_nc_ht=scontent.fsgn13-3.fna&oh=03_AdRMg9j6crxbF0fwYzsDVld1ZhTUKhC2MMGf8SmXwq98bw&oe=64865B7E">
 													</div>
 												</div>
-												<span style="padding-left:6px" class="ng-binding">Toa còn vé</span>
+												<span style="padding-left:6px; display: inline-block; font-weight: 600;" class="ng-binding">Toa còn vé</span>
 											</div>
 										</div>
-										<div class="et-col-md-12 text-center et-no-padding ng-binding" style="margin-top: -20px;display:none">Toa còn vé</div>
-									</div>
-								</div>
-								<div class="et-col-md-3 et-no-padding" style="display:none">
-									<div class="et-col-md-12">
-										<div class="et-col-md-12" style="padding:0px">
-											<div class="et-col-md-12" style="padding:6px 0px 0px 0px;">
-												<div class="et-car-block" style="height:36px">
-													<div class="et-car-icon et-car-icon-full">
-														<img src="https://scontent.fsgn13-3.fna.fbcdn.net/v/t1.15752-9/346106970_1317239385494022_3703447187004011364_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=b8aO2KMS1kQAX-OrVe0&_nc_ht=scontent.fsgn13-3.fna&oh=03_AdRMg9j6crxbF0fwYzsDVld1ZhTUKhC2MMGf8SmXwq98bw&oe=64865B7E">
-													</div>
-												</div>
-												<span style="padding-left:6px" class="ng-binding">Toa chưa bán</span>
-											</div>
-										</div>
-										<div class="et-col-md-12 et-no-padding text-center ng-binding" style="margin-top: -20px;display:none">Toa chưa bán</div>
+										<div class="et-col-md-12 text-center et-no-padding ng-binding" style="margin-top: -20px; display:none; font-weight: 600;">Toa còn vé</div>
 									</div>
 								</div>
 								<div class="et-col-md-4 et-no-padding">
 									<div class="et-col-md-12">
 										<div class="et-col-md-12" style="padding:0px">
 											<div class="et-col-md-12" style="padding:6px 0px 0px 0px;">
-												<div class="et-car-block" style="height:36px">
+												<div class="et-car-block" style="height:36px; display: inline-block; margin-left: 6px;">
 													<div class="et-car-icon et-car-icon-selected">
 														<img src="https://scontent.fsgn13-3.fna.fbcdn.net/v/t1.15752-9/346106970_1317239385494022_3703447187004011364_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=b8aO2KMS1kQAX-OrVe0&_nc_ht=scontent.fsgn13-3.fna&oh=03_AdRMg9j6crxbF0fwYzsDVld1ZhTUKhC2MMGf8SmXwq98bw&oe=64865B7E">
 													</div>
 												</div>
-												<span style="padding-left:6px" class="ng-binding">Toa đang chọn</span>
+												<span style="padding-left:6px; display: inline-block; font-weight: 600;" class="ng-binding">Toa đang chọn</span>
 											</div>
 										</div>
-										<div class="et-col-md-12 et-no-padding text-center ng-binding" style="margin-top: -20px;display:none">Toa đang chọn</div>
+										<div class="et-col-md-12 et-no-padding text-center ng-binding" style="margin-top: -20px; display:none; font-weight: 600;">Toa đang chọn</div>
 									</div>
 								</div>
 								<div class="et-col-md-4 et-no-padding">
 									<div class="et-col-md-12">
 										<div class="et-col-md-12" style="padding:0px">
 											<div class="et-col-md-12" style="padding:6px 0px 0px 0px;">
-												<div class="et-car-block" style="height:36px">
+												<div class="et-car-block" style="height:36px; display: inline-block; margin-left: 33px;">
 													<div class="et-car-icon et-car-icon-sold-out">
 														<img src="https://scontent.fsgn13-3.fna.fbcdn.net/v/t1.15752-9/346106970_1317239385494022_3703447187004011364_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=b8aO2KMS1kQAX-OrVe0&_nc_ht=scontent.fsgn13-3.fna&oh=03_AdRMg9j6crxbF0fwYzsDVld1ZhTUKhC2MMGf8SmXwq98bw&oe=64865B7E">
 													</div>
 												</div>
-												<span style="padding-left:6px" class="ng-binding">Toa hết vé</span>
+												<span style="padding-left:6px; display: inline-block; font-weight: 600;" class="ng-binding">Toa hết vé</span>
 											</div>
 										</div>
-										<div class="et-col-md-12 text-center et-no-padding ng-binding" style="margin-top: -20px;display:none">Toa hết vé</div>
+										<div class="et-col-md-12 text-center et-no-padding ng-binding" style="margin-top: -20px; display:none; font-weight: 600;">Toa hết vé</div>
 									</div>
 								</div>
 							</div>
-
-							<div class="et-col-md-12 table-bordered"></div>
-							<div class="et-col-md-12 et-legend" style="padding:0px">
+						
+<!---------------------------------------------------------------------------------------------------------->
+						<div class="et-col-md-12 table-bordered"></div>
+							<div class="et-col-md-12 et-legend" style="padding:0px; margin-bottom: 27px;">
 								<div class="et-col-md-4" style="padding: 0px">
 									<div class="et-col-md-4" style="padding: 0px">
 										<div class="row">
-											<div class="et-car-nm-64-sit et-col-md-6" style="padding-right:0px">
+											<div class="et-car-nm-64-sit et-col-md-6" style="padding-right:0px; width:50%; margin-right: 8px;"><!--mới thêm width:30%-->
 												<div class="et-col-16 et-sit-side"></div>
 												<div class="et-col-64 et-sit-sur-outer">
 													<div class="et-sit-sur text-center"></div>
@@ -524,13 +471,13 @@ h5 {
 										</div>
 									</div>
 									<div class="et-col-md-8" style="padding: 0px">
-										<div class="et-legend-label ng-binding" style="margin-left:-6px">Chỗ trống</div>
+										<div class="et-legend-label ng-binding" style="margin-left:30px; margin-top:15px; margin-right: 20px; font-weight: 600;">Chỗ trống</div> 
 									</div>
 								</div>
 								<div class="et-col-md-4" style="padding: 0px">
 									<div class="et-col-md-4" style="padding: 0px">
 										<div class="row">
-											<div class="et-car-nm-64-sit et-col-md-6" style="padding-right:0px">
+											<div class="et-car-nm-64-sit et-col-md-6" style="padding-right:0px; width:50%; margin-right: 8px;">
 												<div class="et-col-16 et-sit-side"></div>
 												<div class="et-col-64 et-sit-sur-outer">
 													<div class="et-sit-sur text-center et-sit-longer"></div>
@@ -545,13 +492,13 @@ h5 {
 										</div>
 									</div>
 									<div class="et-col-md-8" style="padding: 0px">
-										<div class="et-legend-label ng-binding" style="margin-left:-6px">Chỗ chặng dài hơn</div>
+										<div class="et-legend-label ng-binding" style="margin-left:30px; margin-top:15px; margin-right: 20px; font-weight: 600;">Chỗ chặng dài hơn</div>
 									</div>
 								</div>
 								<div class="et-col-md-4" style="padding: 0px">
 									<div class="et-col-md-4" style="padding: 0px">
 										<div class="row">
-											<div class="et-car-nm-64-sit et-col-md-6" style="padding-right:0px">
+											<div class="et-car-nm-64-sit et-col-md-6" style="padding-right:0px; width:50%; margin-right: 8px;">
 												<div class="et-col-16 et-sit-side"></div>
 												<div class="et-col-64 et-sit-sur-outer">
 													<div class="et-sit-sur text-center et-sit-blocked"></div>
@@ -566,15 +513,21 @@ h5 {
 										</div>
 									</div>
 									<div class="et-col-md-8" style="padding: 0px">
-										<div class="et-legend-label ng-binding" style="margin-left:-6px">Chỗ đã bán, không bán</div>
+										<div class="et-legend-label ng-binding" style="margin-left:30px; margin-top:15px; font-weight: 600;">Chỗ đã bán, không bán</div>
 									</div>
 								</div>
 							</div>
 						</div>
 
+						<div class="et-col-md-12 hidden-print text-center">
+							<div class="alert alert-info" style="margin-top: 15px; font-size: 16px;">
+								<strong>Chú ý:</strong> Xem quy định trả vé, đổi vé (Áp dụng với các tàu chạy từ ngày 01/4/2023 đến hết ngày 30/8/2023)
+							</div>
+						</div>
+
 						<div class="download-app mt-2">
 							<div class="container bg-white text-center border-top p-4 border-primary ">
-								<h5 class="main-color-text mb-3">Tải ứng dụng</h5>
+								<h5 class="main-color-text mb-3" style="margin-top: 17px;">Tải ứng dụng</h5>
 								<!--<a href="#"><img class="me-2" src="/HomePage/images/playstore.png" alt="playstore"
 										width="15%"></a>
 								<a href="#"><img src="/HomePage/images/appstore.png" alt="appstore" width="15%"></a>-->
