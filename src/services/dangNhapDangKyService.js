@@ -3,7 +3,7 @@ let createNewUser = (data) =>{
     console.log(data)
     return new Promise(async(reslove, reject)=>{
         try{
-            await db.User.create({
+            let user = await db.User.create({
                 firstName: data.firstName,
                 lastName: data.lastName,
                 phoneNumber: data.phoneNumber,
@@ -14,7 +14,7 @@ let createNewUser = (data) =>{
                 gender : data.gender,
                 roleID : data.roleID,
             })
-            reslove("Đã tạo người dùng mới thành công");
+            reslove(user.id);
         }
         catch(e)
         {

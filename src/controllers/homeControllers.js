@@ -6,9 +6,11 @@ import tripCRUD from "../services/tripCRUD"
 import searchtripService from "../services/searchtripService"
 const ejs = require('ejs');
 const path = require('path');
-
+let idlogin = null
 let homepage =(req,res)=>{
-    let idlogin = null
+    // res.cookie('idlogin', "null");
+    // let idlogin = req.cookies.idlogin
+    // console.log("idlogin",req.cookies.idlogin)
     return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
 }
 
@@ -28,8 +30,7 @@ let loginn = async (req, res) => {
     console.log(result)
     if(result.message=="Bạn đã đăng nhập thành công")
     {
-        let idlogin  = result.data.id;
-        
+        idlogin = result.data.id;
         return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
     }
     else
@@ -38,10 +39,17 @@ let loginn = async (req, res) => {
     }
 
 }
+
+let dangxuat = (req,res)=>{
+    idlogin = null
+    console.log(idlogin)
+    return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
+}
 let completeRegister = async (req, res) => {
     let message = await dangNhapDangKyService.createNewUser(req.body); // req.body la data nguoi nhap
     console.log(message);
-    return res.send("Chúc mừng bạn đã đăng kí thành công!")
+    idlogin = message
+    return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
 }
 let insertUser = async (req, res) => {
     let data = await dangNhapDangKyService.dataUser();
@@ -58,7 +66,7 @@ let capnhatthongtin = async (req, res) => {
     let user = req.body;
     console.log(user);
     let message = dangNhapDangKyService.updateUser(user);
-    return res.send("Cập nhật thông tin thành công")
+    return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
 }
 let xemtruocuser = async (req, res) => {
     console.log(req.query.id)
@@ -83,9 +91,7 @@ let thongtincanhan = async(req,res)=>{
     console.log(data)
     return res.render("thongtincanhan.ejs",{user:data})
 }
-let dangxuat = (req,res)=>{
-    
-}
+
 /*------------------TRIP---------------*/
 
 let formCreateTrip = (req, res) => {
@@ -298,7 +304,7 @@ module.exports = {
     insertUser :insertUser,
     thaydoithongtin :thaydoithongtin,
     capnhatthongtin: capnhatthongtin,
-
+    dangxuat :dangxuat,
     xoaiduser :xoaiduser,
     loginn :loginn,
     xemtruocuser :xemtruocuser ,
