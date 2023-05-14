@@ -333,16 +333,22 @@ main {
 								<a class="nav-link active" aria-current="page"
 									href="https://vr.com.vn/cam-nang-di-tau.html" target="_blank">Cẩm nang đi tàu</a>
 							</li>
-							<% if (idlogin) { %>
+							<% if (idlogin != null) { %>
 								<!-- Hiển thị biểu tượng người dùng và liên kết đến trang thông tin người dùng -->
 								<div class="collapse navbar-collapse" id="navbarNav">
 								  <ul class="navbar-nav ml-auto">
 									<li class="nav-item">
-									  <form method="post" action="/post-thongtincanhan">
+									  <form method="post" action="/post-thongtincanhan" class="nav-link active" >
 										<button type="submit">Thông tin cá nhân</button>
 										<input type="hidden" name="userID" value="<%= idlogin %>"> <!-- Giá trị ID của user -->
 									  </form>
 									</li>
+									<li class="nav-item">
+										
+										<a href="/dangxuat" class="nav-link active" type="button">Đăng Xuất</a>
+										  
+										</form>
+									  </li>
 								  </ul>
 								</div>
 							  <% } else { %>
