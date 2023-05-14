@@ -147,8 +147,9 @@ let deleteTrip = async (req, res) => {
 }
 
 /* --------------BOOKING ----------*/
+
 let dataBooker = (req, res) => {
-    return res.render("databooker.ejs")
+    return res.render("HomePage/ejs/dataCustomer.ejs")
 }
 let completeDatabooker = async (req, res) => {
     let message = await nguoidatveService.createNewBooker(req.body);
@@ -260,30 +261,25 @@ let insertUser4 = async(req, res)=>{
 }
 /*----------------------------------------------------------------------------------------*/
 
-/* -------------Trang booking----------*/
-let insertUser5 = async(req, res)=>{
-    let data = await dangNhapDangKyService.dataAdmin();
-    /*return res.render('admin.ejs',{user:data})*/
-    return res.render('../views/HomePage/ejs/booking.ejs',{user:data})
-}
-/*----------------------------------------------------------------------------------------*/
 
 /* -------------Trang chủ----------*/
 let insertUser6 = async(req, res)=>{
     let idlogin = null
     return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
 }
-/*----------------------------------------------------------------------------------------*/
+/*---------------------------------*/
 
+/* -------------Trang booking----------*/
 let timkiemtau = async(req,res)=>{
     let infotau = req.body
     console.log(infotau)
     console.log("infotau.from",infotau.from)
     let data = await searchtripService.handleSearchTripTrue(infotau.from, infotau.to,infotau.daygo)
-    return res.render('dataTrip.ejs', {
+    return res.render('HomePage/ejs/booking.ejs', {   
         trip: data //trip <-- data
     })
 }
+
 let hienthivetau =async(req,res)=>{
     let  tauid = req.query.id
     console.log(tauid)
@@ -291,7 +287,7 @@ let hienthivetau =async(req,res)=>{
     console.log(data.length)
     res.render("ticketUser.ejs",{tickets:data})
 }
-
+/*---------------------------------*/
 
 module.exports = {
     //USER
@@ -330,18 +326,13 @@ module.exports = {
     insertUser2: insertUser2,
     insertUser3: insertUser3,
     insertUser4: insertUser4,
-    //Trang booking
-    insertUser5: insertUser5,
     //Trang chủ
     insertUser6: insertUser6,
-
-
+    //Trang booking
     timkiemtau:timkiemtau,
 
 //nút xoá người đặt vé
     deletebooker1: deletebooker1,
 //
-
-
 }
 
