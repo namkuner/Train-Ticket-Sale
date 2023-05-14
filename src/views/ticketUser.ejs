@@ -1,0 +1,33 @@
+<!-- tickets.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Thông tin vé tàu</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h1>Thông tin vé tàu</h1>
+  
+  <% if (tickets.length > 0) { %>
+    <table>
+      <tr>
+        <th>Trạng thái</th>
+        <th>Toa</th>
+        <th>Giá vé</th>
+        <th>ID tàu</th>
+      </tr>
+      <% tickets.forEach(function(ticket) { %>
+        <tr>
+          <td><%= ticket.trangThai ? 'Có vé' : 'Hết vé' %></td>
+          <td><%= ticket.toa %></td>
+          <td><%= ticket.giaVe %></td>
+          <td><%= ticket.trainId %></td>
+        </tr>
+      <% }); %>
+    </table>
+  <% } else { %>
+    <p>Không tìm thấy vé tàu.</p>
+  <% } %>
+</body>
+</html>

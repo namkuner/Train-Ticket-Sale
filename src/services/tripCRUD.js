@@ -3,7 +3,7 @@ import db from "../models/index"
 let createNewTrip = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            await db.Trip.create({
+            let tau = await db.Trip.create({
                 diemXuatPhat: data.diemXuatPhat,
                 diemDen: data.diemDen,
                 thoiGianDi: data.thoiGianDi,
@@ -12,14 +12,25 @@ let createNewTrip = (data) => {
                 tenTau: data.tenTau,
                 soToa: data.soToa,
                 soGhe: data.soGhe,
-            })
-            resolve("Tạo chuyến mới thành công")
+            });
+
+            const ves = [];
+            for (let i = 1; i <= data.soGhe; i++) {
+                ves.push({
+                    trangThai: 1,
+                    giaVe : tau.giaVe,
+                    toa: Math.ceil(i / tau.soToa).toString(),
+                    trainId: tau.id // Kiểm tra tên trường dữ liệu `id` của `tau`
+                });
+            }
+
+            await db.Ticket.bulkCreate(ves);
+            resolve("Tạo chuyến mới thành công");
+        } catch (e) {
+            reject(e);
         }
-        catch (e) {
-            reject(e)
-        }
-    })
-}
+    });
+};
 let getAllDataTrip = () => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -91,11 +102,27 @@ let deteleTripById = (tripId) => {
         }
     })
 }
-
+let hienthive =(tauid)=>{
+    return new Promise(async (resolve, reject) => {
+       try{
+        let data = await db.Ticket.findAll({
+            where :{trainId :tauid}          
+        }   
+        )
+       
+        resolve(data)
+       }
+       catch(e)
+       {
+        reject(e)
+       }
+    })
+}
 module.exports = {
     getAllDataTrip: getAllDataTrip,
     createNewTrip: createNewTrip,
     updateTrip: updateTrip,
     getTripInforById: getTripInforById,
-    deteleTripById: deteleTripById
+    deteleTripById: deteleTripById,
+    hienthive:hienthive
 }

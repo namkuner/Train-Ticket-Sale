@@ -21,6 +21,7 @@ let dangNhap = (req, res) => {
 
 }
 let loginn = async (req, res) => {
+    
     let SDT_password = req.body;
     console.log(SDT_password)
     let result  = await dangNhapDangKyService.checkdangnhap(SDT_password)
@@ -81,6 +82,9 @@ let thongtincanhan = async(req,res)=>{
     let data = await dangNhapDangKyService.infomationUser(userid);
     console.log(data)
     return res.render("thongtincanhan.ejs",{user:data})
+}
+let dangxuat = (req,res)=>{
+    
 }
 /*------------------TRIP---------------*/
 
@@ -274,8 +278,18 @@ let insertUser6 = async(req, res)=>{
 let timkiemtau = async(req,res)=>{
     let infotau = req.body
     console.log(infotau)
+    console.log("infotau.from",infotau.from)
     let data = await searchtripService.handleSearchTripTrue(infotau.from, infotau.to,infotau.daygo)
-    console.log(data)
+    return res.render('dataTrip.ejs', {
+        trip: data //trip <-- data
+    })
+}
+let hienthivetau =async(req,res)=>{
+    let  tauid = req.query.id
+    console.log(tauid)
+    let data = await tripCRUD.hienthive(tauid)
+    console.log(data.length)
+    res.render("ticketUser.ejs",{tickets:data})
 }
 
 
@@ -293,6 +307,7 @@ module.exports = {
     loginn :loginn,
     xemtruocuser :xemtruocuser ,
     thongtincanhan :thongtincanhan,
+    hienthivetau:hienthivetau,
 
 
     //BOOKING

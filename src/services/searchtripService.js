@@ -1,24 +1,27 @@
-import db from "../models/index";
+import db from '../models/index';
 
 let checkUserdiemXuatPhat = async (userdiemXuatPhat) => {
   try {
-      let trip = await db.Trip.findOne({
+      let trip = await db.Trip.findAll({
           where: { diemXuatPhat: userdiemXuatPhat }
       });
-      return trip ? true : false;
+      return trip;
   } catch (e) {
       throw e;
   }
 };
 
-let checkUserdiemDen = async (userdiemDen) => {
+let checkUserdiemDen = async (userdiemDen,diemXuatPhat) => {
   try {
-      let trip = await db.Trip.findOne({
-          where: { diemDen: userdiemDen }
-      });
-      return trip ? true : false;
+    let trip = await db.Trip.findAll({
+      where:
+        {diemDen : userdiemDen,
+          diemXuatPhat:diemXuatPhat}
+      
+    });
+    return trip;
   } catch (e) {
-      throw e;
+    throw e;
   }
 };
 
@@ -35,56 +38,33 @@ let checkUserdiemDen = async (userdiemDen) => {
 
 let handleSearchTripTrue = async (diemXuatPhat, diemDen, ngayKhoiHanh) => {
     try {
-      let tripData = {};
-      console.log('1')
+      let tripData= {};
+      console.log("diemXuatPhat",diemXuatPhat)
       let KTdiemXuatPhat = await checkUserdiemXuatPhat(diemXuatPhat);
-      console.log(KTdiemXuatPhat)
       
-      let KTdiemDen = await checkUserdiemDen(diemDen);
-      // let KTngayKhoiHanh = await checkUserngayKhoiHanh(ngayKhoiHanh);
-      
-      if (KTdiemXuatPhat) {
+      if (KTdiemXuatPhat != null) {
         // Nơi xuất phát tồn tại
-        let tripXuatPhat = await db.Trip.findOne({
-          where: { diemXuatPhat: diemXuatPhat },
-        });
+        let tripDen = await checkUserdiemDen(diemDen,diemXuatPhat)
   
-        if (tripXuatPhat) {
-          if (KTdiemDen) {
-            // Nơi đến tồn tại
-            let tripDen = await db.Trip.findOne({
-              attributes: ['diemXuatPhat', 'diemDen', 'ngayKhoiHanh', 'tenTau'],
-              where: { diemDen: diemDen },
-              raw: true,
-            });
-  
-            if (tripDen) {
-              // if (KTngayKhoiHanh) {
-              //   tripData.errCode = 4;
-              //   tripData.errMessage = 'Ok';
-              //   tripData.trip = tripDen;
-              // } else {
-              //   tripData.errCode = 5;
-              //   tripData.errMessage = 'Thời gian khởi hành không tồn tại, vui lòng thử lại!';
-              // }
-            } else {
-              tripData.errCode = 3;
-              tripData.errMessage = 'Nơi đến không tồn tại, vui lòng thử lại!';
-            }
+        
+          if (tripDen != null) {
+              
+            return tripDen;
+
           } else {
-            tripData.errCode = 3;
-            tripData.errMessage = 'Nơi đến không tồn tại, vui lòng thử lại!';
+           
+            tripData.errCode = 2;
+            tripData.errMessage = 'Hiện tại đã hết vé ĐẾN ' + diemDen;
+            return tripData;
           }
-        } else {
-          tripData.errCode = 2;
-          tripData.errMessage = 'Nơi đi không tồn tại, vui lòng thử lại!';
-        }
-      } else {
+        } 
+
+      else {
         tripData.errCode = 1;
-        tripData.errMessage = 'Nơi đi không tồn tại, vui lòng thử lại!';
+        tripData.errMessage = 'Hiện tại đã hết vé ĐI từ ' +diemXuatPhat;
+        return tripData;
       }
-      console.log(tripData)
-      return tripData;
+      
     } catch (e) {
       throw e;
     }
