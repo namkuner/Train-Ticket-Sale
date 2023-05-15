@@ -350,6 +350,10 @@ h5 {
   max-width: 950px; /* kích thước tối đa của container */
   margin: 0 auto; /* căn giữa container */
 }
+/**/
+.form-control[name="Hoten"], .form-control[name="CCCD"], .form-control[name="Phone"], .form-control[name="Email"], .form-control[name="email1"] {
+  font-size: 15px;
+}
 
 
 
@@ -434,60 +438,67 @@ h5 {
 								<div class="row">
 								  <div class="col-md-6">
 									<div class="mb-3">
-									  <label for="Hoten">Họ và tên</label>
+									  <label for="Hoten" style="margin-bottom: 10px;font-weight: 600;">Họ và tên</label>
 									  <input
 										type="text"
 										class="form-control"
 										name="Hoten"
 										placeholder="Họ và tên"
 										required
+										style="padding-top: 10px; padding-bottom: 10px;"
 									  />
 									</div>
 									<div class="mb-3">
-									  <label for="CCCD">Số CCCD/Hộ chiếu</label>
+									  <label for="CCCD" style="margin-bottom: 10px;font-weight: 600;">Số CCCD/Hộ chiếu</label>
 									  <input
 										type="tel"
 										class="form-control"
 										name="CCCD"
 										placeholder="Số CCCD/Hộ chiếu"
+										required
+										style="padding-top: 10px; padding-bottom: 10px;"
 									  />
 									</div>
 									<div class="mb-3">
-										<label for="Phone">Số di động</label>
+										<label for="Phone" style="margin-bottom: 10px;font-weight: 600;">Số di động</label>
 										<input
 										  type="text"
 										  class="form-control"
 										  name="Phone"
 										  placeholder="Số di động"
+										  required
+										  style="padding-top: 10px; padding-bottom: 10px;"
 										/>
 									</div>
 								  </div>
 								  <div class="col-md-6">
 									<div class="mb-3">
-									  <label for="Email">Email </label>
+									  <label for="Email" style="margin-bottom: 10px;font-weight: 600;">Email</label>
 									  <input
 										type="email"
 										class="form-control"
 										name="Email"
 										placeholder="Enter email"
 										required
+										style="padding-top: 10px; padding-bottom: 10px;"
 									  />
 									</div>
 						  
 									<div class="mb-3">
-									  <label for="email1">Xác nhận email</label>
+									  <label for="email1" style="margin-bottom: 10px;font-weight: 600;">Xác nhận email</label>
 									  <input
 										type="email"
 										class="form-control"
 										name="email1"
 										placeholder="Xác nhận email"
 										required
+										style="padding-top: 10px; padding-bottom: 10px;"
 									  />
 									</div>
 								  </div>
 								</div>
 								<input type="hidden" name="roleid" value="R3">
-								<button class="btn btn-primary" type="submit">Submit</button>
+								<button class="btn btn-primary" type="submit" style="padding: 7px 30px;font-size: 16px;margin-top: 7px;">Xác nhận</button>
 							  </form>
 							</div>
 						  </div>
