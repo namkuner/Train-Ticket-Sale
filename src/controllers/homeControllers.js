@@ -15,7 +15,8 @@ let homepage =(req,res)=>{
 }
 
 let dangKy = (req, res) => {
-    return res.render("dangky.ejs")
+    
+    return res.render("dangky.ejs",{er:null})
 }
 let dangNhap = (req, res) => {
 
@@ -46,6 +47,11 @@ let dangxuat = (req,res)=>{
     return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
 }
 let completeRegister = async (req, res) => {
+    let checkSDT = dangNhapDangKyService.inforSDT
+    if(checkSDT !=null)
+    {
+        return res.render("dangky.ejs",{er:"Số điện thoại này đã có người đăng ký"})
+    }
     let message = await dangNhapDangKyService.createNewUser(req.body); // req.body la data nguoi nhap
     console.log(message);
     idlogin = message

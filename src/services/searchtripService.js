@@ -1,4 +1,6 @@
 import db from '../models/index';
+const { Sequelize, Model, DataTypes } = require('sequelize');
+
 
 let checkUserdiemXuatPhat = async (userdiemXuatPhat) => {
   try {
@@ -11,14 +13,22 @@ let checkUserdiemXuatPhat = async (userdiemXuatPhat) => {
   }
 };
 
-let checkUserdiemDen = async (userdiemDen,diemXuatPhat) => {
+let checkUserdiemDen = async (userdiemDen, diemXuatPhat, ngayKhoiHanh) => {
   try {
+    const currentTime = new Date();
+    
     let trip = await db.Trip.findAll({
-      where:
-        {diemDen : userdiemDen,
-          diemXuatPhat:diemXuatPhat}
-      
+      where: {
+        diemDen: {
+          [Sequelize.Op.like]: `%${userdiemDen}%`,
+        },
+        // diemXuatPhat: diemXuatPhat,
+        thoiGianDen: {
+          [Sequelize.Op.gt]: currentTime.toISOString(),
+        },
+      },
     });
+
     return trip;
   } catch (e) {
     throw e;

@@ -7,7 +7,7 @@ const sequelize = new Sequelize('webproject', 'root', null, {
     dialect: 'mysql',
     logging: false,
     charset: 'utf8mb4',
-  collate: 'utf8mb4_unicode_ci'
+  collate: 'utf8mb4'
 });
 
 let connectDB = async () => {

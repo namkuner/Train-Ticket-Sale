@@ -104,6 +104,17 @@ let xoathongtinuser = (dataid)=>
         }
     })
 }
+let inforSDT=(userinfo)=>{
+    return new Promise(async(reslove, reject)=>{
+        try{
+            let data = await db.User.findOne({where:{phoneNumber: userinfo.SDT}})
+            reslove(data);
+        }
+        catch(e){
+            reject(e);
+        }
+    })
+}
 //////////////////////////////////////trang admin
 let dataAdmin =()=>{
     return new Promise(async(reslove,reject)=>{
@@ -124,6 +135,7 @@ module.exports ={
     updateUser: updateUser,
     xoathongtinuser:xoathongtinuser,
     checkdangnhap:checkdangnhap,
+    inforSDT:inforSDT,
     //-----thêm dữ liệu tài khoản người dùng vào trang admin
     dataAdmin: dataAdmin,
 }
