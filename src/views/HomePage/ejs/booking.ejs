@@ -298,63 +298,87 @@ h5 {
 }
 .col-md-12 {
     flex: 0 0 auto;
-    width: 700px;
-	margin-left: 47px;
+    width: 800px;
+	margin-left: -50px;
 }
 .et-col-md-4 {
 	top: 10px;
 }
 /*Bảng dữ liệu tàu thoả*/
 table {
-            border-collapse: collapse;
-            width: 100%;
-        }
+    border-collapse: collapse;
+    width: 100%;
+}
 
-        table th,
-        .table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
+table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
 
-        table th {
-            background-color: #f2f2f2;
-        }
+table th {
+    background-color: #f2f2f2;
+}
 
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 200px;
-            margin: auto;
-        }
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+    margin: auto;
+}
 
-        .edit-button,
-        .delete-button {
-            border: none;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.edit-button,
+.delete-button {
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
-        .edit-button {
-            background-color: #6ab04c;
-        }
+.edit-button {
+    background-color: #6ab04c;
+}
 
-        .delete-button {
-            background-color: #dc3545;
-        }
+.delete-button {
+    background-color: #dc3545;
+}
 
-        .edit-button:hover,
-        .delete-button:hover {
-            opacity: 0.8;
-        }
+.edit-button:hover,
+.delete-button:hover {
+    opacity: 0.8;
+}
 
 
+		/*new 15/05/2023*/
+.wrapper {
+  width: 100%;
+  max-width: 960px; /* hoặc bất kỳ giá trị nào bạn muốn */
+  margin: 0 auto;
+}
+
+.left-column {
+  width: 80%; /* hoặc bất kỳ giá trị nào bạn muốn */
+  float: left;
+  left: -30px;
+}
+
+.right-column {
+  width: 20%; /* hoặc bất kỳ giá trị nào bạn muốn */
+  float: left;
+}
+/**/
+.et-widget {
+    border: 1px solid #ccc;
+    padding-bottom: 20px;
+    margin-top: 10px;
+	width: 240px;
+}
 /********************************************************************************/
     </style>
 <!-------------------------------------------->
@@ -399,58 +423,7 @@ table {
 	</header>
 	
 <!--***********************************************************************-->
-<h1>Trip Info</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Điểm xuất phát</th>
-                <th scope="col">Điểm đến</th>
-                <th scope="col">Thời gian đi</th>
-                <th scope="col">Thời gian đến</th>
-                <th scope="col">Giá vé</th>
-                <th scope="col">Tên tàu</th>
-                <th scope="col">Số toa</th>
-                <th scope="col">Số ghế</th>
-                <th scope="col">Chức năng</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% for (let i=0; i < trip.length; i++) { %>
-                <tr>
-                    <td>
-                        <%= trip[i].diemXuatPhat %>
-                    </td>
-                    <td>
-                        <%= trip[i].diemDen %>
-                    </td>
-                    <td>
-                        <%= trip[i].thoiGianDi %>
-                    </td>
-                    <td>
-                        <%= trip[i].thoiGianDen %>
-                    </td>
-                    <td>
-                        <%= trip[i].giaVe %>
-                    </td>
-                    <td>
-                        <%= trip[i].tenTau %>
-                    </td>
-                    <td>
-                        <%= trip[i].soToa %>
-                    </td>
-                    <td>
-                        <%= trip[i].soGhe %>
-                    </td>
 
-                    <td>
-                        <div class="button-container">
-                            <a href="/vetau?id=<%=trip[i].id %>" class="edit-button" type="button">Xem</a>
-                        </div>
-                    </td>
-                </tr>
-                <% } %>
-        </tbody>
-    </table>
 <!--***********************************************************************-->
     
     <main>
@@ -463,10 +436,67 @@ table {
 			<div class="container  pt-5 px-0 pb-5">
 				<div class="grid">
 					<div class="row">
-						
+		<div class="wrapper">
+			<div class="left-column">
+				
+				<h1>Trip Info</h1>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Điểm xuất phát</th>
+							<th scope="col">Điểm đến</th>
+							<th scope="col">Thời gian đi</th>
+							<th scope="col">Thời gian đến</th>
+							<th scope="col">Giá vé</th>
+							<th scope="col">Tên tàu</th>
+							<th scope="col">Số toa</th>
+							<th scope="col">Số ghế</th>
+							<th scope="col">Chức năng</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% for (let i=0; i < trip.length; i++) { %>
+							<tr>
+								<td>
+									<%= trip[i].diemXuatPhat %>
+								</td>
+								<td>
+									<%= trip[i].diemDen %>
+								</td>
+								<td>
+									<%= trip[i].thoiGianDi %>
+								</td>
+								<td>
+									<%= trip[i].thoiGianDen %>
+								</td>
+								<td>
+									<%= trip[i].giaVe %>
+								</td>
+								<td>
+									<%= trip[i].tenTau %>
+								</td>
+								<td>
+									<%= trip[i].soToa %>
+								</td>
+								<td>
+									<%= trip[i].soGhe %>
+								</td>
+			
+								<td>
+									<div class="button-container">
+										<a href="/vetau?id=<%=trip[i].id %>" class="edit-button" type="button">Xem</a>
+									</div>
+								</td>
+							</tr>
+							<% } %>
+					</tbody>
+				</table>
+
+
+
 						<div class="row" ng-show="tauDiKhuyenMaiInfos&amp;&amp;tauDiKhuyenMaiInfos.length>0">
 							<div class="col-md-12">
-								<h4 style="margin-top: 0px; font-size: 18px; margin-bottom: 13px; color: #317eac" class="ng-binding">Khuyến mại cho chiều đi</h4>
+								<h4 style="margin-top: 0px; font-size: 18px; margin-bottom: 13px; color: #317eac;" class="ng-binding">Khuyến mại cho chiều đi</h4>
 								<table class="table table-striped table-bordered table-hover">
 									<thead class="table-row-header">
 										<tr>
@@ -502,19 +532,19 @@ table {
 							</div>
 						</div>
 
-						<div class="et-col-md-12 table-bordered list-ticket-deskhop" style="margin-top: 20px; padding: 5px; margin-left: 47px; width: 700px;">
-							<div class="et-col-md-12" style="margin-bottom: 15px;">
+						<div class="et-col-md-12 table-bordered list-ticket-deskhop" style="margin-top: 20px; padding: 5px ; width: 100%; left: -50px;"><!--width: 755px-->
+							<div class="et-col-md-12" style="margin-bottom: 15px; left: -30px;">
 								<div class="et-col-md-4 et-no-padding">
 									<div class="et-col-md-12">
 										<div class="et-col-md-12" style="padding:0px">
-											<div class="et-col-md-12" style="padding:6px 0px 0px 0px">
+											<div class="et-col-md-12" style="padding:6px 0px 0px 67px">
 												<div class="et-car-block" style="height:36px; display: inline-block;">
 													<div class="et-car-icon et-car-icon-avaiable">
 														<!--<img src="/HomePage/images/trainCar2.png">-->
 														<img src="https://scontent.fsgn13-3.fna.fbcdn.net/v/t1.15752-9/346106970_1317239385494022_3703447187004011364_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=b8aO2KMS1kQAX-OrVe0&_nc_ht=scontent.fsgn13-3.fna&oh=03_AdRMg9j6crxbF0fwYzsDVld1ZhTUKhC2MMGf8SmXwq98bw&oe=64865B7E">
 													</div>
 												</div>
-												<span style="padding-left:6px; display: inline-block; font-weight: 600;" class="ng-binding">Toa còn vé</span>
+												<span style="padding-left: 7px; display: inline-block; font-weight: 600;" class="ng-binding">Toa còn vé</span>
 											</div>
 										</div>
 										<div class="et-col-md-12 text-center et-no-padding ng-binding" style="margin-top: -20px; display:none; font-weight: 600;">Toa còn vé</div>
@@ -554,7 +584,7 @@ table {
 						
 <!---------------------------------------------------------------------------------------------------------->
 							<div class="et-col-md-12 table-bordered"></div>
-							<div class="et-col-md-12 et-legend" style="padding:0px; margin-bottom: 27px;">
+							<div class="et-col-md-12 et-legend" style="padding:0px; margin-bottom: 27px;"><!--new 15/5 left-->
 								<div class="et-col-md-4" style="padding: 0px">
 									<div class="et-col-md-4" style="padding: 0px">
 										<div class="row">
@@ -620,71 +650,150 @@ table {
 								</div>
 							</div>
 						</div>
-<!--***********************************************************************-->
-<!--***********************************************************************-->
+	</div>
 
-						<div class="et-col-md-12 hidden-print text-center">
-							<div class="alert alert-info" style="margin-top: 15px; font-size: 16px;">
-								<strong>Chú ý:</strong> Xem quy định trả vé, đổi vé (Áp dụng với các tàu chạy từ ngày 01/4/2023 đến hết ngày 30/8/2023)
-							</div>
-						</div>
-
-						<div class="download-app mt-2">
-							<div class="container bg-white text-center border-top p-4 border-primary ">
-								<h5 class="main-color-text mb-3" style="margin-top: 17px;">Tải ứng dụng</h5>
-								<!--<a href="#"><img class="me-2" src="/HomePage/images/playstore.png" alt="playstore"
-										width="15%"></a>
-								<a href="#"><img src="/HomePage/images/appstore.png" alt="appstore" width="15%"></a>-->
-								<a href="#"><img class="me-2" src="https://scontent.fsgn4-1.fna.fbcdn.net/v/t1.15752-9/346106358_193278496982944_2021392920144749953_n.png?_nc_cat=103&ccb=1-7&_nc_sid=ae9488&_nc_ohc=QNSLXzi-JigAX9o-exe&_nc_ht=scontent.fsgn4-1.fna&oh=03_AdSL_OTkKkivyVA9G51kkI84Pa7nxzSjyFLWniK51ohcFA&oe=64866CEB" alt="playstore" width="15%"></a>
-								<a href="#"><img src="https://scontent.fsgn13-3.fna.fbcdn.net/v/t1.15752-9/346103565_765134348499818_4747672716900201717_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=jz9nL_8O7G4AX8qSPDR&_nc_ht=scontent.fsgn13-3.fna&oh=03_AdQlF9_cED2pThY-r8ZLUZHLum_HdMmyT0PVDsyxvJCmPQ&oe=64867751" alt="appstore" width="15%"></a>
-							</div>
-						</div>
-
-						<div class="container1 px-0">
-							<ul class="nav justify-content-center main-color-bg py-2 ">
-				
-								<div class="w-75 text-center">
-									<li class=" nav-item">
-										<a class="nav-link " aria-current="page" href="#">Tìm vé</a>
-									</li>
-									<li class=" nav-item">
-										<a class="nav-link" href="#">Thông tin đặt chỗ</a>
-									</li>
-									<li class=" nav-item">
-										<a class="nav-link" href="#">Giờ tàu - Giá vé</a>
-									</li>
-									<li class=" nav-item">
-										<!-- <a class="nav-link disabled">Disabled</a> -->
-										<a class="nav-link " href="#">Hướng dẫn</a>
-									</li>
-				
-									<li class=" nav-item">
-										<a class="nav-link" href="#">Liên hệ</a>
-									</li>
-								</div>
-								<div class="w-75 text-center">
-									<li class=" nav-item">
-										<a class="nav-link" href="#">Chính sách mua hàng</a>
-									</li>
-									<li class=" nav-item">
-										<a class="nav-link" href="#">Chính sách thanh toán</a>
-									</li>
-									<li class=" nav-item">
-										<a class="nav-link" href="#">Chính sách hoàn trả</a>
-									</li>
-									<li class=" nav-item">
-										<a class="nav-link" href="#">Chính sách bảo mật</a>
-									</li>
-								</div>
-							</ul>
-				
-							<div class="about bg-white d-flex py-5">
-								<div class="w-75 m-auto text-center">
-									<h5>Nhóm 28, Phát triển website bán vé tàu</h5>
-								</div>
-							</div>
-						</div>
+	<div class="right-column">
+		<!--<div et-ticket-pocket="" class="list-ticket-deskhop ng-isolate-scope">
+			<div class="col-md-12 et-widget" id="ticketPocket" style="padding-bottom: 8px">
+				<div class="row et-widget-header">
+					<img src="/images/widgetIcon.png">
+					<span>
+						<strong class="ng-binding">Giỏ vé</strong>
+					</span>
+				</div>
+				<div class="row">
+					<div class="col-md-12 text-center" ng-show="searchData.ves.chieuDi.length == 0 &amp;&amp; searchData.ves.chieuVe.length == 0">
+						<h5 sstyle="margin-top: 4px;" class="ng-binding">Chưa có vé</h5>
 					</div>
+					<div class="col-md-12 text-center ng-hide" ng-show="searchData.ves.chieuDi.length > 0 || searchData.ves.chieuVe.length > 0">
+						<h6 class="ng-binding">Chiều đi</h6>
+					</div>
+					<!-- ngRepeat: ve in searchData.ves.chieuDi 
+					<div class="col-md-12 text-center ng-hide" ng-show="searchData.ves.chieuVe.length > 0">
+						<h6 class="ng-binding">Chiều về</h6>
+					</div>
+					<!-- ngRepeat: ve in searchData.ves.chieuVe 
+				</div>
+				<div class="col-md-12 text-center" style="margin-top: 2px">
+					<a analytics-on="click" analytics-event="Checkout" href="" ng-click="pocketDetail($event)" id="btnCheckOut" target="_blank" class="btn btn-sm et-btn ng-binding">Mua vé</a>
+				</div>
+			</div>
+		</div>-->
+	<div et-social="" class="ng-isolate-scope" style="margin-left: 45px">
+		<div class="col-md-12 et-widget" style="padding-bottom: 5px;">
+			<div class="text-center text-info" style="margin-top: 5px; margin-bottom: 5px;" ng-show="!doneCount">
+				<strong style="font-size:13px;" class="ng-binding"><!--Kết nối với chúng tôi-->Kết nối với chúng tôi</strong>
+			</div>
+			<div class="text-center">
+				<a href="https://zalo.me/1400098068669393989" target="_blank"><img src="https://dsvn.vn/images/zalo.jpg" style="width:32px; height:32px" ;=""></a>
+				<a href="https://www.facebook.com/vetauduongsat" target="_blank"><img src="https://dsvn.vn/images/facebook.png" style="width:32px; height:32px" ;=""></a>
+				<a href="https://www.youtube.com/@vetauduongsat/" target="_blank"><img src="https://dsvn.vn/images/icon-youtube.png" style="width:32px; height:32px" ;=""></a>
+				<a href="http://hoivien.dsvn.vn" target="_blank"><img src="https://dsvn.vn/images/Member.png" style="width:32px; height:32px" ;=""></a>
+			</div>
+			<div class="text-center">
+				<a href="http://vr.com.vn" target="_blank"><img src="https://dsvn.vn/images/banner-vr.com.vn.png" style="width:194px;height:80px;margin-top:6px;border:solid 1px #929292;"></a>
+			</div>
+		</div>
+		<div class="col-md-12 et-widget" style="padding-bottom: 5px;">
+			<div class="text-center text-info" style="margin-top: 5px; margin-bottom: 5px;" ng-show="!doneCount">
+				<strong style="font-size:13px;" class="ng-binding"><!--Kết nối với Cty VTHN-->Kết nối với Cty VTHN</strong>
+			</div>
+			<div class="text-center">
+				<a href="https://www.facebook.com/congtyvantaiduongsathanoi" target="_blank"><img src="https://dsvn.vn/images/icon-ksg-facebook.png" style="width:32px; height:32px" ;=""></a>
+				&nbsp; 
+				<a href="http://www.vantaiduongsathanoi.vn" target="_blank"><img src="https://dsvn.vn/images/icon-ksg-website.png" style="width:32px; height:32px" ;=""></a>
+				&nbsp;
+				<a href="tel:19000109"><img src="https://dsvn.vn/images/phone-hn.png" style="width:100px; height:32px" ;=""></a>
+			</div>
+		</div>
+		<div class="col-md-12 et-widget" style="padding-bottom: 5px;">
+			<div class="text-center text-info" style="margin-top: 5px; margin-bottom: 5px;" ng-show="!doneCount">
+				<strong style="font-size:13px;" class="ng-binding"><!--Kết nối với Cty VTHN-->Kết nối với Cty VTHN</strong>
+			</div>
+			<div class="text-center">
+				<a href="https://www.facebook.com/congtyvantaiduongsathanoi" target="_blank"><img src="https://dsvn.vn/images/icon-ksg-facebook.png" style="width:32px; height:32px" ;=""></a>
+				&nbsp; 
+				<a href="http://www.vantaiduongsathanoi.vn" target="_blank"><img src="https://dsvn.vn/images/icon-ksg-website.png" style="width:32px; height:32px" ;=""></a>
+				&nbsp;
+				<a href="tel:19000109"><img src="https://dsvn.vn/images/phone-hn.png" style="width:100px; height:32px" ;=""></a>
+			</div>
+		</div>
+		<div class="col-md-12 et-widget" ng-show="!doneCount" style="padding-bottom: 4px;">
+			<div class="text-center text-info" style="margin-top: 5px; margin-bottom: 5px;">
+				<strong>Tra cứu hóa đơn</strong>
+			</div>
+			<div class="text-justify text-primary" style="margin-top: 5px; margin-bottom: 5px;width: 185px;margin-left: 29px;text-align: center;color: #2fa4e7;font-weight: 600;">
+				Để tra cứu hóa đơn điện tử, quý khách hàng vui lòng truy cập vào trang chủ.
+			</div>
+		</div>
+	</div>
+		
+	</div>
+
+</div>
+
+<div class="et-col-md-12 hidden-print text-center">
+	<div class="alert alert-info" style="margin-top: 15px; font-size: 16px;">
+		<strong>Chú ý:</strong> Xem quy định trả vé, đổi vé (Áp dụng với các tàu chạy từ ngày 01/4/2023 đến hết ngày 30/8/2023)
+	</div>
+</div>
+
+<div class="download-app mt-2">
+	<div class="container bg-white text-center border-top p-4 border-primary ">
+		<h5 class="main-color-text mb-3" style="margin-top: 17px;">Tải ứng dụng</h5>
+		<!--<a href="#"><img class="me-2" src="/HomePage/images/playstore.png" alt="playstore"
+				width="15%"></a>
+		<a href="#"><img src="/HomePage/images/appstore.png" alt="appstore" width="15%"></a>-->
+		<a href="#"><img class="me-2" src="https://scontent.fsgn4-1.fna.fbcdn.net/v/t1.15752-9/346106358_193278496982944_2021392920144749953_n.png?_nc_cat=103&ccb=1-7&_nc_sid=ae9488&_nc_ohc=QNSLXzi-JigAX9o-exe&_nc_ht=scontent.fsgn4-1.fna&oh=03_AdSL_OTkKkivyVA9G51kkI84Pa7nxzSjyFLWniK51ohcFA&oe=64866CEB" alt="playstore" width="15%"></a>
+		<a href="#"><img src="https://scontent.fsgn13-3.fna.fbcdn.net/v/t1.15752-9/346103565_765134348499818_4747672716900201717_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=jz9nL_8O7G4AX8qSPDR&_nc_ht=scontent.fsgn13-3.fna&oh=03_AdQlF9_cED2pThY-r8ZLUZHLum_HdMmyT0PVDsyxvJCmPQ&oe=64867751" alt="appstore" width="15%"></a>
+	</div>
+</div>
+
+<div class="container1 px-0">
+	<ul class="nav justify-content-center main-color-bg py-2 ">
+
+		<div class="w-75 text-center">
+			<li class=" nav-item">
+				<a class="nav-link " aria-current="page" href="#">Tìm vé</a>
+			</li>
+			<li class=" nav-item">
+				<a class="nav-link" href="#">Thông tin đặt chỗ</a>
+			</li>
+			<li class=" nav-item">
+				<a class="nav-link" href="#">Giờ tàu - Giá vé</a>
+			</li>
+			<li class=" nav-item">
+				<!-- <a class="nav-link disabled">Disabled</a> -->
+				<a class="nav-link " href="#">Hướng dẫn</a>
+			</li>
+
+			<li class=" nav-item">
+				<a class="nav-link" href="#">Liên hệ</a>
+			</li>
+		</div>
+		<div class="w-75 text-center">
+			<li class=" nav-item">
+				<a class="nav-link" href="#">Chính sách mua hàng</a>
+			</li>
+			<li class=" nav-item">
+				<a class="nav-link" href="#">Chính sách thanh toán</a>
+			</li>
+			<li class=" nav-item">
+				<a class="nav-link" href="#">Chính sách hoàn trả</a>
+			</li>
+			<li class=" nav-item">
+				<a class="nav-link" href="#">Chính sách bảo mật</a>
+			</li>
+		</div>
+	</ul>
+
+	<div class="about bg-white d-flex py-5">
+		<div class="w-75 m-auto text-center">
+			<h5>Nhóm 28, Phát triển website bán vé tàu</h5>
+		</div>
+	</div>
+</div>
+</div>				
 				</div>
 			</div>
 			<div class="col-2 l-2 text-center my-custom-class2">
