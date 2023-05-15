@@ -60,21 +60,21 @@ let initWebRouters = (app) => {
     //xoa
     //router.get('/delete-databooker', homeControllers.deletebooker)
 
-
-
     //LẤY DỮ LIỆU NGƯỜI DÙNG RA TRANG ADMIN
     router.get('/AdminPage/ejs/admin', homeControllers.insertUser1);
     router.get('/AdminPage/ejs/danhsachve', homeControllers.insertUser2);
     router.get('/AdminPage/ejs/thongtindat', homeControllers.insertUser3);
     router.get('/AdminPage/ejs/quanlilichtrinh', homeControllers.insertUser4);
 
-    //Trang booking
-    router.get('/HomePage/ejs/booking', homeControllers.insertUser5);
     //Trang chủ
     router.get('/HomePage/ejs/main', homeControllers.insertUser6);
 
-    //Tìm kiếm
-    router.post('/timkiemvetau',homeControllers.timkiemtau)
+    //Trang booking (Tìm kiếm)
+    router.post('/HomePage/ejs/booking',homeControllers.timkiemtau)
+
+    //Trang điền thông tin người đặt vé
+    //router.get('/HomePage/ejs/dataCustomer', homeControllers.dataBooker);
+
 
 
     /*router.get('/admin', (req, res) => {
