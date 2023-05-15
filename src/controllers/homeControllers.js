@@ -287,6 +287,7 @@ let timkiemtau = async(req,res)=>{
     console.log(infotau)
     console.log("infotau.from",infotau.from)
     let data = await searchtripService.handleSearchTripTrue(infotau.from, infotau.to,infotau.daygo)
+    console.log(data)
     return res.render('HomePage/ejs/booking.ejs', {   
         trip: data //trip <-- data
     })

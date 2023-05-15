@@ -13,20 +13,20 @@ let checkUserdiemXuatPhat = async (userdiemXuatPhat) => {
   }
 };
 
-let checkUserdiemDen = async (userdiemDen, diemXuatPhat, ngayKhoiHanh) => {
+const { Op } = require('sequelize');
+
+let checkUserdiemDen = async (userdiemDen, userdiemXuatPhat) => {
   try {
     const currentTime = new Date();
     
     let trip = await db.Trip.findAll({
       where: {
-        diemDen: {
-          [Sequelize.Op.like]: `%${userdiemDen}%`,
-        },
-        // diemXuatPhat: diemXuatPhat,
-        thoiGianDen: {
-          [Sequelize.Op.gt]: currentTime.toISOString(),
-        },
-      },
+        diemXuatPhat: userdiemXuatPhat,
+        diemDen: userdiemDen,
+        thoiGianDi: {
+          [Op.gt]: currentTime
+        }
+      }
     });
 
     return trip;
@@ -34,7 +34,6 @@ let checkUserdiemDen = async (userdiemDen, diemXuatPhat, ngayKhoiHanh) => {
     throw e;
   }
 };
-
 // let checkUserngayKhoiHanh = async (userngayKhoiHanh) => {
 //   try {
 //       let trip = await db.Trip.findOne({
