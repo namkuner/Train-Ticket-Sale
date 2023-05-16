@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
     Ticket.init({
+        tenGhe: DataTypes.STRING,
         trangThai: DataTypes.BOOLEAN,
         tenGhe : DataTypes.STRING,
         toa: DataTypes.STRING,
