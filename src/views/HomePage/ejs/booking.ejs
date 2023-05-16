@@ -557,9 +557,66 @@ table th {
     background-color: #0091d4;
 }
 
-/*Đổi màu ô tàu khi nhấn chọn*/
+.et-car-icon {
+    margin: 0 1px 10px;
+    border-radius: 15%;
+    height: 18px;
+    overflow: visible;
+}
+.et-car-icon img {
+    width: 100%;
+    height: 130%;
+}
 
-/********************************************************************************/
+img {
+    vertical-align: middle;
+}
+img {
+    border: 0;
+}
+#car-container .et-car-block {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px; /* Khoảng cách giữa các phần tử tàu */
+}
+/**/
+.trip-row {
+    display: flex;
+    align-items: center;
+}
+.et-car-block {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px;
+}
+.et-car-icon img {
+    max-width: 50px;
+    height: auto;
+}
+.et-car-label {
+    font-size: 12px;
+}
+#trip-table {
+    border-collapse: collapse;
+    border: none;
+  }
+#trip-table td,
+#trip-table th {
+    border: none;
+	left: -15px;
+}
+.et-car-label {
+    position: relative;
+    top: 23px;
+    left: -18px;
+}
+.train-image {
+  width: auto; /* Đảm bảo ảnh không bị thu nhỏ */
+	left: -100px;
+}
+
+
+
     </style>
 <!-------------------------------------------->
 
@@ -602,8 +659,7 @@ table th {
 		</nav>
 	</header>
 
-
-<!--***********************************************************************-->
+<!------>
     
     <main>
 		<div class="some-regulations">
@@ -619,15 +675,17 @@ table th {
 			<div class="left-column">
 
 
-
+<% for (let i=0; i < 1; i++) { %>
 <div class="row et-page-header">
 	<span class="et-main-label ng-binding">
-		<strong class="ng-binding">Chiều đi:</strong> ngày <%= trip.thoiGianDi %> từ <%= trip.diemXuatPhat %> đến <%= trip.diemDen %>
+		<strong class="ng-binding">Chiều đi:</strong> ngày <%= trip[i].thoiGianDi %> từ <%= trip[i].diemXuatPhat %> đến <%= trip[i].diemDen %>
 	</span>
 </div>
+<% } %>
+
 
 <!---->
-<div class="row et-train-list">
+<div class="row et-train-list" style="margin-bottom: 44px;">
 	<div class="previous-train et-col-md-1 text-center">
 		<div class="et-pre-train ng-scope et-arrow-disabled" ng-class="{'et-arrow-disabled': !canShiftBack}" ng-click="chuyenTruoc(true)" tooltip="Tàu trước">
 			<div class="et-arrow-left"></div>
@@ -686,27 +744,94 @@ table th {
 	</div>
 </div>
 
-<!--Khi nhấn vào chuyến tàu thì ô tàu sẽ chuyển sang màu xanh-->
-<script>
-const trainBlocks = document.querySelectorAll('.et-train-block');
-trainBlocks.forEach(trainBlock => {
-  trainBlock.addEventListener('click', () => {
-    // Xóa lớp et-train-head-selected khỏi tất cả các phần tử et-train-head
-    document.querySelectorAll('.et-train-head').forEach(trainHead => {
-      trainHead.classList.remove('et-train-head-selected');
-    });
-    
-    // Thêm lớp et-train-head-selected vào phần tử et-train-head tương ứng
-    trainBlock.querySelector('.et-train-head').classList.add('et-train-head-selected');
-  });
-});
-</script>
+
+<!----------->
+  
+  	<table class="table" id="trip-table" style="margin-bottom: 35px;">
+	<tbody>
+	  <% for (let i=0; i < trip.length; i++) { %>
+		<tr class="trip-row" data-train-index="<%= i %>">
+
+		  	<td>
+			<% for (let j=0; j < trip[i].soToa; j++) { %>
+			  <div class="et-car-block ng-scope toa-tau" ng-repeat="toa in searchData.tauDi.ToaXes" tooltip="Giường nằm khoang 4 điều hòa (An28LV)" data-train-index="<%= i %>">
+				<div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable" style="margin-left: -10px; margin-right: -10px;" ng-click="doiToaMoi(toa, false)" ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
+				  <img src="https://dsvn.vn/images/trainCar2.png">
+				</div>
+				<div class="text-center text-info et-car-label ng-binding"><%= trip[i].soToa - j %></div>
+			  </div>
+			<% } %>
+			<div class="et-car-block" style="margin-left: -12px;">
+				<div class="et-car-icon">
+					<img src="https://dsvn.vn/images/train2.png" class="train-image">
+				</div>
+				<div class="text-center text-info et-car-label ng-binding" style="margin-left: -25px;"><%= trip[i].tenTau %></div>
+			</div>
+			</td>
+
+		</tr>
+	  <% } %>
+	</tbody>
+  	
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+		  const trainBlocks = document.querySelectorAll('.et-train-block');
+		  const tripRows = document.querySelectorAll('.trip-row');
+		  const tripTable = document.getElementById('trip-table');
+	  
+		  function applyEffect(index) {
+			// Xóa lớp et-train-head-selected khỏi tất cả các phần tử et-train-head
+			document.querySelectorAll('.et-train-head').forEach(trainHead => {
+			  trainHead.classList.remove('et-train-head-selected');
+			});
+	  
+			// Thêm lớp et-train-head-selected vào phần tử et-train-head tương ứng
+			trainBlocks[index].querySelector('.et-train-head').classList.add('et-train-head-selected');
+	  
+			// Ẩn tất cả các hàng dữ liệu trong bảng
+			tripRows.forEach(row => {
+			  row.style.display = 'none';
+			});
+	  
+			// Hiển thị hàng dữ liệu tương ứng với phần tử được nhấp chuột
+			tripRows[index].style.display = 'table-row';
+		  }
+	  
+		  trainBlocks.forEach((trainBlock, index) => {
+			trainBlock.addEventListener('click', () => {
+			  applyEffect(index);
+			});
+		  });
+	  
+		  // Áp dụng hiệu ứng cho phần tử đầu tiên
+		  applyEffect(0);
+		});
+	</script>
+	  
+  
 
 
 
 
 
-				<h1>Trip Info</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 				<table class="table">
 					<thead>
 						<tr>

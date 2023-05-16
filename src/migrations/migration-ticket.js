@@ -14,9 +14,6 @@ module.exports = {
             trangThai: {
                 type: Sequelize.BOOLEAN
             },
-            tenGhe: {
-                type: Sequelize.STRING
-            },
             toa: {
                 type: Sequelize.STRING
             },
