@@ -78,13 +78,63 @@ let handleSearchTripTrue = async (diemXuatPhat, diemDen, ngayKhoiHanh) => {
       throw e;
     }
   };
-  
+let tongsoveban = async () => {
+  try {
+    const count = await db.Ticket.count({
+      where: {
+        trangthai: 1
+      }
+    });
 
+    return count;
+  } catch (error) {
+    throw error;
+  }
+};
+const tongsovebantheodiemdi = async (diemXuatPhat) => {
+  try {
+    const result = await db.Ticket.count({
+      where: {
+        trangthai: 1,
+        '$train.diemXuatPhat$': diemXuatPhat
+      },
+      include: [
+        {
+          model: db.Train,
+          as: 'train',
+          attributes: [],
+        }
+      ]
+    });
+
+    return result;
+  } catch (e) {
+    throw e;
+  }
+};
+const alltongsovebantheodiemdi = async () => {
+  try {
+    const distinctDiemXuatPhat = await db.Train.distinct('diemXuatPhat');
+
+    const result = {};
+    for (const diemXuatPhat of distinctDiemXuatPhat) {
+      const tongSoVe = await tongsovebantheodiemdi(diemXuatPhat);
+      result[diemXuatPhat] = tongSoVe;
+    }
+
+    return result;
+  } catch (e) {
+    throw e;
+  }
+};
 
 
 
 
 
 module.exports = {
-    handleSearchTripTrue: handleSearchTripTrue
+    handleSearchTripTrue: handleSearchTripTrue,
+    tongsoveban:tongsoveban,
+    tongsovebantheodiemdi:tongsovebantheodiemdi,
+    alltongsovebantheodiemdi:alltongsovebantheodiemdi
 }

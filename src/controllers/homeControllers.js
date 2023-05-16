@@ -301,7 +301,14 @@ let hienthivetau =async(req,res)=>{
     res.render("ticketUser.ejs",{tickets:data})
 }
 /*---------------------------------*/
-
+let tonghopthongtin = async(req,res)=>{
+    res.render("tonghopthongtin.ejs")
+}
+let tonghoptauve = async(req,res)=>{
+    let fromdaytoday = req.body
+    const tongSoVe = await searchtripService.tongsovebantheodiemdi(fromdaytoday.diemXuatPhat);
+console.log(`Tổng số vé đã bán đi từ ${diemXuatPhat}: ${tongSoVe}`);
+}
 module.exports = {
     //USER
     homepage :homepage,
@@ -317,8 +324,8 @@ module.exports = {
     xemtruocuser :xemtruocuser ,
     thongtincanhan :thongtincanhan,
     hienthivetau:hienthivetau,
-
-
+    tonghopthongtin:tonghopthongtin,
+    tonghoptauve : tonghoptauve,
     //BOOKING
     dataBooker: dataBooker,
     completeDatabooker: completeDatabooker,
@@ -346,6 +353,7 @@ module.exports = {
 
 //nút xoá người đặt vé
     deletebooker1: deletebooker1,
+    
 //
 }
 

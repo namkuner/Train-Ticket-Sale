@@ -11,16 +11,16 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            Ticket.belongsTo(models.Trip, {
-                foreignKey: 'trainId'
-            })
+            Ticket.belongsTo(models.Trip, { foreignKey: 'trainId', as: 'train' });
         }
     };
     Ticket.init({
         trangThai: DataTypes.BOOLEAN,
+        tenGhe : DataTypes.STRING,
         toa: DataTypes.STRING,
         giaVe: DataTypes.INTEGER,
         trainId: DataTypes.INTEGER,
+        
     }, {
         sequelize,
         modelName: 'Ticket',

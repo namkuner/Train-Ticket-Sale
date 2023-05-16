@@ -33,6 +33,9 @@ let initWebRouters = (app) => {
     router.post('/xoa-user',homeControllers.xoaiduser);
     router.post('/post-thongtincanhan', homeControllers.thongtincanhan)
     router.get('/dangxuat',homeControllers.dangxuat)
+
+    router.get('/tonghopthongtin',homeControllers.tonghopthongtin)
+    router.post('/tongsotauve',homeControllers.tonghoptauve)
     //TRIP
     router.get('/nhapTrip', homeControllers.formCreateTrip)
     router.post('/done-nhapTrip', homeControllers.doneCreateTrip);
