@@ -354,8 +354,9 @@ table th {
     opacity: 0.8;
 }
 
-
-		/*new 15/05/2023*/
+.et-page-header {
+    margin-bottom: 20px;
+}
 .wrapper {
   width: 100%;
   max-width: 960px; /* hoặc bất kỳ giá trị nào bạn muốn */
@@ -379,6 +380,185 @@ table th {
     margin-top: 10px;
 	width: 240px;
 }
+/**/
+.et-main-label {
+    background: url(https://dsvn.vn/images/label_bg.png) right bottom no-repeat #0082c4;
+    padding: 5px 20px 5px 10px;
+    margin-left: -40px;
+    color: #fff;
+    font-family: Verdana;
+}
+/**/
+
+.et-train-block {
+  padding-left: 5px;
+  padding-right: 20px;
+  height: 140px;
+  cursor: pointer;
+  width: 140px;
+  display: inline-block;
+  margin-right: 25px; /* Thêm thuộc tính margin-right */
+}
+.et-train-base {
+    height: 0;
+    width: 0;
+    border-bottom: 62px solid #000;
+    border-left: 62px solid transparent;
+    border-right: 62px solid transparent;
+    position: absolute;
+    margin-top: 80px;
+    z-index: 1;
+    margin-left: -2px;
+}
+.et-train-head-selected {
+    background-color: #0091d4;
+}
+.et-train-head {
+    width: 132px;
+    height: 136px;
+    border-radius: 20px;
+    background-color: #999;
+    padding: 0 5px;
+    position: absolute;
+    z-index: 99;
+}
+.et-train-head-info {
+    height: 85px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+    font-size: 10px;
+    padding-left: -10px;
+    padding-right: 2px;
+    padding-top: 5px;
+}
+
+.et-train-lamp {
+    height: 15px;
+    border-radius: 10px;
+    background-color: #fff;
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    width: 100%;
+    margin: 0 auto;
+	margin-left: 44px;
+	margin-top: 4px;
+	margin-bottom: 1px;
+}
+
+.text-center {
+    text-align: center;
+}
+.et-train-lamp-bellow-left {
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    display: block;
+    margin-right: 15px;
+    margin-top: 4px;
+    float: right;
+}
+.et-train-lamp-bellow-right {
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    float: left;
+    display: block;
+    margin-left: 8px;
+    margin-top: 4px;
+}
+.et-train-block:hover .et-train-lamp,
+.et-train-block:hover .et-train-lamp-bellow-left,
+.et-train-block:hover .et-train-lamp-bellow-right {
+  background-color: #fec306;
+}
+
+.et-no-margin {
+    margin: 0 10px 0 6px!important;
+    width: 95%;
+}
+.et-train-head-selected {
+    background-color: #0091d4;
+}
+.et-train-base {
+  height: 0;
+  width: 0;
+  border-bottom: 62px solid #000;
+  border-left: 62px solid transparent;
+  border-right: 62px solid transparent;
+  position: absolute;
+  margin-top: 80px;
+  z-index: 1;
+  margin-left: -2px;
+  transform: translate(6px, 14px); /* Di chuyển sang phải 10px và xuống dưới 10px */
+}
+
+.et-train-base-2 {
+  height: 0;
+  width: 0;
+  border-bottom: 42px solid #fff;
+  border-left: 42px solid transparent;
+  border-right: 42px solid transparent;
+  position: absolute;
+  margin-top: 95px;
+  margin-left: 18px;
+  z-index: 2;
+  transform: translate(6px, 14px); /* Di chuyển sang phải 10px và xuống dưới 10px */
+}
+
+.et-train-base-3 {
+  height: 0;
+  width: 0;
+  border-bottom: 42px solid #000;
+  border-left: 42px solid transparent;
+  border-right: 42px solid transparent;
+  position: absolute;
+  margin-top: 90px;
+  margin-left: 18px;
+  z-index: 3;
+  transform: translate(6px, 14px); /* Di chuyển sang phải 10px và xuống dưới 10px */
+}
+
+.et-train-base-4 {
+  height: 0;
+  width: 0;
+  border-bottom: 32px solid #fff;
+  border-left: 32px solid transparent;
+  border-right: 32px solid transparent;
+  position: absolute;
+  margin-top: 95px;
+  margin-left: 28px;
+  z-index: 4;
+  transform: translate(6px, 14px); /* Di chuyển sang phải 10px và xuống dưới 10px */
+}
+
+.train-group {
+    white-space: nowrap;
+    width: 100%;
+    float: left;
+    margin-left: -30px;
+	display: flex;
+  	flex-wrap: wrap;
+}
+
+.et-no-margin {
+    margin: 0 10px 0 6px!important;
+    width: 95%;
+}
+.et-col-50 {
+    width: 50%;
+    float: left;
+    display: block;
+}
+.et-train-head-selected {
+    background-color: #0091d4;
+}
+
+/*Đổi màu ô tàu khi nhấn chọn*/
+
 /********************************************************************************/
     </style>
 <!-------------------------------------------->
@@ -421,8 +601,7 @@ table th {
 			</div>
 		</nav>
 	</header>
-	
-<!--***********************************************************************-->
+
 
 <!--***********************************************************************-->
     
@@ -438,7 +617,95 @@ table th {
 					<div class="row">
 		<div class="wrapper">
 			<div class="left-column">
-				
+
+
+
+<div class="row et-page-header">
+	<span class="et-main-label ng-binding">
+		<strong class="ng-binding">Chiều đi:</strong> ngày <%= trip.thoiGianDi %> từ <%= trip.diemXuatPhat %> đến <%= trip.diemDen %>
+	</span>
+</div>
+
+<!---->
+<div class="row et-train-list">
+	<div class="previous-train et-col-md-1 text-center">
+		<div class="et-pre-train ng-scope et-arrow-disabled" ng-class="{'et-arrow-disabled': !canShiftBack}" ng-click="chuyenTruoc(true)" tooltip="Tàu trước">
+			<div class="et-arrow-left"></div>
+		</div>
+	</div>
+	<div class="train-group">
+		<% for (let i=0; i < trip.length; i++) { %>
+		<!-- end ngRepeat: tau in onScreenGoingTrains -->
+		<div class="col-xs-4 col-sm-3 et-col-md-2 et-train-block ng-scope" ng-repeat="tau in onScreenGoingTrains" ng-click="doiChuyen(tau, false)" analytics-on="click" analytics-event="SelectTrain">
+			<div class="et-train-head" ng-class="{'et-train-head-selected': tau.MacTau == searchData.tauDi.MacTau}">
+				<div class="row center-block" style="width: 40%; margin-bottom: 3px; margin-top: 1px">
+					<div class="et-train-lamp text-center ng-binding" ng-style="{color: tau.HasCheapTicket?'#bf8c01':'#555555'}" style="color: rgb(85, 85, 85); margin-top: 4px;"><%= trip[i].tenTau %></div>
+				</div>
+				<div class="et-train-head-info">
+					<div class="row et-no-margin">
+						<span class="pull-left et-bold ng-binding" style="margin-left: -7px;"><strong>TG đi</strong></span> 
+						<span class="pull-right ng-binding"><%= trip[i].thoiGianDi %></span>
+					</div>
+					<div class="row et-no-margin">
+						<span class="pull-left et-bold ng-binding" style="margin-left: -7px;"><strong>TG đến</strong></span> 
+						<span class="pull-right"></span> 
+						<span class="pull-right ng-binding"><%= trip[i].thoiGianDen %></span>
+					</div>
+					<div class="row et-no-margin">
+						<div class="et-col-50">
+							<div class="et-text-sm ng-binding" style="margin-left: -8px;">SL chỗ đặt</div>
+							<div class="et-text-large et-bold pull-left ng-binding" style="margin-left: 5px; font-size: 14px;">10</div>
+						</div>
+						<div class="et-col-50 text-center">
+							<div class="et-text-sm ng-binding" style="margin-left: -8px;">SL chỗ trống</div>
+							<div class="et-text-large et-bold pull-right ng-binding" style="margin-right: 5px; font-size: 14px;">122</div>
+						</div>
+					</div>
+				</div>
+				<div class="row et-no-margin">
+					<div class="et-col-50">
+						<span class="et-train-lamp-bellow-left"></span>
+					</div>
+					<div class="et-col-50">
+						<span class="et-train-lamp-bellow-right"></span>
+					</div>
+				</div>
+			</div>
+		<div class="et-train-base"></div>
+		<div class="et-train-base-2"></div>
+		<div class="et-train-base-3"></div>
+		<div class="et-train-base-4"></div>
+		<div class="et-train-base-5"></div>
+		</div>
+		<% } %>
+	</div>
+	<div class="next-train col-md-1 text-center pull-right">
+		<div class="et-next-train ng-scope" ng-class="{'et-arrow-disabled': !canShiftForward}" ng-click="chuyenSau(true)" tooltip="Tàu sau">
+			<div class="et-arrow-right"></div>
+		</div>
+	</div>
+</div>
+
+<!--Khi nhấn vào chuyến tàu thì ô tàu sẽ chuyển sang màu xanh-->
+<script>
+const trainBlocks = document.querySelectorAll('.et-train-block');
+trainBlocks.forEach(trainBlock => {
+  trainBlock.addEventListener('click', () => {
+    // Xóa lớp et-train-head-selected khỏi tất cả các phần tử et-train-head
+    document.querySelectorAll('.et-train-head').forEach(trainHead => {
+      trainHead.classList.remove('et-train-head-selected');
+    });
+    
+    // Thêm lớp et-train-head-selected vào phần tử et-train-head tương ứng
+    trainBlock.querySelector('.et-train-head').classList.add('et-train-head-selected');
+  });
+});
+</script>
+
+
+
+
+
 				<h1>Trip Info</h1>
 				<table class="table">
 					<thead>
@@ -491,6 +758,8 @@ table th {
 							<% } %>
 					</tbody>
 				</table>
+
+
 
 
 
