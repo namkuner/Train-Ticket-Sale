@@ -757,7 +757,7 @@ img {
 
 <!----------->
   
-  	<table class="table" id="trip-table" style="margin-bottom: -10px;">
+  	<table class="table" id="trip-table" style="margin-bottom: -10px; margin-top: -10px;">
 	<tbody>
 	  <% for (let i=0; i < trip.length; i++) { %>
 		<tr class="trip-row" data-train-index="<%= i %>">
@@ -783,7 +783,7 @@ img {
 	  <% } %>
 	</tbody>
 
-	<!--------------------------------------------------------------------------------->
+<!----------->
 
 	<table class="table" id="trip-table" style="margin-bottom: 35px;">
 		<tbody>
@@ -815,6 +815,10 @@ img {
 		  <h4 id="selected-car-name" class="ng-binding"></h4>
 		</div>
 	  </div>
+
+<!----------->
+	
+	<!----------------------------------------------------------------------------------------------->
 	
 	<!----------------------------------------------------------------------------------------------->
 
@@ -854,7 +858,7 @@ img {
 	</script>
 
 	<!--đổi màu toa tàu-->
-	
+
 	<script>
 		document.addEventListener('DOMContentLoaded', () => {
   		  const etCarIcons = document.querySelectorAll('.et-car-icon-avaiable');
@@ -881,7 +885,6 @@ img {
         });
       });
     });
-
 	</script>
 	  
 <!------> 

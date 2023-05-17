@@ -14,13 +14,15 @@ let createNewTrip = (data) => {
                 soGhe: data.soGhe,
             });
 
+            let toa = Math.ceil(tau.soGhe/tau.soToa) + 1
+
             const ves = [];
             for (let i = 1; i <= data.soGhe; i++) {
                 ves.push({
                     trangThai: 1,
                     tenGhe : 'SG'+i,
                     giaVe : tau.giaVe,
-                    toa: Math.ceil(i / tau.soToa).toString(),
+                    toa: Math.ceil(i / toa).toString(),
                     trainId: tau.id // Kiểm tra tên trường dữ liệu `id` của `tau`
                 });
             }
