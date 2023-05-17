@@ -16,6 +16,7 @@
         <th>Toa</th>
         <th>Giá vé</th>
         <th>ID tàu</th>
+        <th>Tên ghế</th>
       </tr>
       <% tickets.forEach(function(ticket) { %>
         <tr>
@@ -23,6 +24,7 @@
           <td><%= ticket.toa %></td>
           <td><%= ticket.giaVe %></td>
           <td><%= ticket.trainId %></td>
+          <td><%= ticket.tenGhe %></td>
         </tr>
       <% }); %>
     </table>
