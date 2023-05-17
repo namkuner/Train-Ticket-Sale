@@ -614,7 +614,10 @@ img {
   width: auto; /* Đảm bảo ảnh không bị thu nhỏ */
 	left: -100px;
 }
-
+/**/
+.selected {
+  background-color: #a6b727; /* Thay đổi màu sắc tùy ý */
+}
 
 
     </style>
@@ -807,6 +810,31 @@ img {
 		  applyEffect(0);
 		});
 	</script>
+
+	<!--đổi màu toa tàu-->
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+		  const etCarIcons = document.querySelectorAll('.et-car-icon-avaiable');
+		
+		  // Áp dụng lớp 'selected' cho toa số 1 khi trang được tải
+		  if (etCarIcons.length > 0) {
+			etCarIcons[0].classList.add('selected');
+		  }
+		
+		  etCarIcons.forEach(etCarIcon => {
+			etCarIcon.addEventListener('click', () => {
+			  // Xóa lớp 'selected' khỏi tất cả các phần tử .et-car-icon-avaiable
+			  etCarIcons.forEach(icon => {
+				icon.classList.remove('selected');
+			  });
+		
+			  // Thêm lớp 'selected' vào phần tử được nhấp chuột
+			  etCarIcon.classList.add('selected');
+			});
+		  });
+		});
+	</script>
+	  
 	  
   
 
