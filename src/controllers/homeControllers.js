@@ -4,6 +4,7 @@ import dangNhapDangKyService from "../services/dangNhapDangKyService"
 import nguoidatveService from "../services/nguoidatveService"
 import tripCRUD from "../services/tripCRUD"
 import searchtripService from "../services/searchtripService"
+// import { strictRight } from "sequelize/types/lib/operators";
 const ejs = require('ejs');
 const path = require('path');
 let idlogin = null
@@ -302,12 +303,60 @@ let hienthivetau =async(req,res)=>{
 }
 /*---------------------------------*/
 let tonghopthongtin = async(req,res)=>{
-    res.render("tonghopthongtin.ejs")
+    let isdata = null
+    res.render("tonghopthongtin.ejs",{isdata:isdata})
 }
 let tonghoptauve = async(req,res)=>{
-    let fromdaytoday = req.body
-    const tongSoVe = await searchtripService.tongsovebantheodiemdi(fromdaytoday.diemXuatPhat);
-console.log(`Tổng số vé đã bán đi từ ${diemXuatPhat}: ${tongSoVe}`);
+    let data = req.body
+    console.log(data)
+    if(data.typeid == "1") {
+        const theothoigian = await searchtripService.tonghopvetaufromdaytoday(data.tuNgay, data.denNgay)
+        console.log("type1 fromdaytoday",theothoigian)
+        let isdata = data.typeid
+        res.render("tonghopthongtin.ejs",{isdata:isdata,ticket:theothoigian, time : data})
+    }
+    else if(data.typeid == "2")
+    {
+        let diemDi = data.diemDi
+        let isdata = data.typeid
+        const theodiemdi =await searchtripService.tongsovebantheodiemdi(data.diemDi)
+        console.log("theodiemdi",theodiemdi[3].tenGhe)
+        res.render("tonghopthongtin.ejs",{diemDi:diemDi,isdata:isdata,ticket:theodiemdi})
+    }
+    else if(data.typeid == "3")
+    {
+        let diemDen =data.diemDen
+        let isdata =data.typeid
+        const theodiemden = await searchtripService.tongsovebantheodiemden(data.diemDen)
+        res.render("tonghopthongtin.ejs",{diemDen:diemDen,isdata:isdata,ticket:theodiemden})
+    }
+    else if(data.typeid=="4")
+    {
+        let diemDen =data.diemDen
+        let diemDi = data.diemDi
+        let isdata = data.typeid
+        const theo2chieu = await searchtripService.findby2chieu(diemDi,diemDen)
+        res.render("tonghopthongtin.ejs",{diemDi:diemDi,diemDen:diemDen,isdata:isdata,ticket:theo2chieu})
+
+    }
+    else if (data.typeid=="5")
+    {
+        
+        let isdata = data.typeid
+        const alltheo2chieu = await searchtripService.getTotalTicketsByRoute()
+        console.log(alltheo2chieu)
+        console.log(alltheo2chieu[0].diemDen)
+        res.render("tonghopthongtin.ejs",{isdata:isdata,ticket:alltheo2chieu})
+
+    }
+    
+    // console.log("fromdaytoday",data.diemXuatPhat)
+    // const tongSoVe = await searchtripService.tongsovebantheodiemdi(data.diemXuatPhat);
+    // console.log(`Tổng số vé đã bán đi từ ${data.diemXuatPhat}: ${tongSoVe}`);
+    // const allTongSoVe = await searchtripService.alltongsovebantheodiemdi()
+    // console.log(`Tổng số vé đã bán đi từ ${data.diemXuatPhat}->${data.diemDen}: ${allTongSoVe}`);
+    // res.render("allthongtin.ejs",{sortedResult:allTongSoVe})
+    
 }
 module.exports = {
     //USER
