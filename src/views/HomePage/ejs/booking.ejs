@@ -557,9 +557,76 @@ table th {
     background-color: #0091d4;
 }
 
-/*Đổi màu ô tàu khi nhấn chọn*/
+.et-car-icon {
+    margin: 0 1px 10px;
+    border-radius: 15%;
+    height: 18px;
+    overflow: visible;
+}
+.et-car-icon img {
+    width: 100%;
+    height: 130%;
+}
 
-/********************************************************************************/
+img {
+    vertical-align: middle;
+}
+img {
+    border: 0;
+}
+#car-container .et-car-block {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px; /* Khoảng cách giữa các phần tử tàu */
+}
+/**/
+.trip-row {
+    display: flex;
+    align-items: center;
+}
+.et-car-block {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 15px;
+}
+.et-car-icon img {
+    max-width: 50px;
+    height: auto;
+}
+.et-car-label {
+    font-size: 12px;
+}
+#trip-table {
+    border-collapse: collapse;
+    border: none;
+  }
+#trip-table td,
+#trip-table th {
+    border: none;
+	left: -15px;
+}
+.et-car-label {
+    position: relative;
+    top: 23px;
+    left: -18px;
+}
+.train-image {
+  width: auto; /* Đảm bảo ảnh không bị thu nhỏ */
+	left: -100px;
+}
+/**/
+.selected {
+  background-color: #a6b727; /* Thay đổi màu sắc tùy ý */
+}
+/**/
+#selected-car-name {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #317eac;
+    font-size: 18px;
+}
+
+
+
     </style>
 <!-------------------------------------------->
 
@@ -602,8 +669,7 @@ table th {
 		</nav>
 	</header>
 
-
-<!--***********************************************************************-->
+<!------>
     
     <main>
 		<div class="some-regulations">
@@ -619,15 +685,17 @@ table th {
 			<div class="left-column">
 
 
-
+<% for (let i=0; i < 1; i++) { %>
 <div class="row et-page-header">
 	<span class="et-main-label ng-binding">
-		<strong class="ng-binding">Chiều đi:</strong> ngày <%= trip.thoiGianDi %> từ <%= trip.diemXuatPhat %> đến <%= trip.diemDen %>
+		<strong class="ng-binding">Chiều đi:</strong> ngày <%= trip[i].thoiGianDi %> từ <%= trip[i].diemXuatPhat %> đến <%= trip[i].diemDen %>
 	</span>
 </div>
+<% } %>
+
 
 <!---->
-<div class="row et-train-list">
+<div class="row et-train-list" style="margin-bottom: 44px;">
 	<div class="previous-train et-col-md-1 text-center">
 		<div class="et-pre-train ng-scope et-arrow-disabled" ng-class="{'et-arrow-disabled': !canShiftBack}" ng-click="chuyenTruoc(true)" tooltip="Tàu trước">
 			<div class="et-arrow-left"></div>
@@ -686,28 +754,120 @@ table th {
 	</div>
 </div>
 
-<!--Khi nhấn vào chuyến tàu thì ô tàu sẽ chuyển sang màu xanh-->
-<script>
-const trainBlocks = document.querySelectorAll('.et-train-block');
-trainBlocks.forEach(trainBlock => {
-  trainBlock.addEventListener('click', () => {
-    // Xóa lớp et-train-head-selected khỏi tất cả các phần tử et-train-head
-    document.querySelectorAll('.et-train-head').forEach(trainHead => {
-      trainHead.classList.remove('et-train-head-selected');
+
+<!----------->
+
+	<table class="table" id="trip-table" style="margin-bottom: 25px;">
+		<tbody>
+		  <% for (let i=0; i < trip.length; i++) { %>
+			<tr class="trip-row" data-train-index="<%= i %>">
+			  <td>
+				<% for (let j=0; j < trip[i].soToa; j++) { %>
+					<!--<a href="/vetau?id=<%= trip[i].id %>&toa=<%= trip[i].soToa - j %>">--><div class="et-car-block ng-scope toa-tau" ng-repeat="toa in searchData.tauDi.ToaXes" data-train-index="<%= i %>">
+					<div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable" style="margin-left: -10px; margin-right: -10px;" ng-click="doiToaMoi(toa, false)" ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
+					  <img src="https://dsvn.vn/images/trainCar2.png">
+					</div>
+					<div class="text-center text-info et-car-label ng-binding"><%= trip[i].soToa - j %></div>
+				  </div><!--</a>-->
+				<!------------------------------------------------------------------->
+
+				<!---------------------------------------------------------------------------->
+				<% } %>
+				<div class="et-car-block" style="margin-left: -12px;">
+				  <div class="et-car-icon">
+					<img src="https://dsvn.vn/images/train2.png" class="train-image">
+				  </div>
+				  <div class="text-center text-info et-car-label ng-binding" style="margin-left: -25px;"><%= trip[i].tenTau %></div>
+				</div>
+				
+			  </td>
+			</tr>
+		  <% } %>
+		</tbody>
+	  </table>
+	  
+	  <div id="selected-car-info">
+		<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+		  <h4 id="selected-car-name" class="ng-binding"></h4>
+		</div>
+	  </div>
+
+<!----------->
+	
+	<!----------------------------------------------------------------------------------------------->
+
+	<!----------------------------------------------------------------------------------------------->
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+		  const trainBlocks = document.querySelectorAll('.et-train-block');
+		  const tripRows = document.querySelectorAll('.trip-row');
+		  const tripTable = document.getElementById('trip-table');
+
+		  let selectedTrainId; // Biến để lưu id của chuyến tàu đang được chọn
+	  
+		  function applyEffect(index) {
+			// Xóa lớp et-train-head-selected khỏi tất cả các phần tử et-train-head
+			document.querySelectorAll('.et-train-head').forEach(trainHead => {
+			  trainHead.classList.remove('et-train-head-selected');
+			});
+	  
+			// Thêm lớp et-train-head-selected vào phần tử et-train-head tương ứng
+			trainBlocks[index].querySelector('.et-train-head').classList.add('et-train-head-selected');
+
+			// Ẩn tất cả các hàng dữ liệu trong bảng
+			tripRows.forEach(row => {
+			  row.style.display = 'none';
+			});
+	  
+			// Hiển thị hàng dữ liệu tương ứng với phần tử được nhấp chuột
+			tripRows[index].style.display = 'table-row';
+		  }
+	  
+		  trainBlocks.forEach((trainBlock, index) => {
+			trainBlock.addEventListener('click', () => {
+			  applyEffect(index);
+			});
+		  });
+	  
+		  // Áp dụng hiệu ứng cho phần tử đầu tiên
+		  applyEffect(0);
+		});
+	</script>
+
+	<!--đổi màu toa tàu-->
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+  		  const etCarIcons = document.querySelectorAll('.et-car-icon-avaiable');
+          const selectedCarName = document.getElementById('selected-car-name');
+
+  		  // Áp dụng lớp 'selected' cho toa số 1 khi trang được tải
+  		  if (etCarIcons.length > 0) {
+    	    etCarIcons[0].classList.add('selected');
+            const selectedCarNumber = etCarIcons[0].nextElementSibling.textContent;
+            selectedCarName.textContent = "Toa số " + selectedCarNumber;
+          }
+
+          etCarIcons.forEach(etCarIcon => {
+    		etCarIcon.addEventListener('click', () => {
+      		// Xóa lớp 'selected' khỏi tất cả các phần tử .et-car-icon-avaiable
+      		etCarIcons.forEach(icon => {
+        	  icon.classList.remove('selected');
+      		});
+
+      	  // Thêm lớp 'selected' vào phần tử được nhấp chuột
+          etCarIcon.classList.add('selected');
+          const selectedCarNumber = etCarIcon.nextElementSibling.textContent;
+          selectedCarName.textContent = "Toa số " + selectedCarNumber;
+        });
+      });
     });
-    
-    // Thêm lớp et-train-head-selected vào phần tử et-train-head tương ứng
-    trainBlock.querySelector('.et-train-head').classList.add('et-train-head-selected');
-  });
-});
-</script>
+	</script>
+	  
+<!------> 
 
-
-
-
-
-				<h1>Trip Info</h1>
-				<table class="table">
+				<table class="table" style="margin-left: -50px;margin-top: 20px;">
 					<thead>
 						<tr>
 							<th scope="col">Điểm xuất phát</th>
@@ -751,7 +911,7 @@ trainBlocks.forEach(trainBlock => {
 			
 								<td>
 									<div class="button-container">
-										<a href="/vetau?id=<%=trip[i].id %>" class="edit-button" type="button">Xem</a>
+										<a href="/vetau?id=<%=trip[i].id %>" class="edit-button" type="button" style="text-decoration: none;">Đặt vé</a>
 									</div>
 								</td>
 							</tr>
@@ -802,8 +962,8 @@ trainBlocks.forEach(trainBlock => {
 						</div>
 
 						<div class="et-col-md-12 table-bordered list-ticket-deskhop" style="margin-top: 20px; padding: 5px ; width: 100%; left: -50px;"><!--width: 755px-->
-							<div class="et-col-md-12" style="margin-bottom: 15px; left: -30px;">
-								<div class="et-col-md-4 et-no-padding">
+							<div class="et-col-md-12" style="margin-bottom: 15px; left: -40px;">
+								<div class="et-col-md-4 et-no-padding" style="margin-left: -8px;">
 									<div class="et-col-md-12">
 										<div class="et-col-md-12" style="padding:0px">
 											<div class="et-col-md-12" style="padding:6px 0px 0px 67px">
@@ -820,10 +980,10 @@ trainBlocks.forEach(trainBlock => {
 									</div>
 								</div>
 								<div class="et-col-md-4 et-no-padding">
-									<div class="et-col-md-12">
-										<div class="et-col-md-12" style="padding:0px">
+									<div class="et-col-md-12" style="display: flex;">
+										<div class="et-col-md-6" style="padding-right: 60px; padding-left: -25px;">
 											<div class="et-col-md-12" style="padding:6px 0px 0px 0px;">
-												<div class="et-car-block" style="height:36px; display: inline-block; margin-left: 6px;">
+												<div class="et-car-block" style="height:36px; display: inline-block;">
 													<div class="et-car-icon et-car-icon-selected">
 														<img src="https://scontent.fsgn13-3.fna.fbcdn.net/v/t1.15752-9/346106970_1317239385494022_3703447187004011364_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=b8aO2KMS1kQAX-OrVe0&_nc_ht=scontent.fsgn13-3.fna&oh=03_AdRMg9j6crxbF0fwYzsDVld1ZhTUKhC2MMGf8SmXwq98bw&oe=64865B7E">
 													</div>
@@ -831,14 +991,9 @@ trainBlocks.forEach(trainBlock => {
 												<span style="padding-left:6px; display: inline-block; font-weight: 600;" class="ng-binding">Toa đang chọn</span>
 											</div>
 										</div>
-										<div class="et-col-md-12 et-no-padding text-center ng-binding" style="margin-top: -20px; display:none; font-weight: 600;">Toa đang chọn</div>
-									</div>
-								</div>
-								<div class="et-col-md-4 et-no-padding">
-									<div class="et-col-md-12">
-										<div class="et-col-md-12" style="padding:0px">
+										<div class="et-col-md-6" style="padding:0px">
 											<div class="et-col-md-12" style="padding:6px 0px 0px 0px;">
-												<div class="et-car-block" style="height:36px; display: inline-block; margin-left: 33px;">
+												<div class="et-car-block" style="height:36px; display: inline-block;">
 													<div class="et-car-icon et-car-icon-sold-out">
 														<img src="https://scontent.fsgn13-3.fna.fbcdn.net/v/t1.15752-9/346106970_1317239385494022_3703447187004011364_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=b8aO2KMS1kQAX-OrVe0&_nc_ht=scontent.fsgn13-3.fna&oh=03_AdRMg9j6crxbF0fwYzsDVld1ZhTUKhC2MMGf8SmXwq98bw&oe=64865B7E">
 													</div>
@@ -846,15 +1001,15 @@ trainBlocks.forEach(trainBlock => {
 												<span style="padding-left:6px; display: inline-block; font-weight: 600;" class="ng-binding">Toa hết vé</span>
 											</div>
 										</div>
-										<div class="et-col-md-12 text-center et-no-padding ng-binding" style="margin-top: -20px; display:none; font-weight: 600;">Toa hết vé</div>
 									</div>
+									<div class="et-col-md-12 et-no-padding text-center ng-binding" style="margin-top: -20px; display:none; font-weight: 600;">Toa đang chọn</div>
 								</div>
 							</div>
 						
 <!---------------------------------------------------------------------------------------------------------->
 							<div class="et-col-md-12 table-bordered"></div>
 							<div class="et-col-md-12 et-legend" style="padding:0px; margin-bottom: 27px;"><!--new 15/5 left-->
-								<div class="et-col-md-4" style="padding: 0px">
+								<div class="et-col-md-4" style="padding-left: 20px">
 									<div class="et-col-md-4" style="padding: 0px">
 										<div class="row">
 											<div class="et-car-nm-64-sit et-col-md-6" style="padding-right:0px; width:50%; margin-right: 8px;"><!--mới thêm width:30%-->
