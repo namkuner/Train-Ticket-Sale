@@ -128,13 +128,9 @@ const alltongsovebantheodiemdi = async () => {
   }
 };
 
-
-
-
-
 module.exports = {
     handleSearchTripTrue: handleSearchTripTrue,
     tongsoveban:tongsoveban,
     tongsovebantheodiemdi:tongsovebantheodiemdi,
-    alltongsovebantheodiemdi:alltongsovebantheodiemdi
+    alltongsovebantheodiemdi:alltongsovebantheodiemdi,
 }

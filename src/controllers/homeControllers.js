@@ -292,14 +292,33 @@ let timkiemtau = async(req,res)=>{
         trip: data //trip <-- data
     })
 }
-
+/*                                                          new 20/5
 let hienthivetau =async(req,res)=>{
     let  tauid = req.query.id
     console.log(tauid)
     let data = await tripCRUD.hienthive(tauid)
     console.log(data.length)
     res.render("ticketUser.ejs",{tickets:data})
+}*/
+let hienthivetau = async (req, res) => {
+    const tenTau = req.query.tenTau;
+    const diemXuatPhat = req.query.diemXuatPhat;
+    const diemDen = req.query.diemDen;
+    const thoiGianDi = req.query.thoiGianDi;
+    
+    let tauid = req.query.id;
+    console.log(tauid);
+    let data = await tripCRUD.hienthive(tauid);
+    console.log(data.length);
+    res.render("ticketUser.ejs", {
+        tickets: data,
+        tenTau: tenTau,
+        diemXuatPhat: diemXuatPhat,
+        diemDen: diemDen,
+        thoiGianDi: thoiGianDi
+    });
 }
+
 /*---------------------------------*/
 let tonghopthongtin = async(req,res)=>{
     res.render("tonghopthongtin.ejs")

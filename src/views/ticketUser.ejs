@@ -384,7 +384,8 @@ table th {
     border: 1px solid #ccc;
     padding-bottom: 20px;
     margin-top: 10px;
-	width: 240px;
+	width: 255px;
+	margin-left: -50px;
 }
 /**/
 .et-main-label {
@@ -649,6 +650,11 @@ h6 {
     line-height: 1.1;
     color: #317eac;
 }
+/**/
+.seat.selected {
+    background-color: red; /* Màu sắc ghế đã chọn */
+    color: white; /* Màu chữ trong ghế đã chọn */
+  }
 
 
     </style>
@@ -797,7 +803,14 @@ h6 {
     background-color: #e6e6e6;
     border-bottom: solid 3px #0082c4;
     color: #0091d4;
-	
+}
+/**/
+#cartDI div {
+  margin-bottom: 10px;
+  border-bottom: 2px solid #333333; /* Màu sắc và độ dày tùy chọn */
+  padding-bottom: 5px;
+  margin-left: 3px;
+  width: 220px;
 }
 </style>
 
@@ -850,8 +863,6 @@ h6 {
   <p>Không tìm thấy vé tàu.</p>
 <% } %>
 </div>
-
-
 
 <div class="row" ng-show="tauDiKhuyenMaiInfos&amp;&amp;tauDiKhuyenMaiInfos.length>0">
 	<div class="col-md-12">
@@ -1014,7 +1025,7 @@ h6 {
 
 		<div style="position: fixed; width: 209px; float: left;" class="mb-w-100 mb-pos-fixed-unset">
 			<div class="col-md-12 et-widget" style="padding-bottom: 8px;">
-			  <div class="row et-widget-header" style="display: inline-block;">
+			  <div class="row et-widget-header" style="display: inline-block; margin-top: -3px; padding-right: 3.5px; margin-left: -1px;">
 				<img src="http://vetautructuyen.vn/dat-ve-tau/images/widgetIcon.png" style="width: 27px; height: 23px;top: -15px">
 				<span>
 				  <strong class="ng-binding" style="padding-right: 160px; top: -20px">GIỎ VÉ</strong>
@@ -1022,18 +1033,14 @@ h6 {
 			  </div>
 			  <div class="row" id="cartDI" style="overflow: auto; height: 200px; width: 100%; padding:3px;">
 				<div class="col-md-12 text-center">
-				  <h6 class="ng-binding">Chiều đi</h6>
+				  <h6 class="ng-binding" style="margin-left: 37px;">Chiều đi</h6>
 				</div>
 			  </div>
-<!---->
-<!-- Các phần tử ghế trong giỏ vé -->
-
-<!---->
 			  <div class="col-md-12 text-center mb-pos-fixed mb-b-40" style="margin-top: 2px;">
-				<span onclick="submitCheck()" style="padding:0px; background:#c10000; color:#fff; padding:3px 10px; font-size:25px; cursor:pointer; margin-left: -460px;">Mua vé</span>
+				<span onclick="submitCheck()" style="padding:0px; background:#c10000; color:#fff; padding:3px 10px; font-size:25px; cursor:pointer; margin-left: -444px;">Mua vé</span>
 			  </div>
 			</div>
-		  </div>
+		</div>
 		
 	</div>
 
@@ -1081,8 +1088,9 @@ function renderSelectedSeats() {
   // Tạo phần tử hiển thị cho từng ghế đã chọn
   selectedSeats.forEach(function(seatInfo) {
     var seatElement = document.createElement('div');
-    seatElement.textContent = 'Toa ' + seatInfo.toa + ', Ghế số: ' + seatInfo.seatNumber;
-    cartDI.appendChild(seatElement);
+    //seatElement.textContent = 'Toa ' + seatInfo.toa + ', Ghế số: ' + seatInfo.seatNumber+', Tàu: '+'<%= tenTau %>'+', Xuất phát: ' + '<%= diemXuatPhat %>' +', Đến: ' + '<%= diemDen %>' + ', Thời gian đi: ' + '<%= thoiGianDi %>';
+    seatElement.textContent = '<%= tenTau %>'+ ' - ' + 'Toa ' +seatInfo.toa + ' - ' + 'Ghế ' + seatInfo.seatNumber +' - ' + '<%= diemXuatPhat %>' +' - ' + '<%= diemDen %>' + ' - ' + '<%= thoiGianDi %>';
+	cartDI.appendChild(seatElement);
   });
 }
 
