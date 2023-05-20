@@ -756,47 +756,22 @@ img {
 
 
 <!----------->
-  
-  	<table class="table" id="trip-table" style="margin-bottom: -10px; margin-top: -10px;">
-	<tbody>
-	  <% for (let i=0; i < trip.length; i++) { %>
-		<tr class="trip-row" data-train-index="<%= i %>">
 
-		  	<td>
-			<% for (let j=0; j < trip[i].soToa; j++) { %>
-			  <div class="et-car-block ng-scope toa-tau" ng-repeat="toa in searchData.tauDi.ToaXes" data-train-index="<%= i %>">
-				<div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable" style="margin-left: -10px; margin-right: -10px;" ng-click="doiToaMoi(toa, false)" ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
-				  <img src="https://dsvn.vn/images/trainCar2.png">
-				</div>
-				<div class="text-center text-info et-car-label ng-binding"><%= trip[i].soToa - j %></div>
-			  </div>
-			<% } %>
-			<div class="et-car-block" style="margin-left: -12px;">
-				<div class="et-car-icon">
-					<img src="https://dsvn.vn/images/train2.png" class="train-image">
-				</div>
-				<div class="text-center text-info et-car-label ng-binding" style="margin-left: -25px;"><%= trip[i].tenTau %></div>
-			</div>
-			</td>
-
-		</tr>
-	  <% } %>
-	</tbody>
-
-<!----------->
-
-	<table class="table" id="trip-table" style="margin-bottom: 35px;">
+	<table class="table" id="trip-table" style="margin-bottom: 25px;">
 		<tbody>
 		  <% for (let i=0; i < trip.length; i++) { %>
 			<tr class="trip-row" data-train-index="<%= i %>">
 			  <td>
 				<% for (let j=0; j < trip[i].soToa; j++) { %>
-				  <div class="et-car-block ng-scope toa-tau" ng-repeat="toa in searchData.tauDi.ToaXes" data-train-index="<%= i %>">
+					<!--<a href="/vetau?id=<%= trip[i].id %>&toa=<%= trip[i].soToa - j %>">--><div class="et-car-block ng-scope toa-tau" ng-repeat="toa in searchData.tauDi.ToaXes" data-train-index="<%= i %>">
 					<div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable" style="margin-left: -10px; margin-right: -10px;" ng-click="doiToaMoi(toa, false)" ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
 					  <img src="https://dsvn.vn/images/trainCar2.png">
 					</div>
 					<div class="text-center text-info et-car-label ng-binding"><%= trip[i].soToa - j %></div>
-				  </div>
+				  </div><!--</a>-->
+				<!------------------------------------------------------------------->
+
+				<!---------------------------------------------------------------------------->
 				<% } %>
 				<div class="et-car-block" style="margin-left: -12px;">
 				  <div class="et-car-icon">
@@ -804,6 +779,7 @@ img {
 				  </div>
 				  <div class="text-center text-info et-car-label ng-binding" style="margin-left: -25px;"><%= trip[i].tenTau %></div>
 				</div>
+				
 			  </td>
 			</tr>
 		  <% } %>
@@ -819,7 +795,7 @@ img {
 <!----------->
 	
 	<!----------------------------------------------------------------------------------------------->
-	
+
 	<!----------------------------------------------------------------------------------------------->
 
 	<script>
@@ -827,6 +803,8 @@ img {
 		  const trainBlocks = document.querySelectorAll('.et-train-block');
 		  const tripRows = document.querySelectorAll('.trip-row');
 		  const tripTable = document.getElementById('trip-table');
+
+		  let selectedTrainId; // Biến để lưu id của chuyến tàu đang được chọn
 	  
 		  function applyEffect(index) {
 			// Xóa lớp et-train-head-selected khỏi tất cả các phần tử et-train-head
@@ -836,7 +814,7 @@ img {
 	  
 			// Thêm lớp et-train-head-selected vào phần tử et-train-head tương ứng
 			trainBlocks[index].querySelector('.et-train-head').classList.add('et-train-head-selected');
-	  
+
 			// Ẩn tất cả các hàng dữ liệu trong bảng
 			tripRows.forEach(row => {
 			  row.style.display = 'none';
@@ -889,38 +867,7 @@ img {
 	  
 <!------> 
 
-
-
-
-
-
-
-					
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				<table class="table">
+				<table class="table" style="margin-left: -50px;margin-top: 20px;">
 					<thead>
 						<tr>
 							<th scope="col">Điểm xuất phát</th>
@@ -964,7 +911,7 @@ img {
 			
 								<td>
 									<div class="button-container">
-										<a href="/vetau?id=<%=trip[i].id %>" class="edit-button" type="button">Xem</a>
+										<a href="/vetau?id=<%=trip[i].id %>" class="edit-button" type="button" style="text-decoration: none;">Đặt vé</a>
 									</div>
 								</td>
 							</tr>

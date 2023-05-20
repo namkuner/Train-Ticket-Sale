@@ -121,11 +121,12 @@ let hienthive =(tauid)=>{
        }
     })
 }
+
 module.exports = {
     getAllDataTrip: getAllDataTrip,
     createNewTrip: createNewTrip,
     updateTrip: updateTrip,
     getTripInforById: getTripInforById,
     deteleTripById: deteleTripById,
-    hienthive:hienthive
+    hienthive:hienthive,
 }
