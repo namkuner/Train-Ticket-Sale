@@ -162,7 +162,18 @@ let deleteTrip = async (req, res) => {
 /* --------------BOOKING ----------*/
 
 let dataBooker = (req, res) => {
-    return res.render("HomePage/ejs/dataCustomer.ejs")
+    const tenGhe = req.query.tenGhe;
+    const tenTau = req.query.tenTau;
+    const diemXuatPhat = req.query.diemXuatPhat;
+    const diemDen = req.query.diemDen;
+    const thoiGianDi = req.query.thoiGianDi;
+    return res.render("HomePage/ejs/dataCustomer.ejs", {
+        tenGhe: tenGhe,
+        tenTau: tenTau,
+        diemXuatPhat: diemXuatPhat,
+        diemDen: diemDen,
+        thoiGianDi: thoiGianDi
+    });
 }
 let completeDatabooker = async (req, res) => {
     let message = await nguoidatveService.createNewBooker(req.body);

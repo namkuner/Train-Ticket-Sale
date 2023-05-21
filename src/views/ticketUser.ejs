@@ -757,7 +757,7 @@ h6 {
 
   /* CSS cho ghế đã chọn */
   .seat.selected {
-    background-color: #ffc107;
+    background-color: #a6b727;
   }
 
 
@@ -775,7 +775,7 @@ h6 {
   }
 
   .selected-seat .seat button {
-    background-color: orange;
+    background-color: #a6b727;
   }
   .container4 {
 	margin-left: -30px;
@@ -1022,33 +1022,38 @@ h6 {
 	</div>
 
 	<div class="right-column">
-
-		<div style="position: fixed; width: 209px; float: left;" class="mb-w-100 mb-pos-fixed-unset">
-			<div class="col-md-12 et-widget" style="padding-bottom: 8px;">
-			  <div class="row et-widget-header" style="display: inline-block; margin-top: -3px; padding-right: 3.5px; margin-left: -1px;">
-				<img src="http://vetautructuyen.vn/dat-ve-tau/images/widgetIcon.png" style="width: 27px; height: 23px;top: -15px">
-				<span>
-				  <strong class="ng-binding" style="padding-right: 160px; top: -20px">GIỎ VÉ</strong>
-				</span>
-			  </div>
-			  <div class="row" id="cartDI" style="overflow: auto; height: 200px; width: 100%; padding:3px;">
-				<div class="col-md-12 text-center">
-				  <h6 class="ng-binding" style="margin-left: 37px;">Chiều đi</h6>
-				</div>
-			  </div>
-			  <div class="col-md-12 text-center mb-pos-fixed mb-b-40" style="margin-top: 2px;">
-				<span onclick="submitCheck()" style="padding:0px; background:#c10000; color:#fff; padding:3px 10px; font-size:25px; cursor:pointer; margin-left: -444px;">Mua vé</span>
-			  </div>
-			</div>
-		</div>
-		
-	</div>
+    <div style="position: fixed; width: 209px; float: left;" class="mb-w-100 mb-pos-fixed-unset">
+      <div class="col-md-12 et-widget" style="padding-bottom: 8px;">
+        <div class="row et-widget-header" style="display: inline-block; margin-top: -3px; padding-right: 3.5px; margin-left: -1px;">
+          <img src="http://vetautructuyen.vn/dat-ve-tau/images/widgetIcon.png" style="width: 27px; height: 23px;top: -15px">
+          <span>
+            <strong class="ng-binding" style="padding-right: 160px; top: -20px">GIỎ VÉ</strong>
+          </span>
+        </div>
+        <div class="row" id="cartDI" style="overflow: auto; height: 200px; width: 100%; padding:3px;">
+          <div class="col-md-12 text-center">
+            <h6 class="ng-binding" style="margin-left: 37px;">Chiều đi</h6>
+          </div>
+        </div>
+        <div class="col-md-12 text-center mb-pos-fixed mb-b-40" style="margin-top: 2px;">
+          
+          <a href="/homePage/ejs/dataCustomer?&tenTau=<%= tenTau %>&diemXuatPhat=<%= diemXuatPhat %>&diemDen=<%= diemDen %>&thoiGianDi=<%= thoiGianDi %>">  <input type="submit" value="Mua vé" style="padding:0px; background:#c10000; color:#fff; padding:3px 10px; font-size:25px; cursor:pointer; margin-left: -444px;"></a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
 
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
   var seats = document.querySelectorAll('.seat button');
   var selectedSeatsDiv = document.getElementById('selectedSeats');
+  var selectedSeatsDiv = document.getElementById('cartDI');
+  var buyButton = document.querySelector('.mb-pos-fixed-unset span');
+  
+
 
   seats.forEach(function(seat) {
   seat.addEventListener('click', function() {

@@ -77,7 +77,7 @@ let initWebRouters = (app) => {
     router.post('/HomePage/ejs/booking',homeControllers.timkiemtau)
 
     //Trang điền thông tin người đặt vé
-    //router.get('/HomePage/ejs/dataCustomer', homeControllers.dataBooker);
+    router.get('/HomePage/ejs/dataCustomer', homeControllers.dataBooker);
 
 
 

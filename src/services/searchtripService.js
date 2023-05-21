@@ -166,146 +166,25 @@ const findby2chieu = async (diemXuatPhat,diemDen) => {
         trangthai: 1,
         '$train.diemDen$': diemDen,
         '$train.diemXuatPhat$': diemXuatPhat,
-
-<<<<<<< HEAD
-=======
       },
-      include: [
-        {
-          model: db.Trip,
-          as: 'train',
-          attributes: ["diemDen","thoiGianDi","tenTau"],
-        }
-      ]
-    });
-    return result;
-  } catch (error) {
-    throw error;
-  }
-};
-const totalSoldTickets = async () => {
-  try {
-    const total = await db.Ticket.sum('trangthai');
-    return total;
-  } catch (error) {
-    throw error;
-  }
-};
-
-const tonghopvetaufromdaytoday = async (date1, date2) => {
-  try {
-    const tickets = await db.Ticket.findAll({
-      where: {
-        trangthai: 1,
-        '$train.thoiGiandi$': {
-          [Op.between]: [date1, date2]
-        }
-      },
-      include: [
-        {
-          model: db.Trip,
-          as: 'train',
-          attributes: ["diemXuatPhat","diemDen","tenTau","thoiGianDi"]
-        }
-      ]
-    });
-
-    // const totalTickets = tickets.length;
-    return tickets;
-  } catch (e) {
-    throw e;
-  }
-};
-const getAllDistinctDiemXuatPhat = async () => {
-  try {
-    const distinctDiemXuatPhat = await db.Trip.findAll({
-      attributes: [
-        [Sequelize.fn('DISTINCT', Sequelize.col('diemXuatPhat')), 'diemXuatPhat']
-      ]
-    });
-
-    const diemXuatPhatList = distinctDiemXuatPhat.map(item => item.diemXuatPhat);
-
-    return diemXuatPhatList;
-  } catch (error) {
-    throw error;
-  }
-};
-const getAllDistinctDiemDen = async () => {
-  try {
-    const distinctDiemXuatPhat = await db.Trip.findAll({
-      attributes: [
-        [Sequelize.fn('DISTINCT', Sequelize.col('diemDen')), 'diemDen']
-      ]
-    });
-
-    const diemXuatPhatList = distinctDiemXuatPhat.map(item => item.diemXuatPhat);
-
-    return diemXuatPhatList;
-  } catch (error) {
-    throw error;
-  }
-};
-const countTicketsByTrainId = async () => {
-  try {
-    const distinctTrainIds = await db.Train.distinct('id');
-    const counts = {};
-
-    for (const trainId of distinctTrainIds) {
-      const count = await db.Ticket.count({
-        where: {
-          trainId: trainId,
-          trangthai: 1
-        }
+        include: [
+          {
+            model: db.Trip,
+            as: 'train',
+            attributes: ["diemXuatPhat","thoiGianDi","tenTau"],
+          }
+        ]
       });
-
-      counts[trainId] = count;
+  
+      return result;
+    } catch (e) {
+      throw e;
     }
+  };
 
-    return counts;
-  } catch (error) {
-    throw error;
-  }
-};
-const getTotalTicketsByRoute = async () => {
-  try {
-    const result = await db.Ticket.findAll({
-      attributes: [
-        [db.sequelize.literal('train.diemXuatPhat'), 'diemXuatPhat'],
-        [db.sequelize.literal('train.diemDen'), 'diemDen'],
-        [db.sequelize.fn('sum', db.sequelize.col('trangThai')), 'totalTickets']
-      ],
-      include: [
-        {
-          model: db.Trip,
-          attributes: [],
-          as: 'train'
-        }
-      ],
-      where: {
-        trangThai: 1
-      },
-      group: ['train.diemXuatPhat', 'train.diemDen'],
-      order: [[db.sequelize.literal('totalTickets'), 'DESC']]
-    });
-
-    return result;
-  } catch (error) {
-    throw error;
-  }
-};
-
->>>>>>> 86b7069a9bf146350b2a24ac3e167d39f257d234
 module.exports = {
     handleSearchTripTrue: handleSearchTripTrue,
     tongsoveban:tongsoveban,
     tongsovebantheodiemdi:tongsovebantheodiemdi,
     alltongsovebantheodiemdi:alltongsovebantheodiemdi,
-<<<<<<< HEAD
-=======
-    tonghopvetaufromdaytoday:tonghopvetaufromdaytoday,
-    tongsovebantheodiemden:tongsovebantheodiemden,
-    findby2chieu:findby2chieu,
-    getTotalTicketsByRoute:getTotalTicketsByRoute
->>>>>>> 86b7069a9bf146350b2a24ac3e167d39f257d234
 }

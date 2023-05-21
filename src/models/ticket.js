@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         trangThai: DataTypes.BOOLEAN,
         toa: DataTypes.STRING,
         giaVe: DataTypes.INTEGER,
+        userdatve: DataTypes.INTEGER,
         trainId: DataTypes.INTEGER,
     }, {
         sequelize,
