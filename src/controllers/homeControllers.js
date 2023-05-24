@@ -172,7 +172,8 @@ let dataBooker = (req, res) => {
         tenTau: tenTau,
         diemXuatPhat: diemXuatPhat,
         diemDen: diemDen,
-        thoiGianDi: thoiGianDi
+        thoiGianDi: thoiGianDi,
+        req: req
     });
 }
 let completeDatabooker = async (req, res) => {
@@ -327,7 +328,7 @@ let hienthivetau = async (req, res) => {
         tenTau: tenTau,
         diemXuatPhat: diemXuatPhat,
         diemDen: diemDen,
-        thoiGianDi: thoiGianDi
+        thoiGianDi: thoiGianDi,
     });
 }
 

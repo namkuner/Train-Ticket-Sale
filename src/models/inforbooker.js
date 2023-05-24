@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Inforbooker.hasMany(models.Ticket, { foreignKey: 'userdatve', as: 'tickets' });
     }
   };
   Inforbooker.init({

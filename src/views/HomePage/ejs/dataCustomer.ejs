@@ -430,18 +430,18 @@ h5 {
 						<!--------------------------------------------------------------------------->
 
 						<h1>Thông tin khách hàng</h1>
-						
+						<p>Tên ghế: <%= tenGhe %></p>
 						<p>Tên tàu: <%= tenTau %></p>
 						<p>Điểm xuất phát: <%= diemXuatPhat %></p>
 						<p>Điểm đến: <%= diemDen %></p>
 						<p>Thời gian đi: <%= thoiGianDi %></p>
 
-
 						<!--------------------------------------------------------------------------->
 
 						<div class="container2">
 							<div class="row">
-							  <form action="/complete-databooker" method="POST">
+							  <!--<form action="/complete-databooker" method="POST">-->
+							<form action="/vetau" method="POST"></form>
 								<div class="row">
 								  <div class="col-md-6">
 									<div class="mb-3">
@@ -507,10 +507,39 @@ h5 {
 								<input type="hidden" name="roleid" value="R3">
 								<button class="btn btn-primary" type="submit" style="padding: 7px 30px;font-size: 16px;margin-top: 7px;">Xác nhận</button>
 							  </form>
+							  
 							</div>
 						  </div>
 						  
 						</div>
+						<script>
+							document.addEventListener('DOMContentLoaded', function() {
+
+								
+							  // Lấy form đăng ký bằng id hoặc class của form
+							  var form = document.querySelector('form');
+							  
+							  // Thêm sự kiện submit cho form
+							  form.addEventListener('submit', function(event) {
+								// Ngăn chặn hành vi mặc định của form khi submit
+								event.preventDefault();
+								
+								// Gửi yêu cầu lưu thông tin người đặt vé qua Ajax hoặc fetch API
+								// và nhận id từ máy chủ sau khi lưu thành công
+								
+								// Giả định rằng id được nhận từ máy chủ là newBookingId
+								var receivedId = id; // Thay newBookingId bằng giá trị id thực tế từ máy chủ
+								
+								// Gán giá trị id vào input hidden trong form
+								var hiddenInput = document.querySelector('input[name="userdatve"]');
+								hiddenInput.value = receivedId;
+								
+								// Submit form để chuyển đến trang /complete-databooker
+								form.submit();
+							  });
+							});
+						  </script>
+						  
 						<p style="width: 1140px;padding-left: 30px;font-weight: 570;color: #2fa4e7;margin-top: 15px;">Để ngăn chặn dịch bệnh COVID-19, ĐSVN kính mong quý khách hàng nhập đúng thông tin số điện thoại để trong trường hợp cần thông báo chúng tôi có thể liên hệ với quý khách hàng nhanh nhất có thể.</p>
 						<!--------------------------------------------------------------------------->
 
@@ -548,6 +577,7 @@ h5 {
 									</tbody>
 								</table>
 							</div>
+							
 							<!-- 2 -->
 							<div class="list-group-item ng-scope" ng-repeat="item in listCongTT" ng-style="{'border-color': congThanhToanError?'red':'#dddddd'}" ng-show="item.MaCongTT=='PayLater'||!register.IsVeThang" style="border-color: rgb(221, 221, 221);">
 								<table border="0" cellpadding="0" cellspacing="0" style="width: 100%">

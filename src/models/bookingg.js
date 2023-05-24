@@ -16,8 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Bookingg.init({
     customerId: DataTypes.STRING,
     ticketId: DataTypes.STRING,
-    date: DataTypes.DATE
-    
+    date: DataTypes.DATE  
   }, {
     sequelize,
     modelName: 'Bookingg',

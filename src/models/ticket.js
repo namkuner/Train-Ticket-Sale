@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // define association here
             Ticket.belongsTo(models.Trip, { foreignKey: 'trainId', as: 'train' });
+            Ticket.belongsTo(models.Inforbooker, { foreignKey: 'userdatve', as: 'inforbooker' });
         }
     };
     Ticket.init({
