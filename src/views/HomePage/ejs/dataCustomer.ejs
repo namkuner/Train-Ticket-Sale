@@ -430,19 +430,31 @@ h5 {
 						<!--------------------------------------------------------------------------->
 
 						<h1>Thông tin khách hàng</h1>
+						<p>Id: <%= id %></p>
+						<p>Số lượng ghế đã đặt: <span id="seatCount"></span></p>
 						<p>Tên ghế: <%= tenGhe %></p>
 						<p>Tên tàu: <%= tenTau %></p>
 						<p>Điểm xuất phát: <%= diemXuatPhat %></p>
 						<p>Điểm đến: <%= diemDen %></p>
 						<p>Thời gian đi: <%= thoiGianDi %></p>
 
+						<script>
+							var urlParams = new URLSearchParams(window.location.search);
+							var seatCount = urlParams.get('Sove');
+							document.getElementById('seatCount').textContent = seatCount; // Hiển thị số lượng ghế đã đặt trong một phần tử HTML có id 'seatCount'
+						</script>
+
 						<!--------------------------------------------------------------------------->
 
 						<div class="container2">
 							<div class="row">
-							  <!--<form action="/complete-databooker" method="POST">-->
-							<form action="/vetau" method="POST"></form>
+							  <form action="/complete-databooker" method="POST">
+							
+
 								<div class="row">
+
+									<input type="hidden" name="Sove" value="<%= Sove %>">
+
 								  <div class="col-md-6">
 									<div class="mb-3">
 									  <label for="Hoten" style="margin-bottom: 10px;font-weight: 600;">Họ và tên</label>
@@ -518,6 +530,13 @@ h5 {
 								
 							  // Lấy form đăng ký bằng id hoặc class của form
 							  var form = document.querySelector('form');
+							  var urlParams = new URLSearchParams(window.location.search);
+							var seatCount = urlParams.get('Sove');
+
+							// Gán giá trị id vào input hidden trong form
+							var hiddenInput = document.querySelector('input[name="Sove"]');
+								//var hiddenInput = document.querySelector('input[name="userdatve"]');
+								hiddenInput.value = seatCount;
 							  
 							  // Thêm sự kiện submit cho form
 							  form.addEventListener('submit', function(event) {
@@ -528,11 +547,9 @@ h5 {
 								// và nhận id từ máy chủ sau khi lưu thành công
 								
 								// Giả định rằng id được nhận từ máy chủ là newBookingId
-								var receivedId = id; // Thay newBookingId bằng giá trị id thực tế từ máy chủ
+								//var receivedId = id; // Thay newBookingId bằng giá trị id thực tế từ máy chủ
 								
-								// Gán giá trị id vào input hidden trong form
-								var hiddenInput = document.querySelector('input[name="userdatve"]');
-								hiddenInput.value = receivedId;
+								
 								
 								// Submit form để chuyển đến trang /complete-databooker
 								form.submit();

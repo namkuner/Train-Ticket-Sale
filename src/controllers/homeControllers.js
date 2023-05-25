@@ -162,17 +162,23 @@ let deleteTrip = async (req, res) => {
 /* --------------BOOKING ----------*/
 
 let dataBooker = (req, res) => {
+    const id = req.query.id;
     const tenGhe = req.query.tenGhe;
     const tenTau = req.query.tenTau;
     const diemXuatPhat = req.query.diemXuatPhat;
     const diemDen = req.query.diemDen;
     const thoiGianDi = req.query.thoiGianDi;
+    const Sove = req.query.Sove;
+    const Tongtien = req.query.Tongtien;
     return res.render("HomePage/ejs/dataCustomer.ejs", {
+        id: id,
         tenGhe: tenGhe,
         tenTau: tenTau,
         diemXuatPhat: diemXuatPhat,
         diemDen: diemDen,
         thoiGianDi: thoiGianDi,
+        Sove: Sove,
+        Tongtien: Tongtien,
         req: req
     });
 }

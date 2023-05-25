@@ -1094,8 +1094,10 @@ h6 {
     var urlParams = seatsToUpdate.map(function(seat) {
       return 'tenGhe=' + encodeURIComponent(seat.seatNumber) + '&toa=' + encodeURIComponent(seat.toa);
     }).join('&');
+
+    var seatCount = selectedSeats.length; // Số lượng ghế đã chọn
     
-    var url = '/homePage/ejs/dataCustomer?' + urlParams + '&tenTau=<%= tenTau %>&diemXuatPhat=<%= diemXuatPhat %>&diemDen=<%= diemDen %>&thoiGianDi=<%= thoiGianDi %>';
+    var url = '/homePage/ejs/dataCustomer?' + urlParams + '&Sove='+  encodeURIComponent(seatCount) + '&tenTau=<%= tenTau %>&diemXuatPhat=<%= diemXuatPhat %>&diemDen=<%= diemDen %>&thoiGianDi=<%= thoiGianDi %>';
 
     // Chuyển hướng đến trang /homePage/ejs/dataCustomer với chuỗi URL parameters
     window.location.href = url;
@@ -1128,13 +1130,10 @@ function renderSelectedSeats() {
 // Xử lý sự kiện khi người dùng chọn ghế
 Array.from(seats).forEach(function(seat) {
   seat.addEventListener('click', function() {
-    // Lấy số ghế từ nút chọn ghế
     var seatNumber = this.querySelector('button').textContent;
 
     // Lấy số toa từ thuộc tính data-toa của ghế
     var toa = this.getAttribute('data-toa');
-
-    // Lấy tên ghế từ thuộc tính data-tenghe của ghế
     var tenGhe = this.getAttribute('data-tenghe');
 
     // Kiểm tra xem ghế đã được chọn hay chưa
