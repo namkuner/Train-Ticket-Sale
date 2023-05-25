@@ -1097,7 +1097,7 @@ h6 {
 
     var seatCount = selectedSeats.length; // Số lượng ghế đã chọn
     
-    var url = '/homePage/ejs/dataCustomer?' + urlParams + '&Sove='+  encodeURIComponent(seatCount) + '&tenTau=<%= tenTau %>&diemXuatPhat=<%= diemXuatPhat %>&diemDen=<%= diemDen %>&thoiGianDi=<%= thoiGianDi %>';
+    var url = '/homePage/ejs/dataCustomer?' + urlParams + '&Sove='+  encodeURIComponent(seatCount) + '&giaVe=<%= giaVe %>&tenTau=<%= tenTau %>&diemXuatPhat=<%= diemXuatPhat %>&diemDen=<%= diemDen %>&thoiGianDi=<%= thoiGianDi %>';
 
     // Chuyển hướng đến trang /homePage/ejs/dataCustomer với chuỗi URL parameters
     window.location.href = url;

@@ -163,6 +163,7 @@ let deleteTrip = async (req, res) => {
 
 let dataBooker = (req, res) => {
     const id = req.query.id;
+    const giaVe = req.query.giaVe;
     const tenGhe = req.query.tenGhe;
     const tenTau = req.query.tenTau;
     const diemXuatPhat = req.query.diemXuatPhat;
@@ -173,6 +174,7 @@ let dataBooker = (req, res) => {
     return res.render("HomePage/ejs/dataCustomer.ejs", {
         id: id,
         tenGhe: tenGhe,
+        giaVe: giaVe,
         tenTau: tenTau,
         diemXuatPhat: diemXuatPhat,
         diemDen: diemDen,
@@ -320,6 +322,7 @@ let hienthivetau =async(req,res)=>{
     res.render("ticketUser.ejs",{tickets:data})
 }*/
 let hienthivetau = async (req, res) => {
+    const giaVe = req.query.giaVe;
     const tenTau = req.query.tenTau;
     const diemXuatPhat = req.query.diemXuatPhat;
     const diemDen = req.query.diemDen;
@@ -331,6 +334,7 @@ let hienthivetau = async (req, res) => {
     console.log(data.length);
     res.render("ticketUser.ejs", {
         tickets: data,
+        giaVe: giaVe,
         tenTau: tenTau,
         diemXuatPhat: diemXuatPhat,
         diemDen: diemDen,

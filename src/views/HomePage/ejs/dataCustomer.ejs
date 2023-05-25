@@ -432,6 +432,7 @@ h5 {
 						<h1>Thông tin khách hàng</h1>
 						<p>Id: <%= id %></p>
 						<p>Số lượng ghế đã đặt: <span id="seatCount"></span></p>
+						<p>Giá vé: <%= giaVe %></p>
 						<p>Tên ghế: <%= tenGhe %></p>
 						<p>Tên tàu: <%= tenTau %></p>
 						<p>Điểm xuất phát: <%= diemXuatPhat %></p>
@@ -442,6 +443,11 @@ h5 {
 							var urlParams = new URLSearchParams(window.location.search);
 							var seatCount = urlParams.get('Sove');
 							document.getElementById('seatCount').textContent = seatCount; // Hiển thị số lượng ghế đã đặt trong một phần tử HTML có id 'seatCount'
+							// Lấy giá trị từ trường ẩn
+							var giaVeElement = document.getElementById('giaVe');
+							var giaVe = giaVeElement.value;
+							// Sử dụng giá trị giaVe theo nhu cầu của bạn
+							console.log(giaVe); // In giá trị giaVe ra console
 						</script>
 
 						<!--------------------------------------------------------------------------->
@@ -453,7 +459,9 @@ h5 {
 
 								<div class="row">
 
-									<input type="hidden" name="Sove" value="<%= Sove %>">
+									<input type="hidden" id="sove" name="Sove" value="<%= Sove %>">
+									<input type="hidden" id="giave" name="giaVe" value="<%= giaVe %>">
+									<input type="hidden" name="Tongtien" value="<%= Tongtien %>">
 
 								  <div class="col-md-6">
 									<div class="mb-3">
@@ -524,38 +532,39 @@ h5 {
 						  </div>
 						  
 						</div>
+
 						<script>
 							document.addEventListener('DOMContentLoaded', function() {
 
-								
 							  // Lấy form đăng ký bằng id hoặc class của form
 							  var form = document.querySelector('form');
 							  var urlParams = new URLSearchParams(window.location.search);
-							var seatCount = urlParams.get('Sove');
+							  var seatCount = urlParams.get('Sove');
 
-							// Gán giá trị id vào input hidden trong form
-							var hiddenInput = document.querySelector('input[name="Sove"]');
-								//var hiddenInput = document.querySelector('input[name="userdatve"]');
-								hiddenInput.value = seatCount;
-							  
+							  // Gán giá trị id vào input hidden trong form
+							  var hiddenInput = document.querySelector('input[name="Sove"]');
+							  hiddenInput.value = seatCount;
+
+							var SoveInput = document.getElementById('sove');
+							var Sove = parseInt(SoveInput.value);
+							var giaVeInput = document.getElementById('giave');
+							var giaVe = parseInt(giaVeInput.value);
+
+							// Tính toán Tongtien bằng cách nhân Sove với giaVe
+							var Tongtien = Sove * giaVe;
+
+    						// Gán giá trị Tongtien vào input hidden trong form
+    						var hiddenTongtienInput = document.querySelector('input[name="Tongtien"]');
+    						hiddenTongtienInput.value = Tongtien;
+
 							  // Thêm sự kiện submit cho form
 							  form.addEventListener('submit', function(event) {
-								// Ngăn chặn hành vi mặc định của form khi submit
 								event.preventDefault();
-								
-								// Gửi yêu cầu lưu thông tin người đặt vé qua Ajax hoặc fetch API
-								// và nhận id từ máy chủ sau khi lưu thành công
-								
-								// Giả định rằng id được nhận từ máy chủ là newBookingId
-								//var receivedId = id; // Thay newBookingId bằng giá trị id thực tế từ máy chủ
-								
-								
-								
-								// Submit form để chuyển đến trang /complete-databooker
 								form.submit();
 							  });
+							  
 							});
-						  </script>
+						</script>
 						  
 						<p style="width: 1140px;padding-left: 30px;font-weight: 570;color: #2fa4e7;margin-top: 15px;">Để ngăn chặn dịch bệnh COVID-19, ĐSVN kính mong quý khách hàng nhập đúng thông tin số điện thoại để trong trường hợp cần thông báo chúng tôi có thể liên hệ với quý khách hàng nhanh nhất có thể.</p>
 						<!--------------------------------------------------------------------------->
