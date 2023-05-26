@@ -535,36 +535,65 @@ h5 {
 
 						<script>
 							document.addEventListener('DOMContentLoaded', function() {
-
-							  // Lấy form đăng ký bằng id hoặc class của form
 							  var form = document.querySelector('form');
 							  var urlParams = new URLSearchParams(window.location.search);
 							  var seatCount = urlParams.get('Sove');
-
-							  // Gán giá trị id vào input hidden trong form
 							  var hiddenInput = document.querySelector('input[name="Sove"]');
 							  hiddenInput.value = seatCount;
+						  
+							  var SoveInput = document.getElementById('sove');
+							  var Sove = parseInt(SoveInput.value);
+							  var giaVeInput = document.getElementById('giave');
+							  var giaVe = parseInt(giaVeInput.value);
+							  var Tongtien = Sove * giaVe;
+						  
+							  var hiddenTongtienInput = document.querySelector('input[name="Tongtien"]');
+							  hiddenTongtienInput.value = Tongtien;
+						  
+							  // Thêm đoạn mã để lấy danh sách các phần tử <p> chứa ID vé
+							 /* var idElements = document.querySelectorAll('p');
+							  var ids = [];
+							  idElements.forEach(function(element) {
+								var id = element.textContent.replace('Id: ', '');
+								ids.push(id);
+							  });
+						  
+							  // Gán giá trị ids vào input hidden trong form
+							  var hiddenTicketIdInput = document.querySelector('input[name="ticketId"]');
+							  hiddenTicketIdInput.value = ids.join(',');
 
-							var SoveInput = document.getElementById('sove');
-							var Sove = parseInt(SoveInput.value);
-							var giaVeInput = document.getElementById('giave');
-							var giaVe = parseInt(giaVeInput.value);
+							  const urlParams = new URLSearchParams(window.location.search);
+							  const idValues = urlParams.getAll('id');
+							  ids = ids.concat(idValues);*/
+							  ////////////////////////////////////////////////////////////26/
 
-							// Tính toán Tongtien bằng cách nhân Sove với giaVe
-							var Tongtien = Sove * giaVe;
+							  const ticketIdsString = '<%= id %>'; // Chuỗi ID vé (ví dụ: "id,id,id,...")
+const ticketIdArray = ticketIdsString.split(',');
 
-    						// Gán giá trị Tongtien vào input hidden trong form
-    						var hiddenTongtienInput = document.querySelector('input[name="Tongtien"]');
-    						hiddenTongtienInput.value = Tongtien;
+// Lặp qua mảng ticketIdArray và tạo các đối tượng bookingData
+const bookingDataArray = ticketIdArray.map(ticketId => {
+  return {
+    customerId: customerId, // Lấy giá trị từ đâu đó, ví dụ: customerId
+    ticketId: ticketId.trim() // Xóa khoảng trắng xung quanh id
+  };
+});
 
-							  // Thêm sự kiện submit cho form
+// Tiếp tục xử lý với mảng bookingDataArray để tạo các booking trong bảng bookingg
+
+
+
+
+
+							  /////////////////////////////////////////////////////////
+
+						  
 							  form.addEventListener('submit', function(event) {
 								event.preventDefault();
 								form.submit();
 							  });
-							  
 							});
 						</script>
+						  
 						  
 						<p style="width: 1140px;padding-left: 30px;font-weight: 570;color: #2fa4e7;margin-top: 15px;">Để ngăn chặn dịch bệnh COVID-19, ĐSVN kính mong quý khách hàng nhập đúng thông tin số điện thoại để trong trường hợp cần thông báo chúng tôi có thể liên hệ với quý khách hàng nhanh nhất có thể.</p>
 						<!--------------------------------------------------------------------------->

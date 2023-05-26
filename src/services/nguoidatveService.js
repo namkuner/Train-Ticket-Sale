@@ -1,24 +1,71 @@
 //import { Promise } from 'sequelize';
 import db from '../models/index';
-let createNewBooker = (data) =>{
-    return new Promise(async(resolve, reject) => {
-        try{
-            await db.Inforbooker.create({
-                Hoten: data.Hoten,
-                Phone: data.Phone,
-                Email: data.Email,
-                CCCD: data.CCCD,
-                Ngaydi: data.Ngaydi,
-                Sove: data.Sove,
-                Tongtien: data.Tongtien,
-            })
-            resolve('ok! create a new user succeed!')
-        }catch (e) {
-            reject(e);
+
+let createNewBooker = (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const newBooker = await db.Inforbooker.create({
+          Hoten: data.Hoten,
+          Phone: data.Phone,
+          Email: data.Email,
+          CCCD: data.CCCD,
+          Ngaydi: data.Ngaydi,
+          Sove: data.Sove,
+          Tongtien: data.Tongtien,
+        });
+  
+        const bookerId = newBooker.id; // Lưu ID người đặt vé
+  
+        const bookingData = {
+            customerId: bookerId, // Gán ID người đặt vé cho trường customerId
+          };
+          
+        await db.Bookingg.create(bookingData);
+        resolve('ok! create a new user succeed!');
+      } catch (e) {
+        reject(e);
+      }
+    });
+  };
+  
+/*
+let createNewBooker = (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const newBooker = await db.Inforbooker.create({
+          Hoten: data.Hoten,
+          Phone: data.Phone,
+          Email: data.Email,
+          CCCD: data.CCCD,
+          Ngaydi: data.Ngaydi,
+          Sove: data.Sove,
+          Tongtien: data.Tongtien,
+        });
+  
+        const customerId = newBooker.id;
+  
+        const ticketIds = data.id; // Chuỗi ID vé (ví dụ: "1,2,3,...")
+        const ticketIdArray = ticketIds.split(',');
+  
+        for (const ticketId of ticketIdArray) {
+          const bookingData = {
+            customerId: customerId,
+            ticketId: ticketId.toString(),
+          };
+  
+          await db.Bookingg.create(bookingData);
         }
-    }) 
-     
-}
+       // await db.Bookingg.create(bookingData);
+  
+        resolve('ok! create a new user succeed!');
+      } catch (e) {
+        reject(e);
+      }
+    });
+  };
+  */
+  
+
 
 let getAllBooker = () => {
     return new Promise (async(resolve, reject) => {
