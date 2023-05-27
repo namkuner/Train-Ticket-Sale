@@ -171,6 +171,7 @@ let dataBooker = (req, res) => {
     const thoiGianDi = req.query.thoiGianDi;
     const Sove = req.query.Sove;
     const Tongtien = req.query.Tongtien;
+    const trangThai = req.query.trangThai;
     return res.render("HomePage/ejs/dataCustomer.ejs", {
         id: id,
         tenGhe: tenGhe,
@@ -181,6 +182,7 @@ let dataBooker = (req, res) => {
         thoiGianDi: thoiGianDi,
         Sove: Sove,
         Tongtien: Tongtien,
+        trangThai: trangThai,
         req: req
     });
 }

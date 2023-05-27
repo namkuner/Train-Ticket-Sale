@@ -2,32 +2,42 @@
 import db from '../models/index';
 
 let createNewBooker = (data) => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const newBooker = await db.Inforbooker.create({
-          Hoten: data.Hoten,
-          Phone: data.Phone,
-          Email: data.Email,
-          CCCD: data.CCCD,
-          Ngaydi: data.Ngaydi,
-          Sove: data.Sove,
-          Tongtien: data.Tongtien,
-        });
-  
-        const bookerId = newBooker.id; // Lưu ID người đặt vé
-  
-        const bookingData = {
-            customerId: bookerId, // Gán ID người đặt vé cho trường customerId
-          };
-          
-        await db.Bookingg.create(bookingData);
-        resolve('ok! create a new user succeed!');
-      } catch (e) {
-        reject(e);
-      }
-    });
+  return new Promise(async (resolve, reject) => {
+    try {
+      const newBooker = await db.Inforbooker.create({
+        Hoten: data.Hoten,
+        Phone: data.Phone,
+        Email: data.Email,
+        CCCD: data.CCCD,
+        Ngaydi: data.Ngaydi,
+        Sove: data.Sove,
+        Tongtien: data.Tongtien,
+      });
+
+      const bookerId = newBooker.id; // Lưu ID người đặt vé
+      /*const ticketIdsString = '<%= id %>';
+      const ticketIdsArray = ticketIdsString.split(',');*/
+
+      // Sử dụng vòng lặp để lặp qua từng giá trị ID vé và tạo các bản ghi Bookingg tương ứng
+      const ticketIds = ['219', '220']; // Các giá trị ID vé từ URL
+
+// Lặp qua danh sách các ID vé
+for (const ticketId of ticketIds) {
+  const bookingData = {
+    customerId: bookerId, // Lưu ID người đặt vé
+    ticketId: ticketId, // Lưu ID vé
   };
-  
+
+        await db.Bookingg.create(bookingData);
+      }
+
+      resolve('ok! create a new user succeed!');
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
 /*
 let createNewBooker = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -64,6 +74,41 @@ let createNewBooker = (data) => {
     });
   };
   */
+
+
+
+
+
+/*
+
+  let createNewBooker = (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const newBooker = await db.Inforbooker.create({
+          Hoten: data.Hoten,
+          Phone: data.Phone,
+          Email: data.Email,
+          CCCD: data.CCCD,
+          Ngaydi: data.Ngaydi,
+          Sove: data.Sove,
+          Tongtien: data.Tongtien,
+        });
+  
+        const bookerId = newBooker.id; // Lưu ID người đặt vé
+  
+        const bookingData = {
+            customerId: bookerId, // Gán ID người đặt vé cho trường customerId
+          };
+          
+        await db.Bookingg.create(bookingData);
+        resolve('ok! create a new user succeed!');
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }; 
+  */
+
   
 
 
