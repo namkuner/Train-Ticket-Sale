@@ -456,7 +456,6 @@ h5 {
 							<div class="row">
 							  <form action="/complete-databooker" method="POST">
 							
-
 								<div class="row">
 
 									<input type="hidden" id="sove" name="Sove" value="<%= Sove %>">
@@ -526,13 +525,30 @@ h5 {
 								</div>
 								<input type="hidden" name="roleid" value="R3">
 								<button class="btn btn-primary" type="submit" style="padding: 7px 30px;font-size: 16px;margin-top: 7px;">Xác nhận</button>
+								<!---->
+								<div class="modal">
+									<div class="modal_inner">
+										<div class="modal_header">
+											<p>Welcome</p>
+											<i class="fas fa-times"></i>
+										</div>
+										<div class="modal_body">
+											<h2>Modal</h2>
+											<p>Đặt vé thành công</p>
+										</div>
+										<div class="modal_footer">
+											<button>Close</button>
+										</div>
+									</div>
+								</div>
+								<!---->
 							  </form>
 							  
 							</div>
 						  </div>
 						  
 						</div>
-
+						
 						<script>
 							document.addEventListener('DOMContentLoaded', function() {
 							  var form = document.querySelector('form');
@@ -582,12 +598,41 @@ const urlParams = new URLSearchParams(window.location.search);
 const ticketIds = urlParams.getAll('id');
 */
 // Tiếp tục xử lý với mảng bookingDataArray để tạo các booking trong bảng bookingg
-
+/*
 var idString = '<%= id %>'; // Chuỗi chứa các ID vé dạng id,id,id...
 var ticketIds = idString.split(','); // Tách chuỗi thành mảng các ID vé
+*/
+
+// Lấy các giá trị ID vé từ trang và gán cho mảng ticketIds
+/*
+const ticketIds = [];
+const ticketElements = document.getElementsByClassName('ticket-id');
+for (const element of ticketElements) {
+  const ticketId = element.textContent;
+  ticketIds.push(ticketId);
+}*/
+// Khởi tạo mảng TicketIds trống
+// Khởi tạo mảng TicketIds trống
+// Khởi tạo mảng TicketIds trống
 
 
 
+
+
+const TicketIds = [];
+
+// Tách chuỗi thành mảng các ID riêng biệt
+const idsString = '<%= id %>';
+const idsArray = idsString.split(',');
+
+// Lặp qua từng phần tử của mảng và gán vào mảng TicketIds
+for (const id of idsArray) {
+  // Thêm ID vào mảng TicketIds
+  TicketIds.push(id);
+}
+
+// Sử dụng biến ticketIds để truy cập vào các phần tử của mảng
+const ticketIds = TicketIds;
 
 
 
@@ -600,7 +645,7 @@ var ticketIds = idString.split(','); // Tách chuỗi thành mảng các ID vé
 							  });
 							});
 						</script>
-						  
+						
 						  
 						<p style="width: 1140px;padding-left: 30px;font-weight: 570;color: #2fa4e7;margin-top: 15px;">Để ngăn chặn dịch bệnh COVID-19, ĐSVN kính mong quý khách hàng nhập đúng thông tin số điện thoại để trong trường hợp cần thông báo chúng tôi có thể liên hệ với quý khách hàng nhanh nhất có thể.</p>
 						<!--------------------------------------------------------------------------->
