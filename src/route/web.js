@@ -6,15 +6,11 @@ let router = express.Router();
 //const express = require('express');
 //const router = express.Router();
 
-
-/*
+const bodyParser = require('body-parser');
 const app = express();
-const ejs = require('ejs');
-// Rest of your code goes here
-app.set('view engine', 'ejs');
-//////lấy dữ liệu người dùng ra admin
-// Khai báo thư viện body-parser
-*/
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 
 

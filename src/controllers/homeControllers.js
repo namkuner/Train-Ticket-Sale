@@ -4,6 +4,8 @@ import dangNhapDangKyService from "../services/dangNhapDangKyService"
 import nguoidatveService from "../services/nguoidatveService"
 import tripCRUD from "../services/tripCRUD"
 import searchtripService from "../services/searchtripService"
+
+
 // import { strictRight } from "sequelize/types/lib/operators";
 const ejs = require('ejs');
 const path = require('path');
@@ -181,6 +183,7 @@ let dataBooker = (req, res) => {
     const Sove = req.query.Sove;
     const Tongtien = req.query.Tongtien;
     const trangThai = req.query.trangThai;
+    const ticketIds = req.query.ticketIds;
     return res.render("HomePage/ejs/dataCustomer.ejs", {
         id: id,
         tenGhe: tenGhe,
@@ -192,14 +195,56 @@ let dataBooker = (req, res) => {
         Sove: Sove,
         Tongtien: Tongtien,
         trangThai: trangThai,
-        req: req
+        req: req,
+        ticketIds: ticketIds
     });
 }
+/*
 let completeDatabooker = async (req, res) => {
+<<<<<<< HEAD
     let message = await nguoidatveService.createNewBooker(req.body);
     console.log(message)
     return res.redirect('/');
 }
+=======
+    const ids = req.body.ids; // Truy cập vào mảng ids gửi từ client
+    console.log(ids);
+    let message = await nguoidatveService.createNewBooker(req.body, ids);
+    //console.log(message);
+    return res.send('post crud from sever'); 
+};*/
+let completeDatabooker = async (req, res) => {
+    const ids = req.body.ids; // Truy cập vào mảng ids gửi từ client
+    console.log(ids);
+    
+    try {
+      let message = await nguoidatveService.createNewBooker(req.body, ids);
+      console.log(message);
+      return res.send('post crud from server');
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "An error occurred while creating a new booker." });
+    }
+  };
+  
+/* 
+const url = require('url');
+let completeDatabooker = async (req, res) => {
+    const ids = [];
+  
+    const parsedUrl = url.parse(req.url, true);
+    const urlParams = parsedUrl.query;
+  
+    if ('id' in urlParams) {
+      const idValues = Array.isArray(urlParams.id) ? urlParams.id : [urlParams.id];
+      ids.push(...idValues);
+    }
+  
+    let message = await nguoidatveService.createNewBooker(req.body, ids);
+    console.log(message);
+    return res.send('post crud from sever');
+}*/ 
+>>>>>>> af2c22dc6bf64b89312f12001857b7bba2e3e824
 
 let displaybooker = async (req, res) => {
     let data = await nguoidatveService.getAllBooker();

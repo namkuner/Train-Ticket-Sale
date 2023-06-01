@@ -2,7 +2,86 @@
 import db from '../models/index';
 
 
-let createNewBooker = (data) => {
+let createNewBooker = (data, ids) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const newBooker = await db.Inforbooker.create({
+        Hoten: data.Hoten,
+        Phone: data.Phone,
+        Email: data.Email,
+        CCCD: data.CCCD,
+        Ngaydi: data.Ngaydi,
+        Sove: data.Sove,
+        Tongtien: data.Tongtien,
+      });
+      const bookerId = newBooker.id;
+      //console.log(ids);
+      console.log('IDs:', ids);
+
+      for (const ticketId of ids) { // Sử dụng trực tiếp mảng `ids`
+        const bookingData = {
+          customerId: bookerId,
+          ticketId: ticketId,
+        };
+        await db.Bookingg.create(bookingData);
+
+        await db.Ticket.update(
+          { trangThai: 0 },
+          { where: { id: ticketId } }
+        );
+      }
+
+      resolve('ok! create a new user succeed!');
+    } catch (e) {
+      reject(e);
+    } 
+  });
+};
+/*
+let createNewBooker = (data, ids) => { // Thêm tham số `ids` vào hàm
+  return new Promise(async (resolve, reject) => {
+    try {
+      const newBooker = await db.Inforbooker.create({
+        Hoten: data.Hoten,
+        Phone: data.Phone,
+        Email: data.Email,
+        CCCD: data.CCCD,
+        Ngaydi: data.Ngaydi,
+        Sove: data.Sove,
+        Tongtien: data.Tongtien,
+      });
+      const bookerId = newBooker.id;
+      console.log(ids);
+      const ticketIds = ids; // Gán mảng `ids` cho `ticketIds`
+
+      for (const ticketId of ticketIds) {
+        const bookingData = {
+          customerId: bookerId,
+          ticketId: ticketId,
+        };
+        await db.Bookingg.create(bookingData);
+
+        await db.Ticket.update(
+          { trangThai: 0 },
+          { where: { id: ticketId } }
+        );
+      }
+
+      resolve('ok! create a new user succeed!');
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
+
+*/
+
+
+//createNewBooker(data); // Thay data bằng dữ liệu thích hợp của bạn
+
+
+/*
+let createNewBooker = (data,ticketIds) => {
   return new Promise(async (resolve, reject) => {
     try {
       const newBooker = await db.Inforbooker.create({
@@ -15,7 +94,7 @@ let createNewBooker = (data) => {
         Tongtien: data.Tongtien,
       });
       const bookerId = newBooker.id; 
-      const ticketIds = ['219', '220', '221']; 
+      //const ticketIds = ['219', '220', '221']; 
 
       for (const ticketId of ticketIds) {
         const bookingData = {
@@ -36,45 +115,6 @@ let createNewBooker = (data) => {
     }
   });
 };
-
-//createNewBooker(data); // Thay data bằng dữ liệu thích hợp của bạn
-
-
-/*
-let createNewBooker = (data) => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const newBooker = await db.Inforbooker.create({
-          Hoten: data.Hoten,
-          Phone: data.Phone,
-          Email: data.Email,
-          CCCD: data.CCCD,
-          Ngaydi: data.Ngaydi,
-          Sove: data.Sove,
-          Tongtien: data.Tongtien,
-        });
-  
-        const customerId = newBooker.id;
-  
-        const ticketIds = data.id; // Chuỗi ID vé (ví dụ: "1,2,3,...")
-        const ticketIdArray = ticketIds.split(',');
-  
-        for (const ticketId of ticketIdArray) {
-          const bookingData = {
-            customerId: customerId,
-            ticketId: ticketId.toString(),
-          };
-  
-          await db.Bookingg.create(bookingData);
-        }
-       // await db.Bookingg.create(bookingData);
-  
-        resolve('ok! create a new user succeed!');
-      } catch (e) {
-        reject(e);
-      }
-    });
-  };
   */
 
 
