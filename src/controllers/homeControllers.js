@@ -201,12 +201,12 @@ let dataBooker = (req, res) => {
 }
 /*
 let completeDatabooker = async (req, res) => {
-<<<<<<< HEAD
+
     let message = await nguoidatveService.createNewBooker(req.body);
     console.log(message)
     return res.redirect('/');
 }
-=======
+
     const ids = req.body.ids; // Truy cập vào mảng ids gửi từ client
     console.log(ids);
     let message = await nguoidatveService.createNewBooker(req.body, ids);
@@ -244,7 +244,6 @@ let completeDatabooker = async (req, res) => {
     console.log(message);
     return res.send('post crud from sever');
 }*/ 
->>>>>>> af2c22dc6bf64b89312f12001857b7bba2e3e824
 
 let displaybooker = async (req, res) => {
     let data = await nguoidatveService.getAllBooker();
