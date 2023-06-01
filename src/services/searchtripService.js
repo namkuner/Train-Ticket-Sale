@@ -181,10 +181,98 @@ const findby2chieu = async (diemXuatPhat,diemDen) => {
       throw e;
     }
   };
+  const tongHopVeTautheothoigian = async (tuNgay, denNgay) => {
+    try {
+      const dateRange = getDateRange(tuNgay, denNgay);
+      const result = [];
+      let total =0 
+      for (let i = 0; i < dateRange.length; i++) {
+        const startDay = dateRange[i];
+        const endDay = dateRange[i + 1] || denNgay;
+  
+        const count = await db.Ticket.count({
+          where: {
+            createdAt: {
+              [Op.between]: [startDay, endDay],
+            },
+            trangThai: 1,
+          },
+        });
+        total += count
+        result.push({
+          ngay: startDay,
+          totalTickets: count,
+        });
+      }
+      result.push({
+        ngay : "Tổng",
+        total :total
+      })
+  
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
+  
+  const getDateRange = (startDate, endDate) => {
+    const dateRange = [];
+    const currentDate = new Date(startDate);
+    const lastDate = new Date(endDate);
+  
+    while (currentDate <= lastDate) {
+      dateRange.push(currentDate.toISOString().split('T')[0]);
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+  
+    return dateRange;
+  };
+let vetautheotrainid= async()=>{
+  try {
+    const trainIds = await db.Trip.findAll({
+      attributes: ['id',"diemDen","diemXuatPhat"],
+    });
+    const result = {};
+
+    for (let i = 0; i < trainIds.length; i++) {
+      const trainId = trainIds[i].id;
+      console.log("trainId",trainId)
+      const count = await db.Ticket.count({
+        where: {
+          trainId: trainId,
+          trangThai: 1,
+        },
+      });
+      const diemDi = trainIds[i].diemXuatPhat;
+      const diemDen = trainIds[i].diemDen;
+      const key = `${diemDi}-${diemDen}`;
+
+      if (result[key]) {
+        result[key].totalTickets += count;
+      } else {
+        result[key] = {
+          diemDi: diemDi,
+          diemDen: diemDen,
+          totalTickets: count,
+        };
+      }
+    }
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
+  
+
 
 module.exports = {
     handleSearchTripTrue: handleSearchTripTrue,
     tongsoveban:tongsoveban,
     tongsovebantheodiemdi:tongsovebantheodiemdi,
     alltongsovebantheodiemdi:alltongsovebantheodiemdi,
+    findby2chieu:findby2chieu,
+    getDateRange:getDateRange,
+    tongHopVeTautheothoigian:tongHopVeTautheothoigian,
+    vetautheotrainid:vetautheotrainid
 }

@@ -33,7 +33,15 @@ let loginn = async (req, res) => {
     if(result.message=="Bạn đã đăng nhập thành công")
     {
         idlogin = result.data.id;
-        return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
+        if(result.data.roleID==1)
+        {
+            let data = await dangNhapDangKyService.dataAdmin();
+            return res.render("AdminPage/ejs/admin",{idlogin:idlogin,user:data})
+        }
+        else
+        {
+            return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
+        }
     }
     else
     {
@@ -107,7 +115,8 @@ let formCreateTrip = (req, res) => {
 
 let doneCreateTrip = async (req, res) => {
     let message = await tripCRUD.createNewTrip(req.body)
-    return res.send("Tạo thành công!")
+
+    return res.redirect('/AdminPage/ejs/quanlilichtrinh')
 }
 
 let xemTrip = async (req, res) => {
@@ -189,7 +198,7 @@ let dataBooker = (req, res) => {
 let completeDatabooker = async (req, res) => {
     let message = await nguoidatveService.createNewBooker(req.body);
     console.log(message)
-    return res.send('post crud from sever');
+    return res.redirect('/');
 }
 
 let displaybooker = async (req, res) => {
@@ -353,8 +362,8 @@ let tonghoptauve = async(req,res)=>{
     let data = req.body
     console.log(data)
     if(data.typeid == "1") {
-        const theothoigian = await searchtripService.tonghopvetaufromdaytoday(data.tuNgay, data.denNgay)
-        console.log("type1 fromdaytoday",theothoigian)
+        const theothoigian = await searchtripService.tongHopVeTautheothoigian(data.tuNgay, data.denNgay)
+        console.log("type1 fromdaytoday",theothoigian.total)
         let isdata = data.typeid
         res.render("tonghopthongtin.ejs",{isdata:isdata,ticket:theothoigian, time : data})
     }
@@ -386,9 +395,8 @@ let tonghoptauve = async(req,res)=>{
     {
         
         let isdata = data.typeid
-        const alltheo2chieu = await searchtripService.getTotalTicketsByRoute()
-        console.log(alltheo2chieu)
-        console.log(alltheo2chieu[0].diemDen)
+        const alltheo2chieu = await searchtripService.vetautheotrainid()
+        console.log("alltheo2chieu",alltheo2chieu)
         res.render("tonghopthongtin.ejs",{isdata:isdata,ticket:alltheo2chieu})
 
     }

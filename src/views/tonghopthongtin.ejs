@@ -48,26 +48,21 @@
         </div>
         <% if (isdata=="1") {%>
           <h3> Từ ngày <%= time.tuNgay %> đến ngày <%= time.denNgay %></h3>
-          <h4>Tổng số : <%= ticket.length %></h4>
+          <h4>Tổng số : <%= ticket[ticket.length-1].total %></h4>
 
           <table class="table">
           <thead>
           <tr>
-            <th scope="col">Điểm Đi</th>
-            <th scope="col">Điểm tới</th>
-            <th scope="col">Ngày đi</th>
-            <th scope="col">Tên tàu</th>
-            <th scope="col">Ghế</th>
+            <th scope="col">Ngày</th>
+            <th scope="col">Tổng vé</th>
+
           </tr>
         </thead>
         <tbody>
           <% for (let i = 0; i < ticket.length; i++) { %>
             <tr>
-              <td><%= ticket[i].train.diemXuatPhat %></td>
-              <td><%= ticket[i].train.diemDen %></td>
-              <td><%= ticket[i].train.thoiGianDi %></td>
-              <td><%= ticket[i].train.tenTau %></td>
-              <td><%= ticket[i].tenGhe %></td>
+              <td><%= ticket[i].ngay %></td>
+              <td><%= ticket[i].totalTickets %></td>
 
             </tr>
           <% } %>
@@ -370,33 +365,33 @@
                 <button class="btn btn-primary" type="submit">Tra</button>
               </div>
             </div>
-
+            <% if (isdata=="5") {%>
+                <h3> Thống kê số vé theo các tuyến</h3>
+                <!-- <h4>Tổng số : <%= ticket.length %></h4> -->
+              
+                <table class="table">
+                <thead>
+                <tr>
+                  <th scope="col">Điểm đi</th>
+                  <th scope="col">Điểm Đến</th>
+                  <th scope="col">Tổng số vé bán được</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let key in ticket) { %>
+                  <tr>      
+                    <td><%= ticket[key].diemDi  %></td>
+                    <td><%= ticket[key].diemDen %></td>
+                    <td><%= ticket[key].totalTickets %></td>
+              
+                  </tr>
+                <% } %>
+              </tbody>
+              </table>
+                <%}  %>
           </form>
         </div>
-        <% if (isdata=="5") {%>
-          <h3> Thống kê số vé theo các tuyến</h3>
-          <!-- <h4>Tổng số : <%= ticket.length %></h4> -->
         
-          <table class="table">
-          <thead>
-          <tr>
-            <th scope="col">Điểm đi</th>
-            <th scope="col">Điểm Đến</th>
-            <th scope="col">Tổng số vé bán được</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% for (let i = 0; i < ticket.length; i++) { %>
-            <tr>      
-              <td><%= ticket[i].dataValues.diemXuatPhat  %></td>
-              <td><%= ticket[i].dataValues.diemDen %></td>
-              <td><%= ticket[i].dataValues.totalTickets %></td>
-        
-            </tr>
-          <% } %>
-        </tbody>
-        </table>
-          <%}  %>
       </div>  
             <style>.container {
                 max-width: 90%;

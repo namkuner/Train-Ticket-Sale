@@ -19,7 +19,7 @@ let createNewTrip = (data) => {
             const ves = [];
             for (let i = 1; i <= data.soGhe; i++) {
                 ves.push({
-                    trangThai: 1,
+                    trangThai: 0,
                     tenGhe : 'SG'+i,
                     giaVe : tau.giaVe,
                     toa: Math.ceil(i / toa).toString(),
