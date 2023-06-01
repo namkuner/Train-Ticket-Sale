@@ -9,6 +9,8 @@
 		integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+	<script src="/src/services/nguoidatveService.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -439,6 +441,7 @@ h5 {
 						<p>Điểm đến: <%= diemDen %></p>
 						<p>Thời gian đi: <%= thoiGianDi %></p>
 
+
 						<script>
 							var urlParams = new URLSearchParams(window.location.search);
 							var seatCount = urlParams.get('Sove');
@@ -448,7 +451,9 @@ h5 {
 							var giaVe = giaVeElement.value;
 							// Sử dụng giá trị giaVe theo nhu cầu của bạn
 							console.log(giaVe); // In giá trị giaVe ra console
+
 						</script>
+  
 
 						<!--------------------------------------------------------------------------->
 
@@ -565,75 +570,37 @@ h5 {
 						  
 							  var hiddenTongtienInput = document.querySelector('input[name="Tongtien"]');
 							  hiddenTongtienInput.value = Tongtien;
-						  
-							  // Thêm đoạn mã để lấy danh sách các phần tử <p> chứa ID vé
-							 /* var idElements = document.querySelectorAll('p');
-							  var ids = [];
-							  idElements.forEach(function(element) {
-								var id = element.textContent.replace('Id: ', '');
-								ids.push(id);
-							  });
-						  
-							  // Gán giá trị ids vào input hidden trong form
-							  var hiddenTicketIdInput = document.querySelector('input[name="ticketId"]');
-							  hiddenTicketIdInput.value = ids.join(',');
-
-							  const urlParams = new URLSearchParams(window.location.search);
-							  const idValues = urlParams.getAll('id');
-							  ids = ids.concat(idValues);*/
-							  ////////////////////////////////////////////////////////////26/
-/*
-							  const ticketIdsString = '<%= id %>'; // Chuỗi ID vé (ví dụ: "id,id,id,...")
-const ticketIdArray = ticketIdsString.split(',');
-
-// Lặp qua mảng ticketIdArray và tạo các đối tượng bookingData
-const bookingDataArray = ticketIdArray.map(ticketId => {
-  return {
-    customerId: customerId, // Lấy giá trị từ đâu đó, ví dụ: customerId
-    ticketId: ticketId.trim() // Xóa khoảng trắng xung quanh id
-  };
-});
-
-const urlParams = new URLSearchParams(window.location.search);
-const ticketIds = urlParams.getAll('id');
-*/
-// Tiếp tục xử lý với mảng bookingDataArray để tạo các booking trong bảng bookingg
-/*
-var idString = '<%= id %>'; // Chuỗi chứa các ID vé dạng id,id,id...
-var ticketIds = idString.split(','); // Tách chuỗi thành mảng các ID vé
-*/
-
-// Lấy các giá trị ID vé từ trang và gán cho mảng ticketIds
-/*
-const ticketIds = [];
-const ticketElements = document.getElementsByClassName('ticket-id');
-for (const element of ticketElements) {
-  const ticketId = element.textContent;
-  ticketIds.push(ticketId);
-}*/
-// Khởi tạo mảng TicketIds trống
-// Khởi tạo mảng TicketIds trống
-// Khởi tạo mảng TicketIds trống
 
 
 
+							
+	
+  const ids = [];
 
+  urlParams.forEach((value, key) => {
+    if (key === "id") {
+      ids.push(value);
+    }
+  });
+  const ticketIds = ids;
+  //console.log(ids); // Kiểm tra giá trị của mảng ids trong console
 
-const TicketIds = [];
+  // Gửi mảng IDs đến tệp JavaScript
+  /*const script = document.createElement('script');
+  script.innerHTML = `const ticketIds = ${JSON.stringify(ticketIds)};`;
+  document.body.appendChild(script);*/
 
-// Tách chuỗi thành mảng các ID riêng biệt
-const idsString = '<%= id %>';
-const idsArray = idsString.split(',');
-
-// Lặp qua từng phần tử của mảng và gán vào mảng TicketIds
-for (const id of idsArray) {
-  // Thêm ID vào mảng TicketIds
-  TicketIds.push(id);
-}
-
-// Sử dụng biến ticketIds để truy cập vào các phần tử của mảng
-const ticketIds = TicketIds;
-
+const script = document.createElement('script');
+script.innerHTML = `const ids = ${JSON.stringify(ids)};`;
+document.body.appendChild(script);
+  axios.post('/complete-databooker', { ids: ticketIds })
+  .then(response => {
+    //console.log(response.data);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+  
 
 
 							  /////////////////////////////////////////////////////////
@@ -645,7 +612,7 @@ const ticketIds = TicketIds;
 							  });
 							});
 						</script>
-						
+					
 						  
 						<p style="width: 1140px;padding-left: 30px;font-weight: 570;color: #2fa4e7;margin-top: 15px;">Để ngăn chặn dịch bệnh COVID-19, ĐSVN kính mong quý khách hàng nhập đúng thông tin số điện thoại để trong trường hợp cần thông báo chúng tôi có thể liên hệ với quý khách hàng nhanh nhất có thể.</p>
 						<!--------------------------------------------------------------------------->
