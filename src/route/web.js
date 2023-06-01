@@ -74,6 +74,8 @@ let initWebRouters = (app) => {
 
     //Trang điền thông tin người đặt vé
     router.get('/HomePage/ejs/dataCustomer', homeControllers.dataBooker);
+    //Hiện thông báo đặt thành công
+    router.get('/HomePage/ejs/thongbao', homeControllers.dataBooker1);
 
 
 
