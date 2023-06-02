@@ -146,24 +146,6 @@ let searchTrips = async (keyword) => {
     }
 }
 
-let searchTrips = async (keyword) => {
-    try {
-        const searchResults = await db.Trip.findAll({
-            where: {
-                [Op.or]: [
-                    { diemXuatPhat: { [Op.like]: `%${keyword}%` } },
-                    { diemDen: { [Op.like]: `%${keyword}%` } },
-                ]
-            },
-        });
-        
-        console.log(searchResults)
-        return searchResults;
-    } catch (e) {
-        // throw new Error('Lỗi khi tìm kiếm lịch trình');\
-        console.log(e)
-    }
-}
 
 module.exports = {
     getAllDataTrip: getAllDataTrip,
