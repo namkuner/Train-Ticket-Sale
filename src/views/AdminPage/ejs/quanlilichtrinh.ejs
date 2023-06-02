@@ -413,7 +413,8 @@ button:hover {
             <th scope="col">Điểm xuất phát</th>
             <th scope="col">Điểm đến</th>
             <th scope="col">Thời gian đi</th>
-            <th scope="col">Thời gian đến</th>
+            <th scope="col">Số vé đã bán</th>
+            <th scope="col">Số vé chưa bán</th>
             <th scope="col">Số toa</th>
             <th scope="col">Tên tàu</th>
             <th scope="col">Chức năng</th>
@@ -423,28 +424,33 @@ button:hover {
         <% for (let i=0; i < trip.length; i++) { %>
             <tr>
                 <td>
-                    <%= trip[i].diemXuatPhat %>
+                    <%= trip[i].train.diemXuatPhat %>
                 </td>
                 <td>
-                    <%= trip[i].diemDen %>
+                    <%= trip[i].train.diemDen %>
                 </td>
                 <td>
-                    <%= trip[i].thoiGianDi %>
+                    <%= trip[i].train.thoiGianDi %>
                 </td>
                 <td>
-                    <%= trip[i].thoiGianDen %>
+                    <%= trip[i].totalTickets %>
                 </td>
                 <td>
-                    <%= trip[i].soToa %>
+                    <%= trip[i].train.soGhe-trip[i].totalTickets %>
                 </td>
                 <td>
-                    <%= trip[i].tenTau %>
+                    <%= trip[i].train.soToa %>
+                </td>
+                <td>
+                    <%= trip[i].train.tenTau %>
                 </td>
 
                 <td>
                     <div class="button-container">
-                        <a href="/edit-trip?id=<%=trip[i].id %>" class="edit-button" type="button">Edit</a>
-                        <a href="/delete-trip?id=<%=trip[i].id %>" class="delete-button" type="button">Delete</a>
+                        <a href="/xemvetau?id=<%=trip[i].train.id %>" class="edit-button" type="button">Xem Vé</a>
+                        <a href="/edit-trip?id=<%=trip[i].train.id %>" class="edit-button" type="button">Edit</a>
+                        <a href="/delete-trip?id=<%=trip[i].train.id %>" class="delete-button" type="button">Delete</a>
+                        
                     </div>
                 </td>
             </tr>

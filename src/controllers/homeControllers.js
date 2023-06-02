@@ -418,7 +418,7 @@ let insertUser3 = async(req, res)=>{
     return res.render('../views/AdminPage/ejs/thongtindat.ejs',{dataTable:data})
 }
 let insertUser4 = async(req, res)=>{
-    let data = await tripCRUD.getAllDataTrip();
+    let data = await tripCRUD.getTrainInfoWithTicketCount();
     return res.render('../views/AdminPage/ejs/quanlilichtrinh.ejs',{trip:data})
 }
 let insertUser7 = async(req, res)=>{
@@ -474,7 +474,12 @@ let hienthivetau = async (req, res) => {
         thoiGianDi: thoiGianDi,
     });
 }
-
+let vetau  = async (req, res) =>{
+    let tauid = req.query.id
+    console.log("tauid",tauid)
+    let data = await tripCRUD.hienthive(tauid);
+    res.render("hienthive.ejs",{ve:data})
+}
 /*---------------------------------*/
 let tonghopthongtin = async(req,res)=>{
     let isdata = null
@@ -572,7 +577,7 @@ module.exports = {
     tonghoptauve : tonghoptauve,
     themnhanvien:themnhanvien,
     completethemnhanvien:completethemnhanvien,
-
+    vetau:vetau,
     //BOOKING
     dataBooker: dataBooker,
     completeDatabooker: completeDatabooker,

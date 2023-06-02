@@ -34,9 +34,11 @@ let createNewTrip = (data) => {
         }
     });
 };
+
 let getAllDataTrip = () => {
     return new Promise(async (resolve, reject) => {
         try {
+
             let data = await db.Trip.findAll();
             resolve(data)
         }
@@ -45,6 +47,37 @@ let getAllDataTrip = () => {
         }
     })
 }
+const getTrainInfoWithTicketCount = async () => {
+    try {
+      // Lấy tất cả thông tin của các chuyến tàu
+      const trains = await db.Trip.findAll();
+  
+      // Duyệt qua từng chuyến tàu và lấy số vé bán được
+      const result = [];
+      for (let i = 0; i < trains.length; i++) {
+        const train = trains[i];
+        const trainId = train.id;
+  
+        // Đếm số vé bán được cho chuyến tàu hiện tại
+        const count = await db.Ticket.count({
+          where: {
+            trainId: trainId,
+            trangThai: 1,
+          },
+        });
+  
+        // Thêm thông tin vào kết quả
+        result.push({
+          train: train,
+          totalTickets: count,
+        });
+      }
+  
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
 
 let getTripInforById = (tripId) => {
     return new Promise(async (resolve, reject) => {
@@ -129,4 +162,5 @@ module.exports = {
     getTripInforById: getTripInforById,
     deteleTripById: deteleTripById,
     hienthive:hienthive,
+    getTrainInfoWithTicketCount:getTrainInfoWithTicketCount
 }
