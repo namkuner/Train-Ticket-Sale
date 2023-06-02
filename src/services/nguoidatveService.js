@@ -1,5 +1,9 @@
 //import { Promise } from 'sequelize';
 import db from '../models/index';
+const { Ticket } = require('../models'); // Đường dẫn và tên file mô hình có thể khác tùy thuộc vào cấu trúc của dự án
+
+// Tiếp tục sử dụng biến `Tickets` trong code của bạn
+
 
 
 let createNewBooker = (data, ids) => {
@@ -192,6 +196,48 @@ let getBookerInforById = (bookerId) => {
         }
     })
 }
+/*************************************************************************************2/6*/ 
+let detailTicked = (bookerId) => {
+  return new Promise(async(resolve, reject) => {
+    try {
+      let bookings = await db.Bookingg.findAll({
+        where: { customerId: bookerId - 1 },
+        attributes: ['ticketId'], // Chỉ lấy trường ticketId
+        raw: true,
+      });
+
+      let ticketIds = bookings.map((booking) => booking.ticketId); // Lấy các giá trị ticketId từ kết quả truy vấn
+
+      let ticketDetails = await db.Ticket.findAll({
+        where: { id: ticketIds },
+        attributes: ['id', 'toa', 'tenGhe', 'giaVe'],
+        raw: true,
+      });
+
+      resolve(ticketIds, ticketDetails);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+const getTicketDetails = async (ticketIds) => {
+  try {
+    let ticketDetails = await db.Ticket.findAll({
+      where: {
+        id: ticketIds
+      },
+      attributes: ['id', 'toa', 'tenGhe', 'giaVe'],
+      raw: true
+    });
+
+    return ticketDetails;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+/*************************************************************************************2/6*/ 
 let updateBookerData = (data) => {
     return new Promise(async(resolve, reject) => {
         try{
@@ -237,4 +283,6 @@ module.exports = {
     getBookerInforById: getBookerInforById,
     updateBookerData: updateBookerData,
     deleteBookerById: deleteBookerById,
+    detailTicked: detailTicked,
+    getTicketDetails: getTicketDetails
 }  

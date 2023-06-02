@@ -46,6 +46,9 @@ let initWebRouters = (app) => {
     router.post('/complete-databooker', homeControllers.completeDatabooker);
     router.get('/get-databooker', homeControllers.displaybooker);
     router.get('/edit-databooker', homeControllers.editbooker);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    router.get('/detail-databooker', homeControllers.detailbooker);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //xoá người đặt vé
     router.get('/delete-databooker', homeControllers.deletebooker)

@@ -6,6 +6,7 @@ import tripCRUD from "../services/tripCRUD"
 import searchtripService from "../services/searchtripService"
 
 
+
 // import { strictRight } from "sequelize/types/lib/operators";
 const ejs = require('ejs');
 const path = require('path');
@@ -306,6 +307,26 @@ let editbooker = async (req, res) => {
         return res.send('Booker not found!');
     }
 }
+/*nút mô tả người đặt vé*/
+let detailbooker = async (req, res) => {
+    let bookerId = req.query.id;
+    if (bookerId) {
+        let ticketIds = await nguoidatveService.detailTicked(bookerId);
+        let ticketDetails = await nguoidatveService.getTicketDetails(ticketIds);
+        console.log('-----------------------');
+        console.log(ticketIds);
+        console.log(ticketDetails);
+        console.log('-----------------------');
+        return res.render('detailbooker.ejs', {
+            booker: ticketIds,
+            ticketDetails: ticketDetails
+        });
+    } else {
+        return res.send('Không tìm thấy Booker!');
+    }
+}
+
+
 /*Sau khi sửa xong chuyển đến trang displaybooker2.ejs để xác nhận sửa thành công*/
 let putbooker = async (req, res) => {
     let data = req.body;
@@ -511,6 +532,7 @@ module.exports = {
     completeDatabooker: completeDatabooker,
     displaybooker: displaybooker,
     editbooker: editbooker,
+    detailbooker: detailbooker,
     putbooker: putbooker,
     deletebooker: deletebooker,
     //Trip
