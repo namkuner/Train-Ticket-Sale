@@ -82,6 +82,9 @@ let initWebRouters = (app) => {
     //Hiện thông báo đặt thành công
     router.get('/HomePage/ejs/thongbao', homeControllers.dataBooker1);
 
+    //Trang xem thông tin vé của khách hàng
+    router.get('/HomePage/ejs/quanlidatcho',homeControllers.insertUser7)
+
 
 
     /*router.get('/admin', (req, res) => {

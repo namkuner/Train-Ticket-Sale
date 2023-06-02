@@ -377,7 +377,7 @@ table th {
 .et-widget {
     border: 1px solid #ccc;
     padding-bottom: 20px;
-    margin-top: 10px;
+    margin-top: 17px;
 	width: 240px;
 }
 /**/
@@ -656,7 +656,7 @@ img {
 								<a class="nav-link active" aria-current="page" href="#">Thông tin lịch trình</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="/HomePage/ejs/quanlidatcho">Quản lý đặt chỗ</a>
+								<a class="nav-link active" aria-current="page" href="#">Quản lý đặt chỗ</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page"
@@ -678,249 +678,15 @@ img {
 				<img class=" w-75" style="max-width: 130px;" src="https://scontent.fsgn13-2.fna.fbcdn.net/v/t1.15752-9/346104697_1569997260076324_3939682777754183455_n.png?_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=olcx-YTmVwQAX8ERTCk&_nc_ht=scontent.fsgn13-2.fna&oh=03_AdSYR9Wjzj0lDf6HhC2fmD9Q2OKdofwa0NmxS_5bKelWOQ&oe=64868227" alt="cac dich vu">
 			</div>
 
+
+
+            
+
 			<div class="container  pt-5 px-0 pb-5">
 				<div class="grid">
 					<div class="row">
 		<div class="wrapper">
 			<div class="left-column">
-
-
-<% for (let i=0; i < trip.length; i++) { %>
-<div class="row et-page-header">
-	<span class="et-main-label ng-binding">
-		<strong class="ng-binding">Chiều đi:</strong> ngày <%= trip[i].thoiGianDi %> từ <%= trip[i].diemXuatPhat %> đến <%= trip[i].diemDen %>
-	</span>
-</div>
-<% } %>
-
-
-<!---->
-<div class="row et-train-list" style="margin-bottom: 44px;">
-	<div class="previous-train et-col-md-1 text-center">
-		<div class="et-pre-train ng-scope et-arrow-disabled" ng-class="{'et-arrow-disabled': !canShiftBack}" ng-click="chuyenTruoc(true)" tooltip="Tàu trước">
-			<div class="et-arrow-left"></div>
-		</div>
-	</div>
-	<div class="train-group">
-		<% for (let i=0; i < trip.length; i++) { %>
-		<!-- end ngRepeat: tau in onScreenGoingTrains -->
-		<div class="col-xs-4 col-sm-3 et-col-md-2 et-train-block ng-scope" ng-repeat="tau in onScreenGoingTrains" ng-click="doiChuyen(tau, false)" analytics-on="click" analytics-event="SelectTrain">
-			<div class="et-train-head" ng-class="{'et-train-head-selected': tau.MacTau == searchData.tauDi.MacTau}">
-				<div class="row center-block" style="width: 40%; margin-bottom: 3px; margin-top: 1px">
-					<div class="et-train-lamp text-center ng-binding" ng-style="{color: tau.HasCheapTicket?'#bf8c01':'#555555'}" style="color: rgb(85, 85, 85); margin-top: 4px;"><%= trip[i].tenTau %></div>
-				</div>
-				<div class="et-train-head-info">
-					<div class="row et-no-margin">
-						<span class="pull-left et-bold ng-binding" style="margin-left: -7px;"><strong>TG đi</strong></span> 
-						<span class="pull-right ng-binding"><%= trip[i].thoiGianDi %></span>
-					</div>
-					<div class="row et-no-margin">
-						<span class="pull-left et-bold ng-binding" style="margin-left: -7px;"><strong>TG đến</strong></span> 
-						<span class="pull-right"></span> 
-						<span class="pull-right ng-binding"><%= trip[i].thoiGianDen %></span>
-					</div>
-					<div class="row et-no-margin">
-						<div class="et-col-50">
-							<div class="et-text-sm ng-binding" style="margin-left: -8px;">SL chỗ đặt</div>
-							<div class="et-text-large et-bold pull-left ng-binding" style="margin-left: 5px; font-size: 14px;">10</div>
-						</div>
-						<div class="et-col-50 text-center">
-							<div class="et-text-sm ng-binding" style="margin-left: -8px;">SL chỗ trống</div>
-							<div class="et-text-large et-bold pull-right ng-binding" style="margin-right: 5px; font-size: 14px;">122</div>
-						</div>
-					</div>
-				</div>
-				<div class="row et-no-margin">
-					<div class="et-col-50">
-						<span class="et-train-lamp-bellow-left"></span>
-					</div>
-					<div class="et-col-50">
-						<span class="et-train-lamp-bellow-right"></span>
-					</div>
-				</div>
-			</div>
-		<div class="et-train-base"></div>
-		<div class="et-train-base-2"></div>
-		<div class="et-train-base-3"></div>
-		<div class="et-train-base-4"></div>
-		<div class="et-train-base-5"></div>
-		</div>
-		<% } %>
-	</div>
-	<div class="next-train col-md-1 text-center pull-right">
-		<div class="et-next-train ng-scope" ng-class="{'et-arrow-disabled': !canShiftForward}" ng-click="chuyenSau(true)" tooltip="Tàu sau">
-			<div class="et-arrow-right"></div>
-		</div>
-	</div>
-</div>
-
-
-<!----------->
-
-	<table class="table" id="trip-table" style="margin-bottom: 25px;">
-		<tbody>
-		  <% for (let i=0; i < trip.length; i++) { %>
-			<tr class="trip-row" data-train-index="<%= i %>">
-			  <td>
-				<% for (let j=0; j < trip[i].soToa; j++) { %>
-					<!--<a href="/vetau?id=<%= trip[i].id %>&toa=<%= trip[i].soToa - j %>">--><div class="et-car-block ng-scope toa-tau" ng-repeat="toa in searchData.tauDi.ToaXes" data-train-index="<%= i %>">
-					<div analytics-on="click" analytics-event="SelectCar" class="et-car-icon et-car-icon-avaiable" style="margin-left: -10px; margin-right: -10px;" ng-click="doiToaMoi(toa, false)" ng-class="{'et-car-icon-avaiable': toa.ToaXeStatus == 1 &amp;&amp; !toa.IsSelected, 'et-car-icon-full': toa.ToaXeStatus == 0 &amp;&amp; !toa.IsSelected, 'et-car-icon-selected': toa.IsSelected, 'et-car-icon-sold-out': toa.ToaXeStatus == 2 &amp;&amp; !toa.IsSelected}">
-					  <img src="https://dsvn.vn/images/trainCar2.png">
-					</div>
-					<div class="text-center text-info et-car-label ng-binding"><%= trip[i].soToa - j %></div>
-				  </div><!--</a>-->
-				<!------------------------------------------------------------------->
-
-				<!---------------------------------------------------------------------------->
-				<% } %>
-				<div class="et-car-block" style="margin-left: -12px;">
-				  <div class="et-car-icon">
-					<img src="https://dsvn.vn/images/train2.png" class="train-image">
-				  </div>
-				  <div class="text-center text-info et-car-label ng-binding" style="margin-left: -25px;"><%= trip[i].tenTau %></div>
-				</div>
-				
-			  </td>
-			</tr>
-		  <% } %>
-		</tbody>
-	  </table>
-	  
-	  <div id="selected-car-info">
-		<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-		  <h4 id="selected-car-name" class="ng-binding"></h4>
-		</div>
-	  </div>
-
-<!----------->
-	
-	<!----------------------------------------------------------------------------------------------->
-
-	<!----------------------------------------------------------------------------------------------->
-
-	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-		  const trainBlocks = document.querySelectorAll('.et-train-block');
-		  const tripRows = document.querySelectorAll('.trip-row');
-		  const tripTable = document.getElementById('trip-table');
-
-		  let selectedTrainId; // Biến để lưu id của chuyến tàu đang được chọn
-	  
-		  function applyEffect(index) {
-			// Xóa lớp et-train-head-selected khỏi tất cả các phần tử et-train-head
-			document.querySelectorAll('.et-train-head').forEach(trainHead => {
-			  trainHead.classList.remove('et-train-head-selected');
-			});
-	  
-			// Thêm lớp et-train-head-selected vào phần tử et-train-head tương ứng
-			trainBlocks[index].querySelector('.et-train-head').classList.add('et-train-head-selected');
-
-			// Ẩn tất cả các hàng dữ liệu trong bảng
-			tripRows.forEach(row => {
-			  row.style.display = 'none';
-			});
-	  
-			// Hiển thị hàng dữ liệu tương ứng với phần tử được nhấp chuột
-			tripRows[index].style.display = 'table-row';
-		  }
-	  
-		  trainBlocks.forEach((trainBlock, index) => {
-			trainBlock.addEventListener('click', () => {
-			  applyEffect(index);
-			});
-		  });
-	  
-		  // Áp dụng hiệu ứng cho phần tử đầu tiên
-		  applyEffect(0);
-		});
-	</script>
-
-	<!--đổi màu toa tàu-->
-
-	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-  		  const etCarIcons = document.querySelectorAll('.et-car-icon-avaiable');
-          const selectedCarName = document.getElementById('selected-car-name');
-
-  		  // Áp dụng lớp 'selected' cho toa số 1 khi trang được tải
-  		  if (etCarIcons.length > 0) {
-    	    etCarIcons[0].classList.add('selected');
-            const selectedCarNumber = etCarIcons[0].nextElementSibling.textContent;
-            selectedCarName.textContent = "Toa số " + selectedCarNumber;
-          }
-
-          etCarIcons.forEach(etCarIcon => {
-    		etCarIcon.addEventListener('click', () => {
-      		// Xóa lớp 'selected' khỏi tất cả các phần tử .et-car-icon-avaiable
-      		etCarIcons.forEach(icon => {
-        	  icon.classList.remove('selected');
-      		});
-
-      	  // Thêm lớp 'selected' vào phần tử được nhấp chuột
-          etCarIcon.classList.add('selected');
-          const selectedCarNumber = etCarIcon.nextElementSibling.textContent;
-          selectedCarName.textContent = "Toa số " + selectedCarNumber;
-        });
-      });
-    });
-	</script>
-	  
-<!------> 
-
-				<table class="table" style="margin-left: -50px;margin-top: 20px;">
-					<thead>
-						<tr>
-							<th scope="col">Điểm xuất phát</th>
-							<th scope="col">Điểm đến</th>
-							<th scope="col">Thời gian đi</th>
-							<th scope="col">Thời gian đến</th>
-							<th scope="col">Giá vé</th>
-							<th scope="col">Tên tàu</th>
-							<th scope="col">Số toa</th>
-							<th scope="col">Số ghế</th>
-							<th scope="col">Chức năng</th>
-						</tr>
-					</thead>
-					<tbody>
-						<% for (let i=0; i < trip.length; i++) { %>
-							<tr>
-								<td>
-									<%= trip[i].diemXuatPhat %>
-								</td>
-								<td>
-									<%= trip[i].diemDen %>
-								</td>
-								<td>
-									<%= trip[i].thoiGianDi %>
-								</td>
-								<td>
-									<%= trip[i].thoiGianDen %>
-								</td>
-								<td>
-									<%= trip[i].giaVe %>
-								</td>
-								<td>
-									<%= trip[i].tenTau %>
-								</td>
-								<td>
-									<%= trip[i].soToa %>
-								</td>
-								<td>
-									<%= trip[i].soGhe %>
-								</td>
-			
-								<td>
-									<div class="button-container">
-										<!--<a href="/vetau?id=<%=trip[i].id %>" class="edit-button" type="button" style="text-decoration: none;">Đặt vé</a>-->
-										<a href="/vetau?id=<%=trip[i].id %>&giaVe=<%= trip[i].giaVe %>&tenTau=<%= trip[i].tenTau %>&diemXuatPhat=<%= trip[i].diemXuatPhat %>&diemDen=<%= trip[i].diemDen %>&thoiGianDi=<%= trip[i].thoiGianDi %>" class="edit-button" type="button" style="text-decoration: none;">Đặt vé</a>
-									</div>
-								</td>
-							</tr>
-							<% } %>
-					</tbody>
-				</table>
-
-
 						<div class="row" ng-show="tauDiKhuyenMaiInfos&amp;&amp;tauDiKhuyenMaiInfos.length>0">
 							<div class="col-md-12">
 								<h4 style="margin-top: 0px; font-size: 18px; margin-bottom: 13px; color: #317eac;" class="ng-binding">Khuyến mại cho chiều đi</h4>
@@ -1074,35 +840,9 @@ img {
 						</div>
 	</div>
 
-	<div class="right-column">
-		<!--<div et-ticket-pocket="" class="list-ticket-deskhop ng-isolate-scope">
-			<div class="col-md-12 et-widget" id="ticketPocket" style="padding-bottom: 8px">
-				<div class="row et-widget-header">
-					<img src="/images/widgetIcon.png">
-					<span>
-						<strong class="ng-binding">Giỏ vé</strong>
-					</span>
-				</div>
-				<div class="row">
-					<div class="col-md-12 text-center" ng-show="searchData.ves.chieuDi.length == 0 &amp;&amp; searchData.ves.chieuVe.length == 0">
-						<h5 sstyle="margin-top: 4px;" class="ng-binding">Chưa có vé</h5>
-					</div>
-					<div class="col-md-12 text-center ng-hide" ng-show="searchData.ves.chieuDi.length > 0 || searchData.ves.chieuVe.length > 0">
-						<h6 class="ng-binding">Chiều đi</h6>
-					</div>
-					<!-- ngRepeat: ve in searchData.ves.chieuDi 
-					<div class="col-md-12 text-center ng-hide" ng-show="searchData.ves.chieuVe.length > 0">
-						<h6 class="ng-binding">Chiều về</h6>
-					</div>
-					<!-- ngRepeat: ve in searchData.ves.chieuVe 
-				</div>
-				<div class="col-md-12 text-center" style="margin-top: 2px">
-					<a analytics-on="click" analytics-event="Checkout" href="" ng-click="pocketDetail($event)" id="btnCheckOut" target="_blank" class="btn btn-sm et-btn ng-binding">Mua vé</a>
-				</div>
-			</div>
-		</div>-->
+	<div class="right-column" style="margin-top: 16px;">
 	<div et-social="" class="ng-isolate-scope" style="margin-left: 45px">
-		<div class="col-md-12 et-widget" style="padding-bottom: 5px;">
+		<div class="col-md-12 et-widget" style="padding-bottom: 8px;">
 			<div class="text-center text-info" style="margin-top: 5px; margin-bottom: 5px;" ng-show="!doneCount">
 				<strong style="font-size:13px;" class="ng-binding"><!--Kết nối với chúng tôi-->Kết nối với chúng tôi</strong>
 			</div>

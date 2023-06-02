@@ -418,6 +418,10 @@ let insertUser4 = async(req, res)=>{
     let data = await tripCRUD.getAllDataTrip();
     return res.render('../views/AdminPage/ejs/quanlilichtrinh.ejs',{trip:data})
 }
+let insertUser7 = async(req, res)=>{
+    let data = await tripCRUD.getAllDataTrip();
+    return res.render('../views/HomePage/ejs/quanlidatcho.ejs',{trip:data})
+}
 /*----------------------------------------------------------------------------------------*/
 
 
@@ -588,6 +592,8 @@ module.exports = {
     deletebooker1: deletebooker1,
     
 //thong báo đặt vé thành công
-    dataBooker1: dataBooker1
+    dataBooker1: dataBooker1,
+
+    insertUser7: insertUser7
 }
 
