@@ -440,15 +440,11 @@ let insertUser3 = async (req, res) => {
     let data = await nguoidatveService.getAllBooker();
     return res.render('../views/AdminPage/ejs/thongtindat.ejs', { dataTable: data })
 }
-<<<<<<< HEAD
+
 let insertUser4 = async(req, res)=>{
     let data = await tripCRUD.getTrainInfoWithTicketCount();
     return res.render('../views/AdminPage/ejs/quanlilichtrinh.ejs',{trip:data})
-=======
-let insertUser4 = async (req, res) => {
-    let data = await tripCRUD.getAllDataTrip();
-    return res.render('../views/AdminPage/ejs/quanlilichtrinh.ejs', { trip: data })
->>>>>>> 840c2c1bc99328788dd876b1532f8412f065be6c
+
 }
 let insertUser7 = async (req, res) => {
     let data = await nguoidatveService.getAllBooker();
@@ -591,7 +587,7 @@ module.exports = {
     insertUser: insertUser,
     thaydoithongtin: thaydoithongtin,
     capnhatthongtin: capnhatthongtin,
-<<<<<<< HEAD
+
     dangxuat :dangxuat,
     xoaiduser :xoaiduser,
     loginn :loginn,
@@ -603,19 +599,7 @@ module.exports = {
     themnhanvien:themnhanvien,
     completethemnhanvien:completethemnhanvien,
     vetau:vetau,
-=======
-    dangxuat: dangxuat,
-    xoaiduser: xoaiduser,
-    loginn: loginn,
-    xemtruocuser: xemtruocuser,
-    thongtincanhan: thongtincanhan,
-    hienthivetau: hienthivetau,
-    tonghopthongtin: tonghopthongtin,
-    tonghoptauve: tonghoptauve,
-    themnhanvien: themnhanvien,
-    completethemnhanvien: completethemnhanvien,
 
->>>>>>> 840c2c1bc99328788dd876b1532f8412f065be6c
     //BOOKING
     dataBooker: dataBooker,
     completeDatabooker: completeDatabooker,
