@@ -42,6 +42,7 @@ let initWebRouters = (app) => {
     router.get('/edit-trip', homeControllers.getEditTripById)
     router.post('/update-trip', homeControllers.updateTrips)
     router.get('/delete-trip', homeControllers.deleteTrip)
+    router.get('/search', homeControllers.searchTrip)
     router.get('/vetau',homeControllers.hienthivetau)
     router.get('/xemvetau',homeControllers.vetau)
     //BOOK

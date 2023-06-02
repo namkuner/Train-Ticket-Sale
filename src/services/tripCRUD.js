@@ -1,4 +1,6 @@
 import db from "../models/index"
+const { Op } = require('sequelize');
+
 
 let createNewTrip = (data) => {
     return new Promise(async (resolve, reject) => {
@@ -87,6 +89,7 @@ let getTripInforById = (tripId) => {
                 raw: true
             })
             if (trip) {
+                console.log(trip)
                 resolve(trip)
             }
             else {
@@ -102,22 +105,24 @@ let getTripInforById = (tripId) => {
 let updateTrip = async (trip) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let data = await db.Trip.findOne({ where: { id: trip.id } });
+            let data = await db.Trip.findOne({
+                where: { id: trip.id }
+            });
             if (data) {
                 data.diemXuatPhat = trip.diemXuatPhat;
                 data.diemDen = trip.diemDen;
                 data.thoiGianDi = trip.thoiGianDi;
                 data.thoiGianDen = trip.thoiGianDen;
                 data.giaVe = trip.giaVe;
-                data.soToa = trip.soToa;
                 data.tenTau = trip.tenTau;
+                data.soToa = trip.soToa;
                 data.soGhe = trip.soGhe;
                 await data.save();
                 let allTrip = await db.Trip.findAll()
                 resolve(allTrip)
             }
         } catch (error) {
-            console.log(error);
+            reject(error)
         }
     })
 
@@ -155,12 +160,33 @@ let hienthive =(tauid)=>{
     })
 }
 
+let searchTrips = async (keyword) => {
+    try {
+        const searchResults = await db.Trip.findAll({
+            where: {
+                [Op.or]: [
+                    { diemXuatPhat: { [Op.like]: `%${keyword}%` } },
+                    { diemDen: { [Op.like]: `%${keyword}%` } },
+                ]
+            },
+        });
+        
+        console.log(searchResults)
+        return searchResults;
+    } catch (e) {
+        // throw new Error('Lỗi khi tìm kiếm lịch trình');\
+        console.log(e)
+    }
+}
+
+
 module.exports = {
     getAllDataTrip: getAllDataTrip,
     createNewTrip: createNewTrip,
     updateTrip: updateTrip,
     getTripInforById: getTripInforById,
     deteleTripById: deteleTripById,
+    searchTrips: searchTrips,
     hienthive:hienthive,
     getTrainInfoWithTicketCount:getTrainInfoWithTicketCount
 }
