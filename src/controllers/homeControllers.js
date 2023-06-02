@@ -58,7 +58,8 @@ let dangxuat = (req,res)=>{
     return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
 }
 let completeRegister = async (req, res) => {
-    let checkSDT = dangNhapDangKyService.inforSDT
+    let data =req.body
+    let checkSDT = dangNhapDangKyService.inforSDT(data)
     if(checkSDT !=null)
     {
         return res.render("dangky.ejs",{er:"Số điện thoại này đã có người đăng ký"})
@@ -108,7 +109,20 @@ let thongtincanhan = async(req,res)=>{
     console.log(data)
     return res.render("thongtincanhan.ejs",{user:data})
 }
-
+let themnhanvien= (req,res)=>{
+    res.render("themnhanvien.ejs",{er:null})
+}
+let completethemnhanvien=async(req,res)=>{
+    let data= req.body
+    let checkSDT = dangNhapDangKyService.inforSDT(data)
+    if(checkSDT !=null)
+    {
+        return res.render("dangky.ejs",{er:"Số điện thoại này đã có người đăng ký"})
+    }
+    let message = await dangNhapDangKyService.createNewUser(req.body); // req.body la data nguoi nhap
+    console.log(message);
+    return res.render("/AdminPage/ejs/admin")
+}
 /*------------------TRIP---------------*/
 
 let formCreateTrip = (req, res) => {
@@ -409,6 +423,7 @@ let tonghoptauve = async(req,res)=>{
         const theothoigian = await searchtripService.tongHopVeTautheothoigian(data.tuNgay, data.denNgay)
         console.log("type1 fromdaytoday",theothoigian.total)
         let isdata = data.typeid
+
         res.render("tonghopthongtin.ejs",{isdata:isdata,ticket:theothoigian, time : data})
     }
     else if(data.typeid == "2")
@@ -444,6 +459,19 @@ let tonghoptauve = async(req,res)=>{
         res.render("tonghopthongtin.ejs",{isdata:isdata,ticket:alltheo2chieu})
 
     }
+    else if (data.typeid =="6")
+    {
+        let data = req.body
+        let ct = await searchtripService.countTrain()*500000
+        console.log("ct",ct)
+        let cu = await searchtripService.countR2()*5000000
+        let doanhthu = await searchtripService.tinhTongTienBanVe(data.tuNgay,data.denNgay)
+        console.log("doanhthu",doanhthu)
+        let loinhuan = doanhthu - ct -cu
+        let isdata = data.typeid 
+        res.render("tonghopthongtin.ejs",{isdata:isdata,dt:doanhthu,ln:loinhuan, time : data,ct:ct,cu:cu})
+    }
+
     
     // console.log("fromdaytoday",data.diemXuatPhat)
     // const tongSoVe = await searchtripService.tongsovebantheodiemdi(data.diemXuatPhat);
@@ -470,6 +498,9 @@ module.exports = {
     hienthivetau:hienthivetau,
     tonghopthongtin:tonghopthongtin,
     tonghoptauve : tonghoptauve,
+    themnhanvien:themnhanvien,
+    completethemnhanvien:completethemnhanvien,
+
     //BOOKING
     dataBooker: dataBooker,
     completeDatabooker: completeDatabooker,

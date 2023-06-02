@@ -19,7 +19,9 @@ let initWebRouters = (app) => {
     //USER
     router.get('/', homeControllers.homepage);
     router.get('/dangky', homeControllers.dangKy);
-    router.post('/complete-register', homeControllers.completeRegister);   
+    router.post('/complete-register', homeControllers.completeRegister); 
+    router.get('/themnhanvien',homeControllers.themnhanvien);
+    router.post('/complete-themnhanvien', homeControllers.completethemnhanvien); 
     router.get('/dangnhap', homeControllers.dangNhap);
     router.post('/login',homeControllers.loginn)
     router.get('/dataUser', homeControllers.insertUser);

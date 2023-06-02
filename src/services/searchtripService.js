@@ -181,39 +181,39 @@ const findby2chieu = async (diemXuatPhat,diemDen) => {
       throw e;
     }
   };
-  const tongHopVeTautheothoigian = async (tuNgay, denNgay) => {
-    try {
-      const dateRange = getDateRange(tuNgay, denNgay);
-      const result = [];
-      let total =0 
-      for (let i = 0; i < dateRange.length; i++) {
-        const startDay = dateRange[i];
-        const endDay = dateRange[i + 1] || denNgay;
-  
-        const count = await db.Ticket.count({
-          where: {
-            createdAt: {
-              [Op.between]: [startDay, endDay],
-            },
-            trangThai: 1,
+const tongHopVeTautheothoigian = async (tuNgay, denNgay) => {
+  try {
+    const dateRange = getDateRange(tuNgay, denNgay);
+    const result = [];
+    let total =0 
+    for (let i = 0; i < dateRange.length; i++) {
+      const startDay = dateRange[i];
+      const endDay = dateRange[i + 1] || denNgay;
+
+      const count = await db.Ticket.count({
+        where: {
+          createdAt: {
+            [Op.between]: [startDay, endDay],
           },
-        });
-        total += count
-        result.push({
-          ngay: startDay,
-          totalTickets: count,
-        });
-      }
+          trangThai: 1,
+        },
+      });
+      total += count
       result.push({
-        ngay : "Tổng",
-        total :total
-      })
-  
-      return result;
-    } catch (error) {
-      throw error;
+        ngay: startDay,
+        totalTickets: count,
+      });
     }
-  };
+    result.push({
+      ngay : "Tổng",
+      total :total
+    })
+
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
   
   const getDateRange = (startDate, endDate) => {
     const dateRange = [];
@@ -263,9 +263,49 @@ let vetautheotrainid= async()=>{
     throw error;
   }
 }
-  
+const countTrain =async()=>{
+  try {
+    const count = await db.Trip.count();
 
+    return count;
+  } catch (error) {
+    throw error;
+  }
+}  
+let countR2 = async()=>{
+  try{
+    let R2 = db.User.count({
+      where :{roleID:"R2"}
+    })
+    return R2
+  }
+  catch(error)
+  {throw error;}
+}
+const tinhTongTienBanVe = async (tuNgay, denNgay) => {
+  try {
+    const tickets = await db.Ticket.findAll({
+      attributes: ['giaVe'],
+      where: {
+        createdAt: {
+          [Op.between]: [tuNgay, denNgay],
+        },
+        trangThai: 1,
+      },
+    });
 
+    let tongTien = 0;
+
+    for (let i = 0; i < tickets.length; i++) {
+      const giaVe = tickets[i].giaVe;
+      tongTien += giaVe;
+    }
+
+    return tongTien;
+  } catch (error) {
+    throw error;
+  }
+};
 module.exports = {
     handleSearchTripTrue: handleSearchTripTrue,
     tongsoveban:tongsoveban,
@@ -274,5 +314,9 @@ module.exports = {
     findby2chieu:findby2chieu,
     getDateRange:getDateRange,
     tongHopVeTautheothoigian:tongHopVeTautheothoigian,
-    vetautheotrainid:vetautheotrainid
+    vetautheotrainid:vetautheotrainid,
+    tongsovebantheodiemden:tongsovebantheodiemden,
+    countTrain:countTrain,
+    countR2:countR2,
+    tinhTongTienBanVe:tinhTongTienBanVe
 }
