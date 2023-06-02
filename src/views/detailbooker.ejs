@@ -374,22 +374,7 @@ a.thoat {
     </div>
 
 
-        <!-- Mã HTML hoặc logic hiển thị khi booker có giá trị và không rỗng 
-        <% var count = 0; %>
-        <ul>
-            <% booker.forEach(function(ticketId) { %>
-                <% if (count < 1) { %>
-                <% var ticketDetail = ticketDetails.find(function(ticket) { return ticket.id === ticketId; }); %>
-                Vé ID: <%= ticketId %><br>
-                <% ticketDetails.forEach(function(ticketDetail) { %>
-                    <p>Toa: <%= ticketDetail.toa %></p>
-                    <p>Tên ghế: <%= ticketDetail.tenGhe %></p>
-                    <p>Giá vé: <%= ticketDetail.giaVe %></p>
-                <% }); %>
-                <% } %>
-                <% count++; %>
-            <% }); %>
-        </ul>   -->
+
         <div class="records">
             <div class="record-header">
                 <div class="add">
@@ -410,37 +395,40 @@ a.thoat {
                 </div>
             </div>
         </div>
+<!------------------------------------------------------------------------------------>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Điểm xuất phát</th>
+        <th>Điểm đến</th>
+        <th>Thời gian đi</th>
+        <th>Tên tàu</th>
+        <th>Toa</th>
+        <th>Tên ghế</th>
+        <th>Giá vé</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (let i = 0; i < ticketIds.length; i++) { %>
+        <tr>
+          <td><%= ticketIds[i]['train.diemXuatPhat'] %></td>
+          <td><%= ticketIds[i]['train.diemDen'] %></td>
+          <td><%= ticketIds[i]['train.thoiGianDi'] %></td>
+          <td><%= ticketIds[i]['train.tenTau'] %></td>
+          <td><%= ticketIds[i].toa %></td>
+          <td><%= ticketIds[i].tenGhe %></td>
+          <td><%= ticketIds[i].giaVe %></td>
+        </tr>
+      <% } %>
+    </tbody>
+</table>
+    <a href="/AdminPage/ejs/thongtindat" class="exit-link">
+        <button class="exit-button">Thoát</button>
+    </a>
 
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col" style="width: 25%;">Toa</th>
-                <th scope="col" style="width: 25%;">Tên ghế</th>
-                <th scope="col" style="width: 25%;">Giá vé</th>
-                <th scope="col" style="width: 25%;">Hành động</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% ticketDetails.forEach(function(ticketDetail) { %>
-                <tr>
-                  <td><%= ticketDetail.toa %></td>
-                  <td><%= ticketDetail.tenGhe %></td>
-                  <td><%= ticketDetail.giaVe %></td>
-                  <td>
-                    <div class="button-container">
-                      <a href="/edit-databooker" class="edit-button" type="button">Edit</a>
-                      <a href="/delete-databooker" class="delete-button" type="button">Delete</a>
-                    </div>
-                  </td>
-                </tr>
-              <% }); %>
-            </tbody>
-          </table>
 
-          <a href="/AdminPage/ejs/thongtindat" class="exit-link">
-            <button class="exit-button">Thoát</button>
-          </a>
-
+          
+<!------------------------------------------------------------------------------------>
 <style>
     .edit-button,
     .delete-button,
@@ -619,27 +607,7 @@ button:hover {
     }
 </style>
           
-          
 
-        <!--<ul>
-            <% booker.forEach(function(ticketId) { %>
-              <% var ticketDetail = ticketDetails.find(function(ticket) { return ticket.id === ticketId; }); %>
-              <li>
-                Vé ID: <%= ticketId %><br>
-                <% if (ticketDetail) { %>
-                  <p>ID: <%= ticketDetail.id %></p>
-                  <p>Toa: <%= ticketDetail.toa %></p>
-                  <p>Tên ghế: <%= ticketDetail.tenGhe %></p>
-                  <p>Giá vé: <%= ticketDetail.giaVe %></p>
-                <% } else { %>
-                  <!-- Xử lý khi không tìm thấy ticketDetail cho ticketId tương ứng 
-                  <p>Không tìm thấy thông tin chi tiết cho vé ID <%= ticketId %></p>
-                <% } %>
-                <p>-----------------------------------------------------</p>
-              </li>
-            <% }); %>
-        </ul>-->
-                
 </section> 
 </body>
 </html>

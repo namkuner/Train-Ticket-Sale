@@ -198,44 +198,59 @@ let getBookerInforById = (bookerId) => {
 }
 /*************************************************************************************2/6*/ 
 let detailTicked = (bookerId) => {
-  return new Promise(async(resolve, reject) => {
-    try {
-      let bookings = await db.Bookingg.findAll({
-        where: { customerId: bookerId - 1 },
-        attributes: ['ticketId'], // Chỉ lấy trường ticketId
-        raw: true,
-      });
-
-      let ticketIds = bookings.map((booking) => booking.ticketId); // Lấy các giá trị ticketId từ kết quả truy vấn
-
-      let ticketDetails = await db.Ticket.findAll({
-        where: { id: ticketIds },
-        attributes: ['id', 'toa', 'tenGhe', 'giaVe'],
-        raw: true,
-      });
-
-      resolve(ticketIds, ticketDetails);
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
-const getTicketDetails = async (ticketIds) => {
-  try {
-    let ticketDetails = await db.Ticket.findAll({
-      where: {
-        id: ticketIds
-      },
-      attributes: ['id', 'toa', 'tenGhe', 'giaVe'],
-      raw: true
+    return new Promise(async (resolve, reject) => {
+      try {
+        let bookings = await db.Bookingg.findAll({
+          where: { customerId: bookerId - 1 },
+          attributes: ['ticketId'], // Chỉ lấy trường ticketId
+          raw: true,
+        });
+  
+        let ticketIds = bookings.map((booking) => booking.ticketId); // Lấy các giá trị ticketId từ kết quả truy vấn
+  
+        let ticketDetails = await db.Ticket.findAll({
+          where: { id: ticketIds },
+          attributes: ['id', 'toa', 'tenGhe', 'giaVe', 'trainId'],
+          include: [
+            {
+              model: db.Trip,
+              as: 'train',
+              attributes: ['diemXuatPhat', 'thoiGianDi', 'tenTau','diemDen']
+            }
+          ],
+          raw: true,
+        });
+  
+        resolve(ticketDetails);
+      } catch (error) {
+        reject(error);
+      }
     });
-
-    return ticketDetails;
-  } catch (error) {
-    throw error;
-  }
-};
-
+  };
+  
+  const getTicketDetails = async (ticketIds) => {
+    try {
+      let ticketDetails = await db.Ticket.findAll({
+        where: {
+          id: ticketIds
+        },
+        attributes: ['id', 'toa', 'tenGhe', 'giaVe', 'trainId'],
+        include: [
+          {
+            model: db.Trip,
+            as: 'train',
+            attributes: ['diemXuatPhat', 'thoiGianDi', 'tenTau']
+          }
+        ],
+        raw: true
+      });
+  
+      return ticketDetails;
+    } catch (error) {
+      throw error;
+    }
+  };
+  
 
 /*************************************************************************************2/6*/ 
 let updateBookerData = (data) => {
