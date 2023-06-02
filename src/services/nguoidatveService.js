@@ -26,7 +26,7 @@ let createNewBooker = (data, ids) => {
         await db.Bookingg.create(bookingData);
 
         await db.Ticket.update(
-          { trangThai: 0 },
+          { trangThai: 1 },
           { where: { id: ticketId } }
         );
       }
