@@ -335,7 +335,7 @@ let detailbooker = async (req, res) => {
         console.log(ticketDetails);
         console.log('-----------------------');
         return res.render('detailbooker.ejs', {
-            booker: ticketIds,
+            ticketIds: ticketIds,
             ticketDetails: ticketDetails
         });
     } else {
