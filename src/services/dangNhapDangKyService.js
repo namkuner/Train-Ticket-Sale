@@ -57,12 +57,12 @@ let checkdangnhap = (user_password)=>{
                     reslove({ message: "Bạn đã đăng nhập thành công", data: data })
                 }
                 else{
-                    reslove("Mật khẩu bạn bị sai mời nhập lại")
+                    reslove({ message: "Mật khẩu bạn bị sai mời nhập lại" })
                 }
                 
             }
             else {
-                reslove("tài khoản của bạn không chính xác! xin mời nhập lại")
+                reslove({message:"tài khoản của bạn không chính xác! xin mời nhập lại"})
             }
         }catch(e)
         {reject(e)}
