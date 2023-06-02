@@ -419,8 +419,8 @@ let insertUser4 = async(req, res)=>{
     return res.render('../views/AdminPage/ejs/quanlilichtrinh.ejs',{trip:data})
 }
 let insertUser7 = async(req, res)=>{
-    let data = await tripCRUD.getAllDataTrip();
-    return res.render('../views/HomePage/ejs/quanlidatcho.ejs',{trip:data})
+    let data = await nguoidatveService.getAllBooker();
+    return res.render('../views/HomePage/ejs/quanlidatcho.ejs',{dataTable:data})
 }
 /*----------------------------------------------------------------------------------------*/
 

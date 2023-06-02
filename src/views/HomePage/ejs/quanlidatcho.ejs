@@ -88,12 +88,14 @@ main {
 	background-color: var(--maincolor);
 	color: #fff;
 	margin-top: 20px;
+    width: 815px;
+    margin-left: 170px;
 }
 
 .some-regulations .container1{
 	background-color: #fff;
 	margin-left: 7px;
-	margin-top: 30px;
+	margin-top: 50%;
 	width: 1140px;
 }
 
@@ -624,6 +626,43 @@ img {
     color: #317eac;
     font-size: 18px;
 }
+.search-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 700px;
+}
+
+#search-button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#search-button:hover {
+  background-color: #0056b3;
+}
+.ticket-info {
+  margin-left: 170px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  width: 815px;
+}
 
 
 
@@ -678,13 +717,53 @@ img {
 				<img class=" w-75" style="max-width: 130px;" src="https://scontent.fsgn13-2.fna.fbcdn.net/v/t1.15752-9/346104697_1569997260076324_3939682777754183455_n.png?_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=olcx-YTmVwQAX8ERTCk&_nc_ht=scontent.fsgn13-2.fna&oh=03_AdSYR9Wjzj0lDf6HhC2fmD9Q2OKdofwa0NmxS_5bKelWOQ&oe=64868227" alt="cac dich vu">
 			</div>
 
-
-
-            
-
 			<div class="container  pt-5 px-0 pb-5">
 				<div class="grid">
 					<div class="row">
+
+
+                        <h5 class="titlegatau text-center mb-0 text-uppercase py-2">XEM THÔNG TIN VÉ:</h5>
+                        <div class="search-box">
+                            <input type="text" id="phone-number" placeholder="Nhập số điện thoại" style="margin-bottom: 26px;">
+                            <button id="search-button" onclick="searchTicket()" style="margin-bottom: 26px;">Tìm kiếm</button>
+                        </div>
+                        <div class="ticket-info">
+                            <p><strong>Họ tên:</strong> <span id="Hoten"></span></p>
+                            <p><strong>Số điện thoại:</strong> <span id="Phone"></span></p>
+                            <p><strong>Email:</strong> <span id="Email"></span></p>
+                            <p><strong>CCCD:</strong> <span id="CCCD"></span></p>
+                            <p><strong>Số vé:</strong> <span id="Sove"></span></p>
+                        </div>
+
+
+                        <table class="table" id="inforbooker" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 12%;">Họ và tên</th>
+                                    <th scope="col" style="width: 10%;">Số điện thoại</th>
+                                    <th scope="col" style="width: 28%;">Email</th>
+                                    <th scope="col" style="width: 10%;">CCCD</th>
+                                    <th scope="col" style="width: 5%;">Số vé</th>
+                                    <th scope="col" style="width: 10%;text-align: center;">Tổng tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(let i=0; i < dataTable.length; i++) {
+                                    if(dataTable[i].Hoten !== null) { %>
+                                      <tr>
+                                          <td><%= dataTable[i].Hoten %></td>
+                                          <td><%= dataTable[i].Phone %></td>
+                                          <td><%= dataTable[i].Email %></td>
+                                          <td><%= dataTable[i].CCCD %></td>
+                                          <td><%= dataTable[i].Sove %></td>
+                                          <td><%= dataTable[i].Tongtien %></td>
+                                      </tr>
+                                  <% }
+                                } %>
+                            </tbody>
+                        </table>
+
+
 		<div class="wrapper">
 			<div class="left-column">
 						<div class="row" ng-show="tauDiKhuyenMaiInfos&amp;&amp;tauDiKhuyenMaiInfos.length>0">
@@ -911,7 +990,7 @@ img {
 	</div>
 </div>
 
-<div class="container1 px-0">
+<div class="container1 px-0" style="margin-top: 10px;">
 	<ul class="nav justify-content-center main-color-bg py-2 ">
 
 		<div class="w-75 text-center">
@@ -967,5 +1046,42 @@ img {
 	</main>
 
 </body>
+<script>
+    function searchTicket() {
+  var phoneNumber = document.getElementById('phone-number').value;
+
+  // Ẩn bảng dữ liệu ban đầu
+  document.getElementById('inforbooker').style.display = 'none';
+
+  // Duyệt qua từng hàng trong bảng
+  var rows = document.querySelectorAll('#inforbooker tbody tr');
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    var Phone = row.querySelector('td:nth-child(2)').innerText;
+
+    // So sánh số điện thoại
+    if (Phone === phoneNumber) {
+      // Nếu trùng khớp, lấy thông tin và hiển thị
+      var Hoten = row.querySelector('td:nth-child(1)').innerText;
+      var Email = row.querySelector('td:nth-child(3)').innerText;
+      var CCCD = row.querySelector('td:nth-child(4)').innerText;
+      var Sove = row.querySelector('td:nth-child(5)').innerText;
+
+      // Hiển thị thông tin
+      document.getElementById('Hoten').textContent = Hoten;
+      document.getElementById('Phone').textContent = Phone;
+      document.getElementById('Email').textContent = Email;
+      document.getElementById('CCCD').textContent = CCCD;
+      document.getElementById('Sove').textContent = Sove;
+
+      // Hiển thị kết quả và dừng vòng lặp sau khi tìm thấy
+      document.getElementById('ticket-info').style.display = 'block';
+      break;
+    }
+  }
+}
+
+
+    </script>
 
 </html>
