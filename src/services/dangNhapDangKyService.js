@@ -12,7 +12,32 @@ let createNewUser = (data) =>{
                 CMND :  data.CMND,
                 address :data.address,
                 gender : data.gender,
-                roleID : data.roleID,
+                roleID : data.roleid,
+            })
+            reslove(user.id);
+        }
+        catch(e)
+        {
+            reject(e);
+        }
+    })
+}
+let themnhanvien = (data) =>{
+    console.log(data)
+    return new Promise(async(reslove, reject)=>{
+        try{
+            let user = await db.User.create({
+                firstName: data.firstName,
+                lastName: data.lastName,
+                phoneNumber: data.phoneNumber,
+                password : data.password,
+                email:data.email,
+                CMND :  data.CMND,
+                address :data.address,
+                gender : data.gender,
+                roleID : data.roleid,
+                chucVu: data.chucvu,
+                luong :data.luong
             })
             reslove(user.id);
         }
@@ -139,6 +164,7 @@ let dataAdmin =()=>{
         }
     })
 }
+
 module.exports ={
     createNewUser: createNewUser,
     dataUser:dataUser,
@@ -148,6 +174,7 @@ module.exports ={
     checkdangnhap:checkdangnhap,
     inforSDT:inforSDT,
     infordangky:infordangky,
+    themnhanvien:themnhanvien,
     //-----thêm dữ liệu tài khoản người dùng vào trang admin
     dataAdmin: dataAdmin,
 }

@@ -123,7 +123,7 @@ let completethemnhanvien=async(req,res)=>{
     {
         return res.render("themnhanvien.ejs",{er:"Số điện thoại này đã có người đăng ký"})
     }
-    let message = await dangNhapDangKyService.createNewUser(req.body); // req.body la data nguoi nhap
+    let message = await dangNhapDangKyService.themnhanvien(req.body); // req.body la data nguoi nhap
     console.log(message);
     return res.redirect("/AdminPage/ejs/admin")
 }
@@ -526,12 +526,20 @@ let tonghoptauve = async(req,res)=>{
     else if (data.typeid =="6")
     {
         let data = req.body
-        let ct = await searchtripService.countTrain()*500000
-        console.log("ct",ct)
-        let cu = await searchtripService.countR2()*5000000
+        const tuNgay = new Date(data.tuNgay);
+        const denNgay = new Date(data.denNgay);
+        const diffInMilliseconds = denNgay - tuNgay;
+        const diffInDays = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+        const thang = Math.floor(diffInDays / 30)
+        let ct = await searchtripService.countTrain()
+        
+        let cu = await searchtripService.countAndTotalSalaryR2()
         let doanhthu = await searchtripService.tinhTongTienBanVe(data.tuNgay,data.denNgay)
         console.log("doanhthu",doanhthu)
-        let loinhuan = doanhthu - ct -cu
+        console.log("cu",cu.totalSalary)
+        console.log("thang",thang)
+        let loinhuan = doanhthu - ct*500000 -cu.totalSalary*thang
+        console.log(loinhuan)
         let isdata = data.typeid 
         res.render("tonghopthongtin.ejs",{isdata:isdata,dt:doanhthu,ln:loinhuan, time : data,ct:ct,cu:cu})
     }
