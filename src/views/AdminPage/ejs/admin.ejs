@@ -327,8 +327,12 @@ input, button, select {
 button:hover {
     background-color: rgb(41, 174, 70);
     color: white;
-  }
+}
 
+.add a {
+  text-decoration: none; /* Loại bỏ dấu gạch chân */
+  color: white; /* Chuyển màu chữ thành trắng */
+}
 	</style>
     <section id="menu">
         <div class="logo">
@@ -339,10 +343,8 @@ button:hover {
 
         <div class="items">
             <li><i class="fas fa-home"></i><a href="/AdminPage/ejs/admin">Trang chủ</a></li>
-            <li><i class="fas solid fa-list"></i><a href="/AdminPage/ejs/danhsachve">Danh sách vé</a></li>
             <li><i class="fas solid fa-book"></i><a href="/AdminPage/ejs/thongtindat">Thông tin đặt</a></li>
             <li><i class="fas sharp fa-solid fa-calendar-week"></i><a href="/AdminPage/ejs/quanlilichtrinh">Quản lí lịch trình</a></li>
-            <li><i class="fas solid fa-user"></i><a href="#">Tài khoản</a></li>
             <li><i class="fas solid fa-user"></i><a href="/tonghopthongtin">Tổng hợp thông tin</a></li>
         </div>
     </section>
@@ -433,9 +435,6 @@ button:hover {
 </div>
 </div>
 
-
-
-
 <!------------------------------------------------------------------------------------->
 
     <table class="table">
@@ -519,10 +518,6 @@ button:hover {
             opacity: 0.8;
         }
     </style>
-
-
-<!------------------------------------------------------------------------------------->
-
 
     </section>
     
