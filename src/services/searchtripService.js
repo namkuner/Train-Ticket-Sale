@@ -204,6 +204,7 @@ const tongHopVeTautheothoigian = async (tuNgay, denNgay) => {
         totalTickets: count,
       });
     }
+    result.sort((a, b) => b.totalTickets - a.totalTickets);
     result.push({
       ngay : "Tổng",
       total :total
@@ -257,8 +258,10 @@ let vetautheotrainid= async()=>{
         };
       }
     }
+    // Sắp xếp giá trị theo thứ tự giảm dần dựa trên thuộc tính totalTickets
+    const sortedResult = Object.values(result).sort((a, b) => b.totalTickets - a.totalTickets);
 
-    return result;
+    return sortedResult;
   } catch (error) {
     throw error;
   }
@@ -266,22 +269,26 @@ let vetautheotrainid= async()=>{
 const countTrain =async()=>{
   try {
     const count = await db.Trip.count();
-
     return count;
   } catch (error) {
     throw error;
   }
 }  
-let countR2 = async()=>{
-  try{
-    let R2 = db.User.count({
-      where :{roleID:"R2"}
-    })
-    return R2
+let countAndTotalSalaryR2 = async () => {
+  try {
+    const users = await db.User.findAll({
+      where: { roleID: "R2" },
+      attributes: ['luong'],
+    });
+
+    const count = users.length;
+    const totalSalary = users.reduce((sum, user) => sum + user.luong, 0);
+
+    return { count, totalSalary };
+  } catch (error) {
+    throw error;
   }
-  catch(error)
-  {throw error;}
-}
+};
 const tinhTongTienBanVe = async (tuNgay, denNgay) => {
   try {
     const tickets = await db.Ticket.findAll({
@@ -317,6 +324,6 @@ module.exports = {
     vetautheotrainid:vetautheotrainid,
     tongsovebantheodiemden:tongsovebantheodiemden,
     countTrain:countTrain,
-    countR2:countR2,
+    countAndTotalSalaryR2:countAndTotalSalaryR2,
     tinhTongTienBanVe:tinhTongTienBanVe
 }

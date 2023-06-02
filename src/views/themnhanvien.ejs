@@ -74,6 +74,17 @@
             <input type="text" class="form-control" name="CMND" placeholder="Enter CMND" />
           </div>
         </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="email">Chức vụ</label>
+              <input type="text" class="form-control" name="chucvu" placeholder="Chức Vụ" required />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="CMND">Lương</label>
+              <input type="text" class="form-control" name="luong" placeholder="Nhập lương" />
+            </div>
+          </div>
+        
         
 
         <div class="mb-3">
@@ -92,13 +103,14 @@
             <option value="Other">Other</option>
           </select>
           </div>
+          <input type="hidden" name="roleid" value="R2">
           <div class="col-md-6 mb-3">
             <label ></label>
             
             <button class="btn btn-primary" type="submit">Đăng ký</button>
           </div>
         </div>
-        <input type="hidden" name="roleid" value="R2">
+        
 
       </form>
             <script>

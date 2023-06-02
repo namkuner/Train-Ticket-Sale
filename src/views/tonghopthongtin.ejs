@@ -422,8 +422,10 @@
         </div>
         <% if (isdata=="6") {%>
           <h3> Từ ngày <%= time.tuNgay %> đến ngày <%= time.denNgay %></h3>
-          <h4> Lương nhân viên : <%= cu %></h4>
-          <h4> Nhiên liệu : <%= ct %></h4>
+          <h4> Số lượng nhân viên : <%= cu.count %></h4>
+          <h4> Tổng lương nhân viên : <%= cu.totalSalary %></h4>
+          <h4> Số chuyến tàu : <%= ct %></h4>
+          <h4> Tiền nhiên liệu : <%= ct*500000 %></h4>
           <h4> Doanh Thu : <%= dt %></h4>
           <h4> Lợi nhuận : <%= ln %></h4>
 
