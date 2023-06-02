@@ -420,23 +420,25 @@ button:hover {
         </tr>
     </thead>
     <tbody>
-        <% for(let i=0; i < dataTable.length; i++) { %>
-            <tr>
-                <td><%= dataTable[i].Hoten %></td>
-                <td><%= dataTable[i].Phone %></td>
-                <td><%= dataTable[i].Email %></td>
-                <td><%= dataTable[i].CCCD %></td>
-                <td><%= dataTable[i].Sove %></td>
-                <td><%= dataTable[i].Tongtien %></td>
-                <td>
-                  <div class="button-container">
-                  <a href="/edit-databooker?id=<%= dataTable[i].id %>" class="edit-button" type="button">Edit</a>
-                  <a href="/delete-databooker?id=<%= dataTable[i].id %>" class="delete-button" type="button">Delete</a>
-                  <a href="" class="detail-button" type="button">Detail</a>
-                  </div>
-                </td>
-            </tr>
-        <% } %>
+        <% for(let i=0; i < dataTable.length; i++) {
+            if(dataTable[i].Hoten !== null) { %>
+              <tr>
+                  <td><%= dataTable[i].Hoten %></td>
+                  <td><%= dataTable[i].Phone %></td>
+                  <td><%= dataTable[i].Email %></td>
+                  <td><%= dataTable[i].CCCD %></td>
+                  <td><%= dataTable[i].Sove %></td>
+                  <td><%= dataTable[i].Tongtien %></td>
+                  <td>
+                    <div class="button-container">
+                    <a href="/edit-databooker?id=<%= dataTable[i].id %>" class="edit-button" type="button">Edit</a>
+                    <a href="/delete-databooker?id=<%= dataTable[i].id %>" class="delete-button" type="button">Delete</a>
+                    <a href="" class="detail-button" type="button">Detail</a>
+                    </div>
+                  </td>
+              </tr>
+          <% }
+        } %>
     </tbody>
 </table>
 <!------------------------------------------------------------------------------------->

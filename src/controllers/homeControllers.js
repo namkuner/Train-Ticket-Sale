@@ -213,6 +213,34 @@ let dataBooker = (req, res) => {
         ticketIds: ticketIds
     });
 }
+let dataBooker1 = (req, res) => {
+    const id = req.query.id;
+    const giaVe = req.query.giaVe;
+    const tenGhe = req.query.tenGhe;
+    const tenTau = req.query.tenTau;
+    const diemXuatPhat = req.query.diemXuatPhat;
+    const diemDen = req.query.diemDen;
+    const thoiGianDi = req.query.thoiGianDi;
+    const Sove = req.query.Sove;
+    const Tongtien = req.query.Tongtien;
+    const trangThai = req.query.trangThai;
+    const ticketIds = req.query.ticketIds;
+    return res.render("HomePage/ejs/dataCustomer.ejs", {
+        id: id,
+        tenGhe: tenGhe,
+        giaVe: giaVe,
+        tenTau: tenTau,
+        diemXuatPhat: diemXuatPhat,
+        diemDen: diemDen,
+        thoiGianDi: thoiGianDi,
+        Sove: Sove,
+        Tongtien: Tongtien,
+        trangThai: trangThai,
+        req: req,
+        ticketIds: ticketIds
+    });
+    //return res.render('/HomePage/ejs/main');
+}
 /*
 let completeDatabooker = async (req, res) => {
 
@@ -237,10 +265,18 @@ let completeDatabooker = async (req, res) => {
       return res.send('post crud from server');
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ error: "An error occurred while creating a new booker." });
+      //return res.status(500).json({ error: "An error occurred while creating a new booker." });
+      return res.redirect('/HomePage/ejs/main');
     }
-  };
-  
+};
+/*
+console.error(error);
+res.render('HomePage/ejs/thongbao', { message: 'Đặt vé thành công' }); // Render trang thongbao.ejs với thông báo
+setTimeout(() => {
+  res.redirect('/HomePage/ejs/main'); // Chuyển hướng về trang chủ sau 5 giây
+}, 5000);
+}
+*/
 /* 
 const url = require('url');
 let completeDatabooker = async (req, res) => {
@@ -529,6 +565,7 @@ module.exports = {
 //nút xoá người đặt vé
     deletebooker1: deletebooker1,
     
-//
+//thong báo đặt vé thành công
+    dataBooker1: dataBooker1
 }
 

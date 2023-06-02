@@ -429,15 +429,6 @@ h5 {
 						<h5 class="ng-binding" style="color: #e55a05!important;font-weight: 700!important;font-size: 16px;margin: 10px 0 10px 35px;padding-top: 10px;">Thông tin người đặt vé</h5>
 						<p style="width: 1140px;padding-left: 30px;font-weight: 570;color: #3a87ad;">Quý khách vui lòng điền đẩy đủ và chính xác các thông tin về người mua vé dưới đây. Các thông tin này sẽ được sử dụng để xác minh người mua vé và lấy vé tại ga trước khi lên tàu theo đúng các quy định của Tổng công ty Đường sắt Việt Nam.</p>
 											
-						<!--------------------------------------------------------------------------->
-						<!--<p>Id: <%= id %></p>
-						<p>Số lượng ghế đã đặt: <span id="seatCount"></span></p>
-						<p>Giá vé: <%= giaVe %></p>
-						<p>Tên ghế: <%= tenGhe %></p>
-						<p>Tên tàu: <%= tenTau %></p>
-						<p>Điểm xuất phát: <%= diemXuatPhat %></p>
-						<p>Điểm đến: <%= diemDen %></p>
-						<p>Thời gian đi: <%= thoiGianDi %></p>-->
 
 						<style>
 							.customer-info {
@@ -463,6 +454,23 @@ h5 {
 							}
 						</style>
 						
+
+                        <div class="notification">
+                            <p>Đặt vé thành công!</p>
+                        </div>
+                        <script>
+                            setTimeout(function() {
+                                window.location.href = '/HomePage/ejs/main';
+                            }, 3000); // Chuyển hướng sau 3 giây (3000 milliseconds)
+                        </script>
+                        <style>
+                            .notification {
+                                background-color: #f8d7da;
+                                color: #721c24;
+                                padding: 10px;
+                                text-align: center;
+                            }
+                        </style>
 						<!-- Bảng thông tin khách hàng -->
 						<h1 style="margin-bottom: 17px;margin-left: 40px;margin-top: 7px;">Thông tin khách hàng</h1>
 						<table class="customer-info">
@@ -472,27 +480,25 @@ h5 {
 							</tr>
 							<tr>
 								<th>Giá vé</th>
-								<td><%= giaVe %></td>
 							</tr>
 							<tr>
 								<th>Tên ghế</th>
-								<td><%= tenGhe %></td>
 							</tr>
 							<tr>
 								<th>Tên tàu</th>
-								<td><%= tenTau %></td>
+								
 							</tr>
 							<tr>
 								<th>Điểm xuất phát</th>
-								<td><%= diemXuatPhat %></td>
+								
 							</tr>
 							<tr>
 								<th>Điểm đến</th>
-								<td><%= diemDen %></td>
+								
 							</tr>
 							<tr>
 								<th>Thời gian đi</th>
-								<td><%= thoiGianDi %></td>
+								
 							</tr>
 						</table>
 						
@@ -518,10 +524,6 @@ h5 {
 							  <form action="/complete-databooker" method="POST">
 							
 								<div class="row">
-
-									<input type="hidden" id="sove" name="Sove" value="<%= Sove %>">
-									<input type="hidden" id="giave" name="giaVe" value="<%= giaVe %>">
-									<input type="hidden" name="Tongtien" value="<%= Tongtien %>">
 
 								  <div class="col-md-6">
 									<div class="mb-3">
@@ -659,6 +661,9 @@ document.body.appendChild(script);
   
 
 
+  
+
+
 							  /////////////////////////////////////////////////////////
 
 						  
@@ -668,6 +673,7 @@ document.body.appendChild(script);
 							  });
 							});
 						</script>
+
 					
 						  
 						<p style="width: 1140px;padding-left: 30px;font-weight: 570;color: #2fa4e7;margin-top: 15px;">Để ngăn chặn dịch bệnh COVID-19, ĐSVN kính mong quý khách hàng nhập đúng thông tin số điện thoại để trong trường hợp cần thông báo chúng tôi có thể liên hệ với quý khách hàng nhanh nhất có thể.</p>
