@@ -48,6 +48,9 @@ let initWebRouters = (app) => {
     router.post('/complete-databooker', homeControllers.completeDatabooker);
     router.get('/get-databooker', homeControllers.displaybooker);
     router.get('/edit-databooker', homeControllers.editbooker);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    router.get('/detail-databooker', homeControllers.detailbooker);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //xoá người đặt vé
     router.get('/delete-databooker', homeControllers.deletebooker)
@@ -78,6 +81,9 @@ let initWebRouters = (app) => {
     router.get('/HomePage/ejs/dataCustomer', homeControllers.dataBooker);
     //Hiện thông báo đặt thành công
     router.get('/HomePage/ejs/thongbao', homeControllers.dataBooker1);
+
+    //Trang xem thông tin vé của khách hàng
+    router.get('/HomePage/ejs/quanlidatcho',homeControllers.insertUser7)
 
 
 
