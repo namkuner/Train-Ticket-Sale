@@ -676,7 +676,7 @@ h6 {
 					<div class="collapse d-inline-flex" id="navbarSupportedContent">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="  nav-item">
-								<a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+								<a class="nav-link active" aria-current="page" href="/">Trang chủ</a>
 							</li>
 
 							<li class="nav-item">
@@ -849,7 +849,7 @@ h6 {
                   <div class="seat-row">
                 <% } %>
                 <div class="seat" data-id="<%= t.id %>" data-toa="<%= t.toa %>">
-                  <% if (!t.trangThai) { %>
+                  <% if (t.trangThai) { %>
                     <button style="border: none; background-color: rgb(237, 71, 71); color: #fff;"><%= t.tenGhe %></button>
                   <% } else { %>
                       <button style="border: none;"><%= t.tenGhe %></button>

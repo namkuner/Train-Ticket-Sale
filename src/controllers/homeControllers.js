@@ -36,7 +36,7 @@ let loginn = async (req, res) => {
     if(result.message=="Bạn đã đăng nhập thành công")
     {
         idlogin = result.data.id;
-        if(result.data.roleID==1)
+        if(result.data.roleID!=3)
         {
             let data = await dangNhapDangKyService.dataAdmin();
             return res.render("AdminPage/ejs/admin",{idlogin:idlogin,user:data})
@@ -60,7 +60,9 @@ let dangxuat = (req,res)=>{
 }
 let completeRegister = async (req, res) => {
     let data =req.body
-    let checkSDT = dangNhapDangKyService.inforSDT(data)
+    console.log("thong tin dăng kí",data)
+    let checkSDT = await dangNhapDangKyService.infordangky(data)
+    console.log("checkSDT",checkSDT)
     if(checkSDT !=null)
     {
         return res.render("dangky.ejs",{er:"Số điện thoại này đã có người đăng ký"})
@@ -100,7 +102,7 @@ let xoaiduser = async (req, res) => {
     console.log(userid)
     let message = await dangNhapDangKyService.xoathongtinuser(userid)
     // let data = await dangNhapDangKyService.dataUser();
-    return res.send("Xoa thông tin thành công ")
+    return res.redirect("/AdminPage/ejs/admin")
     // return res.render('dataUser.ejs',{user:data})
 }
 let thongtincanhan = async(req,res)=>{
@@ -114,15 +116,16 @@ let themnhanvien= (req,res)=>{
     res.render("themnhanvien.ejs",{er:null})
 }
 let completethemnhanvien=async(req,res)=>{
-    let data= req.body
-    let checkSDT = dangNhapDangKyService.inforSDT(data)
+    let data= req.body 
+    let checkSDT = await dangNhapDangKyService.infordangky(data)
+    console.log(" checkSDT", checkSDT)
     if(checkSDT !=null)
     {
-        return res.render("dangky.ejs",{er:"Số điện thoại này đã có người đăng ký"})
+        return res.render("themnhanvien.ejs",{er:"Số điện thoại này đã có người đăng ký"})
     }
     let message = await dangNhapDangKyService.createNewUser(req.body); // req.body la data nguoi nhap
     console.log(message);
-    return res.render("/AdminPage/ejs/admin")
+    return res.redirect("/AdminPage/ejs/admin")
 }
 /*------------------TRIP---------------*/
 
@@ -492,7 +495,7 @@ let tonghoptauve = async(req,res)=>{
         let diemDi = data.diemDi
         let isdata = data.typeid
         const theodiemdi =await searchtripService.tongsovebantheodiemdi(data.diemDi)
-        console.log("theodiemdi",theodiemdi[3].tenGhe)
+        // console.log("theodiemdi",theodiemdi[3].tenGhe)
         res.render("tonghopthongtin.ejs",{diemDi:diemDi,isdata:isdata,ticket:theodiemdi})
     }
     else if(data.typeid == "3")
