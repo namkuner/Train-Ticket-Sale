@@ -6,15 +6,11 @@ let router = express.Router();
 //const express = require('express');
 //const router = express.Router();
 
-
-/*
+const bodyParser = require('body-parser');
 const app = express();
-const ejs = require('ejs');
-// Rest of your code goes here
-app.set('view engine', 'ejs');
-//////lấy dữ liệu người dùng ra admin
-// Khai báo thư viện body-parser
-*/
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 
 
@@ -23,7 +19,9 @@ let initWebRouters = (app) => {
     //USER
     router.get('/', homeControllers.homepage);
     router.get('/dangky', homeControllers.dangKy);
-    router.post('/complete-register', homeControllers.completeRegister);   
+    router.post('/complete-register', homeControllers.completeRegister); 
+    router.get('/themnhanvien',homeControllers.themnhanvien);
+    router.post('/complete-themnhanvien', homeControllers.completethemnhanvien); 
     router.get('/dangnhap', homeControllers.dangNhap);
     router.post('/login',homeControllers.loginn)
     router.get('/dataUser', homeControllers.insertUser);
@@ -32,7 +30,11 @@ let initWebRouters = (app) => {
     router.get('/xemtruockhixoa',homeControllers.xemtruocuser);
     router.post('/xoa-user',homeControllers.xoaiduser);
     router.post('/post-thongtincanhan', homeControllers.thongtincanhan)
+    router.get('/dangxuat',homeControllers.dangxuat)
 
+    router.get('/tonghopthongtin',homeControllers.tonghopthongtin)
+    router.post('/tongsotauve',homeControllers.tonghoptauve)
+    
     //TRIP
     router.get('/nhapTrip', homeControllers.formCreateTrip)
     router.post('/done-nhapTrip', homeControllers.doneCreateTrip);
@@ -41,16 +43,15 @@ let initWebRouters = (app) => {
     router.post('/update-trip', homeControllers.updateTrips)
     router.get('/delete-trip', homeControllers.deleteTrip)
     router.get('/search', homeControllers.searchTrip)
-    
+    router.get('/vetau',homeControllers.hienthivetau)
     //BOOK
     router.get('/databooker', homeControllers.dataBooker);
     router.post('/complete-databooker', homeControllers.completeDatabooker);
     router.get('/get-databooker', homeControllers.displaybooker);
     router.get('/edit-databooker', homeControllers.editbooker);
-
-    //new
-    //router.get('/displaybooker2', homeControllers.editbooker1)
-    //new
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    router.get('/detail-databooker', homeControllers.detailbooker);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //xoá người đặt vé
     router.get('/delete-databooker', homeControllers.deletebooker)
@@ -65,20 +66,27 @@ let initWebRouters = (app) => {
     //xoa
     //router.get('/delete-databooker', homeControllers.deletebooker)
 
-
-
     //LẤY DỮ LIỆU NGƯỜI DÙNG RA TRANG ADMIN
     router.get('/AdminPage/ejs/admin', homeControllers.insertUser1);
     router.get('/AdminPage/ejs/danhsachve', homeControllers.insertUser2);
     router.get('/AdminPage/ejs/thongtindat', homeControllers.insertUser3);
     router.get('/AdminPage/ejs/quanlilichtrinh', homeControllers.insertUser4);
 
-    //Trang booking
-    router.get('/HomePage/ejs/booking', homeControllers.insertUser5);
     //Trang chủ
     router.get('/HomePage/ejs/main', homeControllers.insertUser6);
-    
-    
+
+    //Trang booking (Tìm kiếm)
+    router.post('/HomePage/ejs/booking',homeControllers.timkiemtau)
+
+    //Trang điền thông tin người đặt vé
+    router.get('/HomePage/ejs/dataCustomer', homeControllers.dataBooker);
+    //Hiện thông báo đặt thành công
+    router.get('/HomePage/ejs/thongbao', homeControllers.dataBooker1);
+
+    //Trang xem thông tin vé của khách hàng
+    router.get('/HomePage/ejs/quanlidatcho',homeControllers.insertUser7)
+
+
 
     /*router.get('/admin', (req, res) => {
         connection.query('SELECT * FROM users', (error, results, fields) => {

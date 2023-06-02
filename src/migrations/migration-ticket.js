@@ -8,6 +8,9 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
+            tenGhe: {
+                type: Sequelize.STRING
+            },
             trangThai: {
                 type: Sequelize.BOOLEAN
             },
@@ -17,6 +20,19 @@ module.exports = {
             giaVe: {
                 type: Sequelize.INTEGER
             },
+            userdatve: {
+                type: Sequelize.INTEGER
+            },
+            /*userdatve: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                  model: 'Inforbookers',
+                  key: 'id'
+                },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE'
+            },*/
             trainId: {
                 type: Sequelize.INTEGER
             },

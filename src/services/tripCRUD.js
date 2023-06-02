@@ -5,7 +5,7 @@ const { Op } = require('sequelize');
 let createNewTrip = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            await db.Trip.create({
+            let tau = await db.Trip.create({
                 diemXuatPhat: data.diemXuatPhat,
                 diemDen: data.diemDen,
                 thoiGianDi: data.thoiGianDi,
@@ -14,14 +14,28 @@ let createNewTrip = (data) => {
                 tenTau: data.tenTau,
                 soToa: data.soToa,
                 soGhe: data.soGhe,
-            })
-            resolve("Tạo chuyến mới thành công")
+            });
+
+            let toa = Math.ceil(tau.soGhe/tau.soToa) + 1
+
+            const ves = [];
+            for (let i = 1; i <= data.soGhe; i++) {
+                ves.push({
+                    trangThai: 0,
+                    tenGhe : 'SG'+i,
+                    giaVe : tau.giaVe,
+                    toa: Math.ceil(i / toa).toString(),
+                    trainId: tau.id // Kiểm tra tên trường dữ liệu `id` của `tau`
+                });
+            }
+
+            await db.Ticket.bulkCreate(ves);
+            resolve("Tạo chuyến mới thành công");
+        } catch (e) {
+            reject(e);
         }
-        catch (e) {
-            reject(e)
-        }
-    })
-}
+    });
+};
 let getAllDataTrip = () => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -96,6 +110,41 @@ let deteleTripById = (tripId) => {
         }
     })
 }
+let hienthive =(tauid)=>{
+    return new Promise(async (resolve, reject) => {
+       try{
+        let data = await db.Ticket.findAll({
+            where :{trainId :tauid}          
+        }   
+        )
+       
+        resolve(data)
+       }
+       catch(e)
+       {
+        reject(e)
+       }
+    })
+}
+
+let searchTrips = async (keyword) => {
+    try {
+        const searchResults = await db.Trip.findAll({
+            where: {
+                [Op.or]: [
+                    { diemXuatPhat: { [Op.like]: `%${keyword}%` } },
+                    { diemDen: { [Op.like]: `%${keyword}%` } },
+                ]
+            },
+        });
+        
+        console.log(searchResults)
+        return searchResults;
+    } catch (e) {
+        // throw new Error('Lỗi khi tìm kiếm lịch trình');\
+        console.log(e)
+    }
+}
 
 let searchTrips = async (keyword) => {
     try {
@@ -122,5 +171,6 @@ module.exports = {
     updateTrip: updateTrip,
     getTripInforById: getTripInforById,
     deteleTripById: deteleTripById,
-    searchTrips: searchTrips
+    searchTrips: searchTrips,
+    hienthive:hienthive,
 }

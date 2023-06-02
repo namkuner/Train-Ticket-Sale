@@ -3,7 +3,7 @@ let createNewUser = (data) =>{
     console.log(data)
     return new Promise(async(reslove, reject)=>{
         try{
-            await db.User.create({
+            let user = await db.User.create({
                 firstName: data.firstName,
                 lastName: data.lastName,
                 phoneNumber: data.phoneNumber,
@@ -12,9 +12,34 @@ let createNewUser = (data) =>{
                 CMND :  data.CMND,
                 address :data.address,
                 gender : data.gender,
-                roleID : data.roleID,
+                roleID : data.roleid,
             })
-            reslove("Đã tạo người dùng mới thành công");
+            reslove(user.id);
+        }
+        catch(e)
+        {
+            reject(e);
+        }
+    })
+}
+let themnhanvien = (data) =>{
+    console.log(data)
+    return new Promise(async(reslove, reject)=>{
+        try{
+            let user = await db.User.create({
+                firstName: data.firstName,
+                lastName: data.lastName,
+                phoneNumber: data.phoneNumber,
+                password : data.password,
+                email:data.email,
+                CMND :  data.CMND,
+                address :data.address,
+                gender : data.gender,
+                roleID : data.roleid,
+                chucVu: data.chucvu,
+                luong :data.luong
+            })
+            reslove(user.id);
         }
         catch(e)
         {
@@ -57,12 +82,12 @@ let checkdangnhap = (user_password)=>{
                     reslove({ message: "Bạn đã đăng nhập thành công", data: data })
                 }
                 else{
-                    reslove("Mật khẩu bạn bị sai mời nhập lại")
+                    reslove({ message: "Mật khẩu bạn bị sai mời nhập lại" })
                 }
                 
             }
             else {
-                reslove("tài khoản của bạn không chính xác! xin mời nhập lại")
+                reslove({message:"tài khoản của bạn không chính xác! xin mời nhập lại"})
             }
         }catch(e)
         {reject(e)}
@@ -104,6 +129,28 @@ let xoathongtinuser = (dataid)=>
         }
     })
 }
+let inforSDT=(userinfo)=>{
+    return new Promise(async(reslove, reject)=>{
+        try{
+            let data = await db.User.findOne({where:{phoneNumber: userinfo.SDT}})
+            reslove(data);
+        }
+        catch(e){
+            reject(e);
+        }
+    })
+}
+let infordangky=(userinfo)=>{
+    return new Promise(async(reslove, reject)=>{
+        try{
+            let data = await db.User.findOne({where:{phoneNumber: userinfo.phoneNumber}})
+            reslove(data);
+        }
+        catch(e){
+            reject(e);
+        }
+    })
+}
 //////////////////////////////////////trang admin
 let dataAdmin =()=>{
     return new Promise(async(reslove,reject)=>{
@@ -117,6 +164,7 @@ let dataAdmin =()=>{
         }
     })
 }
+
 module.exports ={
     createNewUser: createNewUser,
     dataUser:dataUser,
@@ -124,6 +172,9 @@ module.exports ={
     updateUser: updateUser,
     xoathongtinuser:xoathongtinuser,
     checkdangnhap:checkdangnhap,
+    inforSDT:inforSDT,
+    infordangky:infordangky,
+    themnhanvien:themnhanvien,
     //-----thêm dữ liệu tài khoản người dùng vào trang admin
     dataAdmin: dataAdmin,
 }

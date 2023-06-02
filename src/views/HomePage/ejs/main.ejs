@@ -9,30 +9,6 @@
 		integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-
-	<!--///////////////////////////////////////////////////-->
-	<!--<script>
-		function search() {
-			var from = document.getElementById("from").value;
-			var to = document.getElementById("to").value;
-			var type = document.getElementById("type").value;
-			var goday = document.getElementById("goday").value;
-
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4 && this.status == 200) {
-					if (this.responseText == "found") {
-						window.location.href = "booking.html";
-					} else {
-						document.getElementById("result").innerHTML = "Không tìm thấy vé tàu phù hợp.";
-					}
-				}
-			};
-			xhttp.open("GET", "search.php?from=" + from + "&to=" + to + "&type=" + type + "&daygo=" + goday, true);
-			xhttp.send();
-		}
-	</script>-->
-	<!--///////////////////////////////////////////////////-->
 	<script src="search.js"></script>
 
     <style>
@@ -61,7 +37,6 @@ body {
 .nav-link {
 	color: #fff;
 }
-
 
 :root {
 	--maincolor: #014a9e;
@@ -99,7 +74,6 @@ header > nav {
 
 main {
     overflow: hidden;
-
 }
 
 .slider {
@@ -145,7 +119,8 @@ main {
 
 	width:295px;
 	height: 23px;
-    background-image: url('/HomePage/images/train-footer.png');
+    /*background-image: url('/HomePage/images/train-footer.png');*/
+	background-image: url('https://scontent.fsgn13-2.fna.fbcdn.net/v/t1.15752-9/346106703_591889156055975_8937858956715844045_n.png?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_ohc=STzUadpaiy8AX96mrOC&_nc_ht=scontent.fsgn13-2.fna&oh=03_AdSDpDO9zDlTzo5NJTNiM5j-4-8gxVoWGUZpWQp4EaK-Ew&oe=648665CF');
     background-repeat: no-repeat;
     background-size: cover;
     animation: trainRun linear 14s infinite;
@@ -331,7 +306,8 @@ main {
 			<div class="container">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="#">
-						<img src="/HomePage/images/train-logo.png" alt="logo-train" width="70px" />
+						<!--<img src="/HomePage/images/train-logo.png" alt="logo-train" width="70px" />-->
+						<img src="https://scontent.fsgn4-1.fna.fbcdn.net/v/t1.15752-9/280068745_1908162402711465_8113313082114855897_n.png?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=d63DoD9VXSkAX--VfPO&_nc_ht=scontent.fsgn4-1.fna&oh=03_AdTKF1dlnj07Tp-aUR8eFvU9yr6CYND0ru0im8sVnQT9HQ&oe=6483D505" alt="logo-train" width="70px"/>
 					</a>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 						data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -341,7 +317,7 @@ main {
 					<div class="collapse d-inline-flex" id="navbarSupportedContent">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="  nav-item">
-								<a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+								<a class="nav-link active" aria-current="page" href="/HomePage/ejs/main">Trang chủ</a>
 							</li>
 
 							<li class="nav-item">
@@ -351,22 +327,28 @@ main {
 								<a class="nav-link active" aria-current="page" href="#">Thông tin lịch trình</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="#">Quản lý đặt chỗ</a>
+								<a class="nav-link active" aria-current="page" href="/HomePage/ejs/quanlidatcho">Quản lý đặt chỗ</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page"
 									href="https://vr.com.vn/cam-nang-di-tau.html" target="_blank">Cẩm nang đi tàu</a>
 							</li>
-							<% if (idlogin) { %>
+							<% if (idlogin != null) { %>
 								<!-- Hiển thị biểu tượng người dùng và liên kết đến trang thông tin người dùng -->
 								<div class="collapse navbar-collapse" id="navbarNav">
 								  <ul class="navbar-nav ml-auto">
 									<li class="nav-item">
-									  <form method="post" action="/post-thongtincanhan">
+									  <form method="post" action="/post-thongtincanhan" class="nav-link active" >
 										<button type="submit">Thông tin cá nhân</button>
 										<input type="hidden" name="userID" value="<%= idlogin %>"> <!-- Giá trị ID của user -->
 									  </form>
 									</li>
+									<li class="nav-item">
+										
+										<a href="/dangxuat" class="nav-link active" type="button">Đăng Xuất</a>
+										  
+										</form>
+									  </li>
 								  </ul>
 								</div>
 							  <% } else { %>
@@ -393,13 +375,16 @@ main {
 			<div class="swiper mySwiper">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide">
-						<img src="/HomePage/images/train-1.jpg" alt="" />
+						<!--<img src="/HomePage/images/train-1.jpg" alt="" />-->
+						<img src="https://scontent.fsgn8-2.fna.fbcdn.net/v/t1.15752-9/346105822_768477184675793_8701207230716700548_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=ae9488&_nc_ohc=YCBPdydIm0IAX_PvBZN&_nc_ht=scontent.fsgn8-2.fna&oh=03_AdQjeTUoi7ahHOftAyNbHauUSMdbJubdPJ_P2xWffe-i1g&oe=64866227" alt="" />
 					</div>
 					<div class="swiper-slide">
-						<img src="/HomePage/images/train-2.jpg" alt="" />
+						<!--<img src="/HomePage/images/train-2.jpg" alt="" />-->
+						<img src="https://scontent.fsgn13-3.fna.fbcdn.net/v/t1.15752-9/346104499_263372049441601_5963895656805574621_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=96OyrIjaWAcAX-QttoN&_nc_ht=scontent.fsgn13-3.fna&oh=03_AdRMC1oaxq5Dcpm8r8vPjgsvbv5PETIt0WPzCRNl4Ut74A&oe=64867ECC" alt="" />
 					</div>
 					<div class="swiper-slide">
-						<img src="/HomePage/images/train-3.jpg" alt="" />
+						<!--<img src="/HomePage/images/train-3.jpg" alt="" />-->
+						<img src="https://scontent.fsgn8-2.fna.fbcdn.net/v/t1.15752-9/346107103_251847114120558_397779832452201549_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=ae9488&_nc_ohc=1cgvrIUhovQAX_XJy6X&_nc_ht=scontent.fsgn8-2.fna&oh=03_AdRU-fc-6vG-bb-C3pV7XfSXcsBe1xLwSdHYWqkJjHzTGQ&oe=64867881" alt="" />
 					</div>
 				</div>
 
@@ -409,7 +394,10 @@ main {
 
 		<div class="booking-form">
 			<div class="container">
-				<form action="/src/views/HomePage/search.js" method="GET"><!--action="booking.js"-->
+				<!--<form action="/timkiemvetau" method="POST">--> <!--action="booking.js"-->
+					<!--new 14/05/2023-->
+				<form action="/HomePage/ejs/booking" method="POST">
+					<!--new 14/05/2023-->
 					<div class="form-child hotline">
 						<h3>Vé tàu</h3>
 						<p>Hotline: 999999999</p>
@@ -418,91 +406,82 @@ main {
 					<div class="form-child">
 						<input required type="text" name="from" id="from" placeholder="Nơi đi" class="form-control input-search" />
 						<div class="autobox">
-							<li>Biên Hòa</li>
-							<li>Bỉm Sơn</li>
-							<li>Bình Thuận</li>
-							<li>Bồng Sơn</li>
-							<li>Chợ Sy</li>
-							<li>Đà Nẵng</li>
-							<li>Dĩ An</li>
-							<li>Diêu Trì</li>
-							<li>Đông Hà</li>
-							<li>Đồng Hới</li>
-							<li>Đồng Lê</li>
-							<li>Đức Phổ</li>
-							<li>Giã</li>
-                            <li>Hà Nội</li>
-							<li>Huế</li>
-							<li>Hương Phố</li>	
-							<li>Minh Khôi</li>
-							<li>Nam Định</li>
-							<li>Nha Trang</li>
-							<li>Ninh Bình</li>
-							<li>Ninh Hòa</li>
-							<li>Núi Thành</li>
-							<li>Phủ lý</li>
-							<li>Quãng Ngãi</li>
-							<li>Sài Gòn</li>
-							<li>Sôn Mao</li>
-							<li>Tam Kỳ</li>
-							<li>Thanh Hóa</li>
-							<li>Tháp Chàm</li>
-							<li>Tuy Hòa</li>
-							<li>Vinh</li>
-							<li>Yên Trung</li>
+							<li>1.Biên Hòa</li>
+							<li>2.Bỉm Sơn</li>
+							<li>3.Bình Thuận</li>
+							<li>4.Bồng Sơn</li>
+							<li>5.Chợ Sy</li>
+							<li>6.Đà Nẵng</li>
+							<li>7.Dĩ An</li>
+							<li>8.Diêu Trì</li>
+							<li>9.Đông Hà</li>
+							<li>10.Đồng Hới</li>
+							<li>11.Đồng Lê</li>
+							<li>12.Đức Phổ</li>
+							<li>13.Giã</li>
+							<li>14.Hà Nội</li>
+							<li>15.Huế</li>
+							<li>16.Hương Phố</li>
+							<li>17.Minh Khôi</li>
+							<li>18.Nam Định</li>
+							<li>19.Nha Trang</li>
+							<li>20.Ninh Bình</li>
+							<li>21.Ninh Hòa</li>
+							<li>22.Núi Thành</li>
+							<li>23.Phủ lý</li>
+							<li>24.Quãng Ngãi</li>
+							<li>25.Sài Gòn</li>
+							<li>26.Sôn Mao</li>
+							<li>27.Tam Kỳ</li>
+							<li>28.Thanh Hóa</li>
+							<li>29.Tháp Chàm</li>
+							<li>30.Tuy Hòa</li>
+							<li>31.Vinh</li>
+							<li>32.Yên Trung</li>
 						</div>
 					</div>
 					<div class="form-child">
 						<input required type="text" name="to" id="to" placeholder="Nơi đến" class="form-control output-search" />
 						<div class="autobox2">
-							<li>Hà Nội</li>
-							<li>Phủ lý</li>
-							<li>Nam Định</li>
-							<li>Ninh Bình</li>
-							<li>Bỉm Sơn</li>
-							<li>Thanh Hóa</li>
-							<li>Minh Khôi</li>
-							<li>Chợ Sy</li>
-							<li>Vinh</li>
-							<li>Yên Trung</li>
-							<li>Hương Phố</li>
-							<li>Đồng Lê</li>
-							<li>Đồng Hới</li>
-							<li>Đông Hà</li>
-							<li>Huế</li>
-							<li>Đà Nẵng</li>
-							<li>Tam Kỳ</li>
-							<li>Núi Thành</li>
-							<li>Quãng Ngãi</li>
-							<li>Đức Phổ</li>
-							<li>Bồng Sơn</li>
-							<li>Diêu Trì</li>
-							<li>Tuy Hòa</li>
-							<li>Giã</li>
-							<li>Ninh Hòa</li>
-							<li>Nha Trang</li>
-							<li>Tháp Chàm</li>
-							<li>Sôn Mao</li>
-							<li>Bình Thuận</li>
-							<li>Biên Hòa</li>
-							<li>Dĩ An</li>
-							<li>Sài Gòn</li>
+							<li>1.Biên Hòa</li>
+							<li>2.Bỉm Sơn</li>
+							<li>3.Bình Thuận</li>
+							<li>4.Bồng Sơn</li>
+							<li>5.Chợ Sy</li>
+							<li>6.Đà Nẵng</li>
+							<li>7.Dĩ An</li>
+							<li>8.Diêu Trì</li>
+							<li>9.Đông Hà</li>
+							<li>10.Đồng Hới</li>
+							<li>11.Đồng Lê</li>
+							<li>12.Đức Phổ</li>
+							<li>13.Giã</li>
+							<li>14.Hà Nội</li>
+							<li>15.Huế</li>
+							<li>16.Hương Phố</li>
+							<li>17.Minh Khôi</li>
+							<li>18.Nam Định</li>
+							<li>19.Nha Trang</li>
+							<li>20.Ninh Bình</li>
+							<li>21.Ninh Hòa</li>
+							<li>22.Núi Thành</li>
+							<li>23.Phủ lý</li>
+							<li>24.Quãng Ngãi</li>
+							<li>25.Sài Gòn</li>
+							<li>26.Sôn Mao</li>
+							<li>27.Tam Kỳ</li>
+							<li>28.Thanh Hóa</li>
+							<li>29.Tháp Chàm</li>
+							<li>30.Tuy Hòa</li>
+							<li>31.Vinh</li>
+							<li>32.Yên Trung</li>
 						</div>
 					</div>
-					<div class="form-child">
-						<select id="trip-type" class="form-select form-select-lg" aria-label=".form-select-lg example" name="type" required>
-							<option selected disabled>Loại vé</option>
-							<option value="1">Một chiều</option>
-							<option value="2">Khứ hồi</option>
-						</select>
-					</div>
+
 
 					<div class="form-child day">
 						<input id="godate" required name="daygo" class="form-control" type="datetime-local" placeholder="Ngày đi" />   <!--id="go-date"-->
 					</div> 
-					<div class="form-child day">
-						<input id="returndate" name="dayback" class="form-control" type="datetime-local" placeholder="Ngày về" />
-					</div>
 					<!--<button class="form-child btn btn-primary" type="submit" onclick="handleSearch()">
 						Tìm kiếm
 					</button>-->
@@ -526,7 +505,6 @@ main {
   									}
 								});
 							</script>
-					<!------------------------------------------------------------------------------>
 				</form>
 			</div>
 		</div>
@@ -539,7 +517,8 @@ main {
 				<div class="grid">
 					<div class="row">
 						<div class="col-2 l-2 text-center">
-							<img class=" w-75" src="/HomePage/images/cac-dich-vu-ve-tau-mien-phi.png" alt="cac dich vu">
+							<!--<img class=" w-75" src="/HomePage/images/cac-dich-vu-ve-tau-mien-phi.png" alt="cac dich vu">-->
+							<img class=" w-75" src="https://scontent.fsgn13-2.fna.fbcdn.net/v/t1.15752-9/346104697_1569997260076324_3939682777754183455_n.png?_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=olcx-YTmVwQAX8ERTCk&_nc_ht=scontent.fsgn13-2.fna&oh=03_AdSYR9Wjzj0lDf6HhC2fmD9Q2OKdofwa0NmxS_5bKelWOQ&oe=64868227" alt="cac dich vu">
 						</div>
 						<div class=" col-8 l-8">
 							<h5>1. Thời gian, mức phí đổi trả vé:</h5>
@@ -621,15 +600,17 @@ main {
 							<div class="download-app mt-2">
 								<div class="container bg-white text-center border-top p-4 border-primary ">
 									<h5 class="main-color-text mb-3">Tải ứng dụng</h5>
-									<a href="#"><img class="me-2" src="/HomePage/images/playstore.png" alt="playstore"
-											width="15%"></a>
-									<a href="#"><img src="/HomePage/images/appstore.png" alt="appstore" width="15%"></a>
+									<!--<a href="#"><img class="me-2" src="/HomePage/images/playstore.png" alt="playstore" width="15%"></a>
+									<a href="#"><img src="/HomePage/images/appstore.png" alt="appstore" width="15%"></a>-->
+									<a href="#"><img class="me-2" src="https://scontent.fsgn4-1.fna.fbcdn.net/v/t1.15752-9/346106358_193278496982944_2021392920144749953_n.png?_nc_cat=103&ccb=1-7&_nc_sid=ae9488&_nc_ohc=QNSLXzi-JigAX9o-exe&_nc_ht=scontent.fsgn4-1.fna&oh=03_AdSL_OTkKkivyVA9G51kkI84Pa7nxzSjyFLWniK51ohcFA&oe=64866CEB" alt="playstore" width="15%"></a>
+									<a href="#"><img src="https://scontent.fsgn13-3.fna.fbcdn.net/v/t1.15752-9/346103565_765134348499818_4747672716900201717_n.png?_nc_cat=108&ccb=1-7&_nc_sid=ae9488&_nc_ohc=jz9nL_8O7G4AX8qSPDR&_nc_ht=scontent.fsgn13-3.fna&oh=03_AdQlF9_cED2pThY-r8ZLUZHLum_HdMmyT0PVDsyxvJCmPQ&oe=64867751" alt="appstore" width="15%"></a>
 								</div>
 							</div>
 						</div>
 
 						<div class="col-2 l-2 text-center  ">
-							<img class=" w-75" src="/HomePage/images/mua-ve-tau-online.png" alt="mua ve tau">
+							<!--<img class=" w-75" src="/HomePage/images/mua-ve-tau-online.png" alt="mua ve tau">-->
+							<img class=" w-75" src="https://scontent.fsgn3-1.fna.fbcdn.net/v/t1.15752-9/346105117_916327686330998_2380265099123286209_n.png?_nc_cat=111&ccb=1-7&_nc_sid=ae9488&_nc_ohc=Yr8vdDqDhxAAX-4gzKX&_nc_ht=scontent.fsgn3-1.fna&oh=03_AdSRZXq6oJyd0zCRCQo5nB17HYUqgGhKn58SBWQjKz0HXQ&oe=648688F6" alt="mua ve tau">
 						</div>
 					</div>
 				</div>
@@ -720,7 +701,7 @@ function slugName(str) {
     return str;
 }
 
-let recomentlist = [
+recomentlist = [
     "Biên Hòa",
     "Bỉm Sơn",
     "Bình Thuận",
@@ -752,7 +733,7 @@ let recomentlist = [
     "Tháp Chàm",
     "Tuy Hòa",
     "Vinh",
-    "Yên Trung",
+    "Yên Trung"
 ]
   
 

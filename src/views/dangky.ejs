@@ -20,6 +20,11 @@
 </head>
 
 <body>
+  <% if ( er !== null) { %>
+    <script>
+        alert('<%= er %>');
+    </script>
+<% } %>
   <div class="header">
     <a href="#" class="logo">Đăng ký tài khoản</a>
     <div class="header-right">
@@ -84,13 +89,14 @@
               <option value="Other">Other</option>
             </select>
           </div>
+          <input type="hidden" name="roleid" value="R3">
           <div class="col-md-6 mb-3">
             <label></label>
 
             <button class="btn btn-primary" type="submit">Đăng ký</button>
           </div>
         </div>
-        <input type="hidden" name="roleid" value="R3">
+        
 
       </form>
       <script>

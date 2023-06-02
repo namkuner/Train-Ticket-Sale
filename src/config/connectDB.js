@@ -5,7 +5,9 @@ const { Sequelize } = require('sequelize');
 const sequelize = new Sequelize('webproject', 'root', null, {
     host: 'localhost',
     dialect: 'mysql',
-    logging: false
+    logging: false,
+    charset: 'utf8mb4',
+  collate: 'utf8mb4'
 });
 
 let connectDB = async () => {

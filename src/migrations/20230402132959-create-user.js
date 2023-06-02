@@ -46,6 +46,12 @@ module.exports = {
       roleID: {
         type: Sequelize.STRING
       },
+      chucVu: {
+        type: Sequelize.STRING
+      },
+      luong: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
