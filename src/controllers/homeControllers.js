@@ -4,12 +4,13 @@ import dangNhapDangKyService from "../services/dangNhapDangKyService"
 import nguoidatveService from "../services/nguoidatveService"
 import tripCRUD from "../services/tripCRUD"
 import searchtripService from "../services/searchtripService"
+import { Console } from "console";
 const ejs = require('ejs');
 const path = require('path');
 
-let homepage =(req,res)=>{
+let homepage = (req, res) => {
     let idlogin = null
-    return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
+    return res.render("HomePage/ejs/main.ejs", { idlogin: idlogin })
 }
 
 let dangKy = (req, res) => {
@@ -23,17 +24,15 @@ let dangNhap = (req, res) => {
 let loginn = async (req, res) => {
     let SDT_password = req.body;
     console.log(SDT_password)
-    let result  = await dangNhapDangKyService.checkdangnhap(SDT_password)
+    let result = await dangNhapDangKyService.checkdangnhap(SDT_password)
     console.log(result)
-    if(result.message=="Bạn đã đăng nhập thành công")
-    {
-        let idlogin  = result.data.id;
-        
-        return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
+    if (result.message == "Bạn đã đăng nhập thành công") {
+        let idlogin = result.data.id;
+
+        return res.render("HomePage/ejs/main.ejs", { idlogin: idlogin })
     }
-    else
-    {
-        res.render("dangnhap.ejs", {er :result.message})
+    else {
+        res.render("dangnhap.ejs", { er: result.message })
     }
 
 }
@@ -75,12 +74,12 @@ let xoaiduser = async (req, res) => {
     return res.send("Xoa thông tin thành công ")
     // return res.render('dataUser.ejs',{user:data})
 }
-let thongtincanhan = async(req,res)=>{
+let thongtincanhan = async (req, res) => {
     let userid = req.body.userID
     console.log("user ID" + req.body.userID)
     let data = await dangNhapDangKyService.infomationUser(userid);
     console.log(data)
-    return res.render("thongtincanhan.ejs",{user:data})
+    return res.render("thongtincanhan.ejs", { user: data })
 }
 /*------------------TRIP---------------*/
 
@@ -89,8 +88,13 @@ let formCreateTrip = (req, res) => {
 }
 
 let doneCreateTrip = async (req, res) => {
-    let message = await tripCRUD.createNewTrip(req.body)
-    return res.send("Tạo thành công!")
+    let result = await tripCRUD.createNewTrip(req.body)
+    console.log(result)
+    if (result.message == "Tạo chuyến mới thành công") {
+        let data = req.body
+        res.redirect('/AdminPage/ejs/quanlilichtrinh')
+        // return res.render("AdminPage/ejs/quanlilichtrinh.ejs", { trip: data })
+    }
 }
 
 let xemTrip = async (req, res) => {
@@ -113,21 +117,28 @@ let getEditTripById = async (req, res) => {
     else return res.send('Trip not found!')
 }
 
-let editTripsById = async (req, res) => {
-    let tripId = req.query.id
-    if (tripId) {
-        let data = await tripCRUD.getTripById(tripId);
-        return res.render("editTrip.ejs", { trip: data })
-    }
-    else return res.send('Trip not found!')
-}
+// let editTripsById = async (req, res) => {
+//     let tripId = req.query.id
+//     if (tripId) {
+//         let data = await tripCRUD.getTripById(tripId);
+//         return res.render("editTrip.ejs", { trip: data })
+//     }
+//     else return res.send('Trip not found!')
+// }
 
 let updateTrips = async (req, res) => {
-    let trip = req.body;
-    let allTrips = await tripCRUD.updateTrip(trip);
-    return res.render('dataTrip.ejs', {
-        trip: allTrips
-    })
+    try {
+        let trip = req.body;
+        console.log(trip)
+        let allTrips = await tripCRUD.updateTrip(trip);
+        // return res.render('../views/AdminPage/ejs/quanlilichtrinh.ejs', {
+        //     trip: allTrips
+        // })
+        return res.send('cap nhat thanh cong')
+
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 let deleteTrip = async (req, res) => {
@@ -135,10 +146,23 @@ let deleteTrip = async (req, res) => {
     let trip = req.query.id
     if (trip) {
         await tripCRUD.deteleTripById(trip)
-        return res.send('Xóa chuyến thành công!')
+        // console.alert('Xóa thành công!')
+        res.redirect('back')
     }
     else {
         return res.send("Chuyến không tìm thây!")
+    }
+}
+
+let searchTrip = async (req, res) => {
+    try {
+        const keyword = req.query.keyword
+        const searchResults = await tripCRUD.searchTrips(keyword)
+        return res.render('../views/AdminPage/ejs/quanlilichtrinh.ejs',
+            { trip: searchResults }
+        )
+    } catch (e) {
+        console.log(e)
     }
 }
 
@@ -187,7 +211,7 @@ let putbooker = async (req, res) => {
 }
 /**/
 
-/*nút xoá người đặt vé*/ 
+/*nút xoá người đặt vé*/
 let deletebooker = async (req, res) => {
     let bookerId = req.query.id;
     if (bookerId) {
@@ -223,7 +247,7 @@ let putbooker = async (req, res) => {
     return res.render('displaybooker.ejs', {
         dataTable: allBookers
     });
-}*/ 
+}*/
 
 /*
 let deletebooker = async (req, res) => {
@@ -237,37 +261,37 @@ let deletebooker = async (req, res) => {
 }*/
 
 /* --------------TRANG ADMIN ----------*/
-let insertUser1 = async(req, res)=>{
+let insertUser1 = async (req, res) => {
     let data = await dangNhapDangKyService.dataAdmin();
     /*return res.render('admin.ejs',{user:data})*/
-    return res.render('../views/AdminPage/ejs/admin.ejs',{user:data})
+    return res.render('../views/AdminPage/ejs/admin.ejs', { user: data })
 }
-let insertUser2 = async(req, res)=>{
+let insertUser2 = async (req, res) => {
     let data = await dangNhapDangKyService.dataAdmin();
-    return res.render('../views/AdminPage/ejs/danhsachve.ejs',{user:data})
+    return res.render('../views/AdminPage/ejs/danhsachve.ejs', { user: data })
 }
-let insertUser3 = async(req, res)=>{
+let insertUser3 = async (req, res) => {
     let data = await nguoidatveService.getAllBooker();
-    return res.render('../views/AdminPage/ejs/thongtindat.ejs',{dataTable:data})
+    return res.render('../views/AdminPage/ejs/thongtindat.ejs', { dataTable: data })
 }
-let insertUser4 = async(req, res)=>{
+let insertUser4 = async (req, res) => {
     let data = await tripCRUD.getAllDataTrip();
-    return res.render('../views/AdminPage/ejs/quanlilichtrinh.ejs',{trip:data})
+    return res.render('../views/AdminPage/ejs/quanlilichtrinh.ejs', { trip: data })
 }
 /*----------------------------------------------------------------------------------------*/
 
 /* -------------Trang booking----------*/
-let insertUser5 = async(req, res)=>{
+let insertUser5 = async (req, res) => {
     let data = await dangNhapDangKyService.dataAdmin();
     /*return res.render('admin.ejs',{user:data})*/
-    return res.render('../views/HomePage/ejs/booking.ejs',{user:data})
+    return res.render('../views/HomePage/ejs/booking.ejs', { user: data })
 }
 /*----------------------------------------------------------------------------------------*/
 
 /* -------------Trang chủ----------*/
-let insertUser6 = async(req, res)=>{
+let insertUser6 = async (req, res) => {
     let idlogin = null
-    return res.render("HomePage/ejs/main.ejs",{idlogin:idlogin})
+    return res.render("HomePage/ejs/main.ejs", { idlogin: idlogin })
 }
 /*----------------------------------------------------------------------------------------*/
 
@@ -275,18 +299,18 @@ let insertUser6 = async(req, res)=>{
 
 module.exports = {
     //USER
-    homepage :homepage,
-    dangKy :dangKy,
-    dangNhap :dangNhap,
-    completeRegister :completeRegister,
-    insertUser :insertUser,
-    thaydoithongtin :thaydoithongtin,
+    homepage: homepage,
+    dangKy: dangKy,
+    dangNhap: dangNhap,
+    completeRegister: completeRegister,
+    insertUser: insertUser,
+    thaydoithongtin: thaydoithongtin,
     capnhatthongtin: capnhatthongtin,
 
-    xoaiduser :xoaiduser,
-    loginn :loginn,
-    xemtruocuser :xemtruocuser ,
-    thongtincanhan :thongtincanhan,
+    xoaiduser: xoaiduser,
+    loginn: loginn,
+    xemtruocuser: xemtruocuser,
+    thongtincanhan: thongtincanhan,
 
 
     //BOOKING
@@ -296,16 +320,20 @@ module.exports = {
     editbooker: editbooker,
     putbooker: putbooker,
     deletebooker: deletebooker,
+
+
     //Trip
     formCreateTrip: formCreateTrip,
     doneCreateTrip: doneCreateTrip,
     xemTrip: xemTrip,
     getEditTripById: getEditTripById,
-    editTripsById: editTripsById,
     updateTrips: updateTrips,
     deleteTrip: deleteTrip,
+    searchTrip: searchTrip,
+
+
     //Lấy dữ liệu tài khoản người dùng
-    insertUser1:insertUser1,
+    insertUser1: insertUser1,
     insertUser2: insertUser2,
     insertUser3: insertUser3,
     insertUser4: insertUser4,
@@ -313,9 +341,9 @@ module.exports = {
     insertUser5: insertUser5,
     //Trang chủ
     insertUser6: insertUser6,
-//nút xoá người đặt vé
+    //nút xoá người đặt vé
     deletebooker1: deletebooker1,
-//
+    //
 
 }
 

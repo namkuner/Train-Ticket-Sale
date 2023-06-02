@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
     Trip.init({
+        // id: DataTypes.INTEGER,
         diemXuatPhat: DataTypes.STRING,
         diemDen: DataTypes.STRING,
         thoiGianDi: DataTypes.DATE,
